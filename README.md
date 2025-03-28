@@ -1,0 +1,2 @@
+# StockMagic
+Test stock portfolio
