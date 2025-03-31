@@ -1,0 +1,39 @@
+"Welcome to Stock Magic" 
+
+Function login (username, password)
+If username is empty or passowrd is empty THEN 
+Display "Username and password are required, please create an account."
+Return false
+ENDIF
+
+user_data = GET_USER_FROM_DATABASE(username)
+
+If user_data is not found THEN 
+Display "Invalid username or password."
+Return if false
+ENDIF
+
+IF password matches user_data.passord Then 
+DISPLAY "Login Successful."
+//store user session or generate token
+RETURN true
+
+ELSE 
+DISPLAY "Invalid username or password." 
+RETURN false
+ENDIF
+END Function
+
+
+//Example usage
+INPUT username 
+INPUT password
+
+IF login(username,password) THEN
+// Redirect to user's dashboard or homepage
+DISPLAY "Welcome," + username + "!"
+ELSE 
+// Stay on login page and display error message
+DISPLAY "Login failed.  Please try again, or create an account"
+ENDIF
+END
