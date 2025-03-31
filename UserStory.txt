@@ -1,0 +1,19 @@
+User Story:
+
+User should be able to login or create an account. When they create an account it will then bring them to the login page. As they log in it will bring them to account summary page. First time log in it would be nice to go through a tutorial. Should be directed to add funds to their account using a bank account(Bank account will be stored for withdrawing cash).
+
+Left navigation pane will allow user to navigate throughout the site. User will be able to Search for stocks. From the stocks page they will be able to purchase the stocks. This will compare with available funds and notify the user the maximum number of stocks they can purchase. Purchasing the stocks will lower the available funds by the appropriate ammount. Purchasing a stock will update the account summary page and the purchase/sell history page. 
+
+Account summary page will have a pie chart showing where all available funds are being stored at along with a line graph that shows how their total funds are doing.
+
+Clicking on a stock in the account summary will bring user to a more detailed page that will show stock purchase 
+Name of the stock
+Total dollar value of the all stocks.
+Individual stock value
+Number of stocks held
+Sell option for each stock
+
+When selling a stock it will prompt for how many shares you want to sell for and dispaly maximum number. Sells to the current market
+(If time we can setup stocks to be sold at certain values. Set alert or does actually sell at certain threshold if user chooses.) 
+
+Profits from selling will be sent to summary page and tax documents. 
