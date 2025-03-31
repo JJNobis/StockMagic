@@ -1,0 +1,20 @@
+Welcome page:
+Responsive UI*
+Big Welcome message to Stock Magic
+Login and create account in top right corner
+Graphs at bottom
+Our information at the bottom of page. 
+
+Click login - opens page to enter userID and password after successful login it will go to Account summary page
+
+Create account: Ask for email, username, first name, last name, DOB. Creates account and sends user login page. 
+
+Account summary page: Welcome Name, Total Cash (Available cash and Invested cash) 
+
+
+User Story:
+User should be able to login or create an account, immediately see what their cash value is at. See what stocks they currently own with value of each with profit or loss of each stock. 
+Sell option available to each stock. Needs to be able to search for stocks and buy stocks that will add to the account summary page.
+Be able to sell stock next to stocks owned on the account summary page. 
+When buying the stock it needs to check with the available funds to make sure enough funds can be used. 
+*Sell stock or alert option if stock drops 10% past purchase price. 
