@@ -1,0 +1,57 @@
+function generate_Settings_Menu()
+
+build sections(settings_mm): Password change, Change display name,
+banking page
+
+display: 
+Username: //cant change username, this aint social media
+
+Password as uniform ***** set characters to 18
+password_change //go to "password_change" page//
+
+Banking info: 
+	- Bank Name
+	-Acct num: only show last 4 digits of acc num
+ 	-Routing num: display whole number //number is public, 
+ppl can google this//
+bankinf_change
+
+
+password_change: 
+
+insert current password(curr_pw)
+if curr_pw is correct,
+
+(insert) new password(new_pw) 
+string.length of new password >8 && <16
+(double check) new_pw
+if (insert) and (double check) using (new_pw) match 
+then
+
+save = save new_pw set as curr_pw
+cancel = back to settings_mm
+end password_change
+
+
+bankinf_change:
+
+create change_bank: 
+insert (new_bank) name
+
+create changebanknf(
+
+(insert) new account number(new_accnum)
+(insert) new routing number(new_routnum)
+(double check (new_accnum))
+(double check (new_routnum))
+
+if (insert(new_accnum) and (new_routnum)) and (doublecheck(new_accnum) + 
+new_routnum)) match and 
+(new_ bank) is populated; 
+then save as bankinf_
+
+add cancel option
+
+
+
+
