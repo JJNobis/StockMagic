@@ -1,0 +1,22 @@
+Function buyStock (StockID, availableCash) {
+
+		display window 
+		include maximum number of stocks that can be purchases from available cash by availableCash / stockCurrentValue
+		prompt user for how many stocks they want to purchase and store value as integer stockQuantity.
+		
+		If (availableCash < (symbol.value * stockQuantity)){
+			display message that there aren't enough funds and prompt to add funds to account
+		}
+		
+		Display new window to Confirm purchase of stock
+		If yes {
+			availableCash = availableCash - (number of stocks purchased * current symbol value)
+			Store StockID and number of stocks purchased in array or notepad for Account summary page and to the purchase/sell history page to retrieve
+
+		}
+		If No {
+		close display and bring back to searching for stock page
+		}
+	}
+
+}
