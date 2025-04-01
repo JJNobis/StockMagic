@@ -1,0 +1,28 @@
+Function sellStock (accountOwnedStockID, stockQuantity, availableCash){ //accountOwnedStock, stockQuantity parameter might be combined depending on how that is stored
+	
+	display window
+	prompt user for how many stockQuantity they wish to sell displaying the maximum number they own
+	store value as soldStock
+
+	If ( soldStock > stockQuantity) {
+		display error that number needs to be between 1 and stockQuantity
+	} else {
+		display window confirming sell
+		if (yes){
+			availableCash = (soldStock * StockIDCurrentValue) + availableCash
+			Add sell information to purchase/sell history
+			stockQuantity = stockQuantity - soldStock
+			if (stockQuantity === 0){
+				remove stock from account summary page
+			} else {
+			
+				return new stockQuantity to stockQuantity displayed on account summary page
+			
+			}
+
+		if (no){
+		
+		close display window and return back to account summary page
+	}
+	
+}
