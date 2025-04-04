@@ -1,0 +1,5 @@
+"I want to see all of the stocks I own with their value"
+
+"I want to be able to select the stock and sell them either fully or a certain number of shares"
+
+"I want the funds from selling to be added to my available funds"
