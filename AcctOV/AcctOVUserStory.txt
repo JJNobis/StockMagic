@@ -1,0 +1,7 @@
+"I want to display my name at the top to make sure I'm logged into my account"
+
+"I want to see my Total Account Balance"
+
+"I want to see my available funds"
+
+"I want to see my total stock value"
