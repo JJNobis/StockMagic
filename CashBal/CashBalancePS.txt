@@ -1,0 +1,15 @@
+Cash Balance PS
+
+Account Balance has box that shows total cash balance from debits & credits
+
+Add funds is button that allows for you to add additional funds from stored bank account
+	this will be store in the transaction history section
+W/D funds is button that allows for you to transfer account balance funds to stored bank account
+	this will be store in the transaction hisotry section
+
+Transaction HX section will show 
+	Date/Amounts/Account Source/ Debit/Crdt 
+	With running list of transaction history from the debits/credits
+
+
+left hand bar is navigation page that is index to other pages within site
