@@ -1,0 +1,5 @@
+"I want to be able to add funds to my account through bank account"
+
+"I want to be able to remove money from my account to my bank account"
+
+"I want to be able to easily see how much funds I currently have"
