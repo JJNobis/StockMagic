@@ -1,0 +1,7 @@
+"I want to be able to easily search for Stock"
+
+"I want to be able to easily purchase Stock"
+
+"I want it to be able to check to make sure I have enough funds available to purchase the stock"
+
+"I want it to display the maximum amount of stocks I can purchase"

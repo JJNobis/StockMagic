@@ -1,0 +1,5 @@
+"I want to be able to create an account easily"
+
+"I want to be able to login in easily"
+
+"I would like to have a visually interested welcome page"
