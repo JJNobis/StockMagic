@@ -1,0 +1,16 @@
+Display: TransactionHistory
+
+Display Array StockSymbol (sym1, sym2, etc.)
+	under Stocksymbol
+	display name
+
+	display whether it's buy/sell. 
+	display buy/sell unit quantity 
+	Price per unit 
+	Total price unit x quantity
+	display date		
+		pull from db/storage
+		date month day year
+
+	Display last 10 transactions //could add more or take amount
+of xactions//
