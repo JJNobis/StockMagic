@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+  <head>
+    <link rel="stylesheet" href="test.css">
+    <meta charset="udf=8">
+    <title>$tockMagi&cent;</title>
+  </head>
+<ul class="NavBar">
+<li><img class="logo" src="C:\094023Data\Creating Complex Layouts\NVTD Newspaper Columns\img\millsmall.png"></li>
+<li>Account Summary</li>
+<li>Account Overview</li>
+<li> Settings</li>
+<li>LogOUt</li>
+</ul>
+
+<body>
+
+  <div>
+  
+  
+  
+  </div>
+</body>

@@ -115,4 +115,29 @@
   71% {margin-top:11px;}
   99.99% {margin-top:11px;}
   100% {margin-top:-270px;}
+
+
+/*************************************8
+*      Navigation Bar formatting     */
+.NavBar{
+	list-style-type: none;
+	font-size: 2em;
+	background-color: rgba(0, 250, 100, .3);
+	position: fixed;
+	outline: 3px solid green;
+	height: 100vw;
+	width: 15vw;
+	text-align: left;
+	z-index: 1;
+	padding: 2em;
 }
+
+ .logo{
+	display:block;
+	max-height:5em;
+	max-width:5em;
+}
+
+}
+
+
