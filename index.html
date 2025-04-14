@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Stock Magic</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+   
+    <nav class="topnav">
+        <a class="active" href="index.html">Home</a>
+        <a  href="contactUs.html">Contact</a>
+        <div class="login-container">
+            <form id="loginForm">
+                
+                <input type="text" id= "username" placeholder="Username" name="username">
+                <input type="text" id="password" placeholder="Password" name="psw">
+                <button type="submit" id="login">Login</button>
+                <br>
+                <span id="message" style="color: rgb(243, 20, 20);"></span>
+            </form>
+    
+         </div>
+
+         <script>
+            const form = document.getElementById('loginForm');
+            const message = document.getElementById('message');
+    
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+    
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+    
+                // Dummy credentials
+                const validUsername = 'user';
+                const validPassword = 'password';
+    
+                if (username === validUsername && password === validPassword) {
+            
+                    document.getElementById("login").onclick = window.location.href = "AccountOV.html"
+
+                } else {
+                    message.textContent = 'Login failed. Incorrect username or password.';
+                }
+            });
+        </script>
+    </nav>
+
+
+<body class="index-background">
+    
+    <h1 style="color: white; text-align: center; font-size: 32px; text-shadow: 3px 3px 5px green;">STOCK MAGIC</h1>
+
+    <div id=changingMessage>
+        <span>Your</span>
+        <div id=flip>
+          <div><div>Future</div></div>
+          <div><div>Options</div></div>
+          <div><div>Value</div></div>
+        </div>
+        <span>is in your hands!</span>
+      </div>
+    
+
+    <div class="createAccount">
+            <button type="submit" id="createAccount">Join Today!</button>
+      </div>
+
+    <footer style="position: fixed; bottom: 10px; left: 44%;">
+        <p style="color: white;">Copyright &copy; 2025</p>
+    </footer>
+</body>
+
+</html>
