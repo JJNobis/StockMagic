@@ -7,7 +7,7 @@
     <title>$tockMagi&cent;</title>
   </head>
 <ul class="NavBar">
-<li><img class="logo" src="C:\094023Data\Creating Complex Layouts\NVTD Newspaper Columns\img\millsmall.png"></li>
+<li><img class="logo" src="img/StockMagicLogo.png"></li>
 <li>Account Summary</li>
 <li>Account Overview</li>
 <li> Settings</li>
