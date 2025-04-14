@@ -1,3 +1,15 @@
+body{
+  --color-extra-light: #CAFBB4;
+  --color-light: #BCF9A1;
+  --color-med-light: #AFF88F;
+  --color-med: #A1F77C;
+  --color-med-dark: #94F669;
+  --color-dark: #6FB94F;
+  --color-accent: #CB69F6;
+}
+
+
+
 .topnav {
   background-color: #0a071f;
   top: 0;
@@ -36,7 +48,7 @@
 .topnav .login-container button {
   padding-left: 5px;
   padding-right: .25rem;
-  background: #0c91e9;
+  background: color-light;
   font-size: 17px;
   border-radius: .5rem;
 } 
@@ -50,10 +62,18 @@
 
 }
 
-body {box-sizing: border-box;}
+body {box-sizing: border-box;
 
+/****************************************************
+            Setting Color Palette
+****************************************************/
+}
+div {
+
+
+}
 .createAccount button{
-  background-image: radial-gradient(yellow, red);
+  background-image: radial-gradient(#CAFBB4, #6FB94F);
   position: fixed;
   text-align: center;
   font-size: 20px;
@@ -168,9 +188,9 @@ body {box-sizing: border-box;}
 .NavBar{
 	list-style-type: none;
 	font-size: 2em;
-	background-color: rgba(0, 250, 100, .3);
+	background-color: color-light;
 	position: fixed;
-	outline: 3px solid green;
+	outline: 3px solid color-dark;
 	height: 100vw;
 	width: 15vw;
 	text-align: left;
