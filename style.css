@@ -1,0 +1,118 @@
+.topnav {
+  background-color: #0a071f;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1rem 0 1rem 0;
+  
+  
+}
+.topnav a.active {
+  background-color: #1d8325;
+  color: white;
+}
+
+.topnav a {
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav .login-container {
+  float: right;
+  padding-right: 1rem;
+}
+
+.topnav input[type=text] {
+  padding-left: .25rem;
+  padding-right: .25rem;
+  font-size: 17px;
+  border: none;
+  width: 15vw; /* adjust as needed (as long as it doesn't break the topnav) */
+}
+
+.topnav .login-container button {
+  padding-left: 5px;
+  padding-right: .25rem;
+  background: #0c91e9;
+  font-size: 17px;
+  border-radius: .5rem;
+} 
+
+.index-background {
+  background-image: url("img/stockbackground.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment:fixed;
+  background-size: 100% 100%;
+
+}
+
+
+.createAccount button{
+  background-image: radial-gradient(yellow, red);
+  position: absolute;
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  top: 32vw;
+  left: 46vw;
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
+}
+
+
+
+#changingMessage {
+  color:#ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size:24px;
+  font-weight:bold;  
+  position:relative;
+  width:100%;
+  display:block;
+
+}
+
+#flip {
+  display: inline-block;
+  height:50px;
+  overflow:hidden;
+}
+
+#flip > div > div {
+  color:#fff;
+  padding:3px 10px;
+  height:45px;
+  margin-bottom:45px;
+  display:inline-block;
+}
+
+#flip div:first-child {
+  animation: show 8s linear infinite;
+}
+
+#flip div div {
+  background:#42c58a;
+}
+#flip div:first-child div {
+  background:#4ec7f3;
+}
+#flip div:last-child div {
+  background:#DC143C;
+}
+
+@keyframes show {
+  0% {margin-top:-270px;}
+  5% {margin-top:-160px;}
+  33% {margin-top:-160px;}
+  38% {margin-top:-69px;}
+  66% {margin-top:-69px;}
+  71% {margin-top:11px;}
+  99.99% {margin-top:11px;}
+  100% {margin-top:-270px;}
+}
