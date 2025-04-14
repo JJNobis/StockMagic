@@ -1,0 +1,21 @@
+//Display Account Overview
+
+Hello (AccHoldr_name),
+
+Display (totalAccBalance)
+	pull balance from DB/storage
+	
+Display (available.funds) //"buying power"
+	pull balance - balance in stock
+	
+Display (Total stock Value)
+	pull balance - avaliable funds 
+
+Have log.out 
+
+
+
+
+
+***/// 
+maybe previous stock history ***///
