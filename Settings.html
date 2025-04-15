@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Settings Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  
+  <body>
+        
+    <nav>
+      /****nav placeholder***/
+    </nav>
+    
+    <header>
+      <h1>Settings</h1>
+    </header>
+      
+    <main>
+      
+      <section>
+           
+        <h1>Change Password and Banking Information.</h1>
+
+        <p>Username, Display Name and Email</p>
+        <form id="username" class="contact-form" action="" method="post">
+        
+        <label for="username">UserName</label>
+        <input type="text" id="username" name="UserName" placeholder="User Name">
+        <span></span>
+        
+        <label for="displayname"> Display Name</label>
+        <input type="text" id="displayname" name="Display Name" placeholder="Display Name" required>
+        <span></span>
+                
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="us***@yahoo.com" required>
+        <span></span>
+          
+        <p>Change Password</p>
+        <label for="currentpassword"> Current Password</label>
+        <input type="text" id="currentpassword" name="Current Password" placeholder="**********" required>
+        <span></span>
+
+        <label for="newpassword"> New Password</label>
+        <input type="text" id="newpassword" name="New Password" placeholder="**********" required>
+        <span></span>
+        
+        <input id="ChangePassword_button" type="submit" value="Change Password">
+        <input id="Cancel" type="submit" value="Cancel">
+        
+        <p>Change Banking</p>
+        <label for="bankname"> Bank Name</label>
+        <input type="text" id="bankname" name="Bank Name" placeholder="Premier Credit Union" required>
+        <span></span>
+                  
+        <label for="bankaccount">Bank Account #</label>
+        <select id="bankaccount" name="bankaccount" required>
+          <option value=""></option>
+          <option value="Account #">xxxxx6789</option>
+          <option value="Account #">xxxxx1234</option>
+          </select>
+          <span></span>
+        <label for="routingnumber"> Routing #</label>
+        <input type="text" id="routingnumber" name="Routing #" placeholder="273073848" required>
+        <span></span>
+                   
+        <input id="ChangeBankAcct_button" type="submit" value="Change Banking">
+        <input id="Cancel" type="submit" value="Cancel">
+        
+        </form>
+     
+      </section>
+
+    </main>
+
+     </body>
+</html>
