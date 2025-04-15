@@ -62,7 +62,17 @@
 
 }
 
-body {box-sizing: border-box;}
+
+
+.content{   
+  margin-left: 2%;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  position: float;
+  background-color: var(--color-med);
+  border: 2px solid color: var(--color-dark);
+  
+}
 
 /****************************************************
             Setting Color Palette
@@ -184,16 +194,28 @@ body {box-sizing: border-box;}
 *      Navigation Bar formatting     */
 .NavBar{
 	list-style-type: none;
-	font-size: 2em;
+	font-size: 1.25em;
 	background-color: var(--color-light);
-	position: fixed;
 	outline: 3px solid var(--color-dark);
-	height: 100vw;
-	width: 15vw;
+	height: 90vh;
+	width: 10vw;
 	text-align: left;
-	z-index: 1;
-	padding: 2em;
+	padding: 0em 2em;
+  line-height: 2em;
+  float: left;
+  margin-left: 2%;
 }
+
+.NavBar li:nth-child(n+2){
+  display: block;
+  font-size: 2vh;
+  width: 11vw;
+  height: 2vh;
+  margin: 2vh 0 2vh;
+  padding: 2vh 0 2vh;
+  background-color: var(--color-med-dark);
+}
+
 
  .logo{
 	display:block;
@@ -201,6 +223,13 @@ body {box-sizing: border-box;}
 	max-width:5em;
 }
 
+
+h1{
+text-align: center;
+background-color: var(--color-dark);
+z-index: 2;
+padding: 2vh 0;
+}
 /******************************************************
 	Contact form and its controls
 *******************************************************/
