@@ -71,7 +71,7 @@ body {box-sizing: border-box;}
 
 
 .createAccount button{
-  background-image: radial-gradient(color: var(--color-dark), color: var(--color-extra-light));
+  background-image: radial-gradient(var(--color-dark), var(--color-extra-light));
   position: fixed;
   text-align: center;
   font-size: 20px;
@@ -84,7 +84,7 @@ body {box-sizing: border-box;}
 }
 
 .createAccount button:hover{
-  background-image: radial-gradient(color: var(--color-dark), color: var(--color-dark));
+  background-image: radial-gradient(var(--color-extra-light), var(--color-dark));
 }
 
 .form-popup {
