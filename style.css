@@ -194,7 +194,7 @@
 *      Navigation Bar formatting     */
 .NavBar{
 	list-style-type: none;
-	font-size: 1.25em;
+	font-size: 1em;
 	background-color: var(--color-light);
 	outline: 3px solid var(--color-dark);
 	height: 90vh;
@@ -208,14 +208,12 @@
 
 .NavBar li:nth-child(n+2){
   display: block;
-  font-size: 2vh;
   width: 11vw;
   height: 2vh;
   margin: 2vh 0 2vh;
   padding: 2vh 0 2vh;
   background-color: var(--color-med-dark);
 }
-
 
  .logo{
 	display:block;
@@ -227,7 +225,6 @@
 h1{
 text-align: center;
 background-color: var(--color-dark);
-z-index: 2;
 padding: 2vh 0;
 }
 /******************************************************
