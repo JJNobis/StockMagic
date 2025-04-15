@@ -185,9 +185,9 @@ body {box-sizing: border-box;}
 .NavBar{
 	list-style-type: none;
 	font-size: 2em;
-	background-color: var(color-light);
+	background-color: var(--color-light);
 	position: fixed;
-	outline: 3px solid var(color-dark);
+	outline: 3px solid var(--color-dark);
 	height: 100vw;
 	width: 15vw;
 	text-align: left;
