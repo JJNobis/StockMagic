@@ -5,3 +5,9 @@
 "I want to see my available funds"
 
 "I want to see my total stock value"
+
+OPTIONAL:
+"I want to see a list of stocks I own"
+"I want to see each stock entry shows the name, ticker, quantity, price, and total value"
+"I want to display the total portfolio value is calculated and displayed."
+"I want that the interface updates when data changes (e.g., on refresh).
