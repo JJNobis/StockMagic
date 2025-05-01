@@ -194,21 +194,21 @@
 *      Navigation Bar formatting     */
 .NavBar{
 	list-style-type: none;
-	font-size: 1em;
+	font-size: 1.25vw;
 	background-color: var(--color-light);
 	outline: 3px solid var(--color-dark);
 	height: 90vh;
 	width: 10vw;
 	text-align: left;
-	padding: 0em 2em;
-  line-height: 2em;
+	padding: .1vh 2em;
+  line-height: 2vh;
   float: left;
   margin-left: 2%;
 }
 
 .NavBar li:nth-child(n+2){
   display: block;
-  width: 11vw;
+  width: 12vw;
   height: 2vh;
   margin: 2vh 0 2vh;
   padding: 2vh 0 2vh;
@@ -221,7 +221,7 @@
 	max-width:5em;
 }
 
-
+/*header:********************************/
 h1{
 text-align: center;
 background-color: var(--color-dark);
@@ -241,7 +241,7 @@ padding: 2vh 0;
 
 
 
-
+/*Log out button*/
 .logout{
   float: right;
   padding: 12px;
