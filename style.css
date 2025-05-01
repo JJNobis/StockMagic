@@ -235,7 +235,7 @@ padding: 2vh 0;
   text-align: center;
   height: 100vw;
   width: 25vw;
-  padding 15em;
+  padding 25rem;
 }
 
 
@@ -250,7 +250,15 @@ padding: 2vh 0;
   color: white;
   font-size: 16px;
   border-radius: 96px;
+}
 
-
+/*Documents tab*/
+table{
+  padding: 2em 20vw;
+  font-size: 1.5em;
+  text-align: center;
+}
+table.docLinks:nth-child(2n){
+background-color: var(--color-light);
 
 }
