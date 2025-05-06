@@ -227,15 +227,13 @@ text-align: center;
 background-color: var(--color-dark);
 padding: 2vh 0;
 }
-/******************************************************
-	Contact form and its controls
-*******************************************************/
+/*Contact US*/
 .ContactUS {
-  background-color: var(--color-med);
-  text-align: center;
-  height: 100vw;
-  width: 25vw;
-  padding: 15em;
+  background-color: var(--color-extra-light);
+  text-align: justify;
+  height: fit-content;
+  width: fit-content;
+  padding: 30vw;
 }
 
 /*Log out button*/
