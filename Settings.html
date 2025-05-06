@@ -29,13 +29,13 @@
       <h1>Settings</h1>
     </header>
       
-    <main>
+    <main id="settBody">
       
       <section>
            
         <h2>Change Password and Banking Information.</h2>
 
-        <p><h4><u>Username, Display Name and Email</u></h4></p>
+        <h4>Username, Display Name and Email</h4>
         <form id="username" class="contact-form" action="" method="post">
         
         <label for="username">UserName</label>
@@ -44,38 +44,29 @@
         
         <label for="displayname"> Display Name</label>
         <input type="text" id="displayname" name="Display Name" placeholder="Display Name" required>
-        <span></span>
+        <span></span><br /><br />
                 
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="us***@yahoo.com" required>
         <span></span>
-<<<<<<< HEAD
         </form>
         
-        <form>
-        <p>Change Password</p>
-=======
-          
-        <p><h4><u>Change Password</u></h4></p>
->>>>>>> c7f408c24d238a3bff4f6641e0a2e33536f79809
+        <h4>Change Password</h4>
+        <form id ="passChange" class="contact-form">
         <label for="currentpassword"> Current Password</label>
         <input type="text" id="currentpassword" name="Current Password" placeholder="**********" required>
         <span></span>
 
         <label for="newpassword"> New Password</label>
         <input type="text" id="newpassword" name="New Password" placeholder="**********" required>
-        <span></span>
+        <span></span><br /> <br />
         
         <input id="ChangePassword_button" type="submit" value="Change Password">
         <input id="Cancel" type="submit" value="Cancel">
         
-<<<<<<< HEAD
         </form>
-        <form>
-        <p>Change Banking</p>
-=======
-        <p><h4><u>Change/Add Bank Account</u></h4></p>
->>>>>>> c7f408c24d238a3bff4f6641e0a2e33536f79809
+        <h4>Change Banking</h4>
+        <form id="bankChange" class="contact-form">
         <label for="bankname"> Bank Name</label>
         <input type="text" id="bankname" name="Bank Name" placeholder="Premier Credit Union" required>
         <span></span>
@@ -89,7 +80,7 @@
           <span></span>
         <label for="routingnumber"> Routing #</label>
         <input type="text" id="routingnumber" name="Routing #" placeholder="273073848" required>
-        <span></span>
+        <span></span> <br /> <br />
                    
         <input id="ChangeBankAcct_button" type="submit" value="Change Banking">
         <input id="Cancel" type="submit" value="Cancel">
