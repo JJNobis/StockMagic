@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<style>
+    .container{
+        display: flex;
+        border: 2 px solid black;
+    }
+    .box {
+        flex: 1;
+        margin: 15px;
+        padding: 40px;
+        border: 2px solid #6FB94F;
+    }
+</style>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -30,8 +42,13 @@
             <h2 id="greeting">temp</h2>
             <p id="fundsMessage">Message should be above here.</p>
 
-
         </center>
+            <div class="container">
+                <div class="box"> Total Account Balnance</div>
+                <div class="box"> Available Funds</div>
+                <div class="box"> Total Stock Value</div>
+            </div>
+
 
     </body>
     <script src="script.js">
