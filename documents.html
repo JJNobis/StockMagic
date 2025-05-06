@@ -25,13 +25,26 @@
     </header>
 
     <section>
-        <table class="docLinks">
-            <tr><td><a href="Docs/testFile1.pdf"> Quarterly report Mar2025</a></td></tr>
-            <tr><td><a href="Docs/testFile2.pdf"> Quarterly report Dec2024</a></td></tr>
-            <tr><td><a href="Docs/testFile3.pdf"> Annual Report 2024</a></td></tr>
-            <tr><td><a href="Docs/testFile4.pdf"> Quarterly report Sept2024</a></td></tr> 
-            <tr><td><a href="Docs/testFile5.pdf"> Quarterly report June2024</a></td></tr>
-            <tr><td><a href="Docs/testFile6.pdf"> Quarterly report Mar2024</a></td></tr>  
-        </ul>
+        <ul id="reports" class="docLinks"></ul>
     </section>
 </html>
+
+<script>
+    const docLinks=[
+        [2, "Docs/Q22024.txt", 2024], 
+        [3, 'Docs/Q32024.txt', 2024], 
+        [4, "Docs/Q42024.txt", 2024],
+        [0, "Docs/annual2024.txt", 2024],
+        [1, "Docs/Q12025.txt", 2025]
+        ];
+    for (let i=docLinks.length-1; i>-1;i--){
+        const quarter= docLinks[i][0];
+        const container = document.getElementById("reports");
+        const doc = document.createElement("li");
+        const link = docLinks[i][1];
+        const year = docLinks[i][2];
+        const linkName= (quarter==0)? `Annual report ${year}`: `Quarter ${quarter} ${year}`;
+        doc.innerHTML = `<a href="${link}" target="_blank">${linkName}</a>`;
+        container.appendChild(doc);
+   }
+</script>

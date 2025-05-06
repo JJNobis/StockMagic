@@ -253,12 +253,8 @@ padding: 2vh 0;
 }
 
 /*Documents tab*/
-table{
+.reports {
   padding: 2em 20vw;
   font-size: 1.5em;
   text-align: center;
-}
-table.docLinks:nth-child(2n){
-background-color: var(--color-light);
-
 }
