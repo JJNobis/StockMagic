@@ -70,7 +70,7 @@
   font-family: Arial, sans-serif;
   position: float;
   background-color: var(--color-med);
-  border: 2px solid color: var(--color-dark);
+  border: 2px solid; color: var(--color-dark);
   
 }
 
@@ -235,11 +235,8 @@ padding: 2vh 0;
   text-align: center;
   height: 100vw;
   width: 25vw;
-  padding 25rem;
+  padding: 15em;
 }
-
-
-
 
 /*Log out button*/
 .logout{
@@ -257,4 +254,27 @@ padding: 2vh 0;
   padding: 2em 20vw;
   font-size: 1.5em;
   text-align: center;
+<<<<<<< HEAD
+=======
+}
+table.docLinks:nth-child(2n){
+background-color: var(--color-light);
+
+}
+
+/************* Transaction History Table ********/
+
+table{
+  border-collapse: collapse;
+  width: 100%;
+  text-align:center;
+}
+
+tr:hover {background-color: var(--color-extra-light)}
+
+th,td{
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid black;
+>>>>>>> dcfe7e0f0220eadb1eb2ab9970c1d14301325420
 }
