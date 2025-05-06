@@ -1,16 +1,72 @@
-const apiKey = '8G92EAMNYI9SW94C';  // Replace with your Alpha Vantage API key 
-let finalPrice = 0;
-let buyAmount = 0;
-let availableFunds = 10000;
-var maxInput = document.querySelector('#numberofShares')
-var symbol = document.getElementById('symbol').value; 
+const apiKey = '8G92EAMNYI9SW94C';  //API key to connect to Stock Market
+let finalPrice; //Used to display the price of a stock
+let buyAmount; //Maximum number of shares that can be purchased. 
+var availableFunds; // Funds that are available for buying stocks. This will get updated later to incorporate the array. 
+var symbol; //Used for stock name.
+let customerID;
+var userFirstName;
+var userLastName;
+var userEmail;
 
+//Furture plan --- Make sure when creating account that username doesn't already exist.
+var passedArray = JSON.parse(document.getElementById('phpArray').value); //Text document information was passed to a hidden input on the index page. This collects the information and stores everything to an array. 
+const form = document.getElementById('loginForm');
 
-window.addEventListener('load', (event) => {
-    symbol = document.getElementById('symbol').value; 
-    document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    customerID = 0;
+    username = document.getElementById('username').value;//Input values from user to attempt to login
+    password = document.getElementById('password').value;//Input values from user to attempt to login
+
+    //Check with array to see if the user input matches what was used when they created the account. Password is always one element more then the username. 
+    for (let i = 0; i < passedArray.length; i++){
+
+        if (passedArray[i] == "Contact"){
+            customerID++;
+        }
+
+        if (username === passedArray[i] && password === passedArray[i+1]) {
+
+            localStorage.setItem("first-name", passedArray[i+2]);
+            localStorage.setItem("last-name", passedArray[i+3]);
+            localStorage.setItem("email", passedArray[i+4]);
+            localStorage.setItem("funds", passedArray[i+5]);
+
+            
+            document.getElementById('message').textContent = '';
+            document.getElementById("login").onclick = window.location.href = "AccountOV.html";
+            
+
+            break;
+        } 
+        document.getElementById('message').textContent = 'Login failed. Incorrect username or password.';
+    }
 });
+//Displays create account box
+function openCreate() {
+    document.getElementById("createForm").style.display = "block";
+}
+//Closes create account box
+function closeForm() {
+    document.getElementById("createForm").style.display = "none";
+}
+//Display alert that account was created
+function accountCreated() {
+    alert("Account created! You may now login.");
+}
 
+function greetingMessage(){
+    userFirstName = localStorage.getItem("first-name");
+    userLastName = localStorage.getItem("last-name");
+    availableFunds = localStorage.getItem("funds");
+
+    document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
+    document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
+}
+//Displays available funds at start of page loading.
+
+
+//Searches for stock and its price also makes further buying actions appear.
 document.getElementById('getPrice').addEventListener('click', () => { 
     symbol = document.getElementById('symbol').value; 
     getStockPrice(symbol); 
@@ -70,6 +126,7 @@ async function getStockPrice(symbol) {
 document.getElementById('buyButton').addEventListener('click', () => { 
     const purchasedShares = document.getElementById('numberofShares').value;
     
+
     if(purchasedShares <= buyAmount && purchasedShares >= 1){
         availableFunds = availableFunds - (purchasedShares * finalPrice);
         document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
