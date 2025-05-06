@@ -7,41 +7,51 @@ let customerID;
 var userFirstName;
 var userLastName;
 var userEmail;
+var passedArray;
+var fundLine;
+//Future plan --- Make sure when creating account that username doesn't already exist.
 
-//Furture plan --- Make sure when creating account that username doesn't already exist.
-var passedArray = JSON.parse(document.getElementById('phpArray').value); //Text document information was passed to a hidden input on the index page. This collects the information and stores everything to an array. 
-const form = document.getElementById('loginForm');
+function loginAccount() {
+    const form = document.getElementById('loginForm');
 
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    customerID = 0;
-    username = document.getElementById('username').value;//Input values from user to attempt to login
-    password = document.getElementById('password').value;//Input values from user to attempt to login
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        customerID = 0;
+        username = document.getElementById('username').value;//Input values from user to attempt to login
+        password = document.getElementById('password').value;//Input values from user to attempt to login
+        passedArray = JSON.parse(document.getElementById('phpArray').value);
 
-    //Check with array to see if the user input matches what was used when they created the account. Password is always one element more then the username. 
-    for (let i = 0; i < passedArray.length; i++){
+        //Check with array to see if the user input matches what was used when they created the account. Password is always one element more then the username. 
+        
+        
+        for (let i = 0; i < passedArray.length; i++){
 
-        if (passedArray[i] == "Contact"){
-            customerID++;
+            if (passedArray[i] == "Contact"){
+                customerID++;
+            }
+
+            if (username === passedArray[i] && password === passedArray[i+1]) {
+
+                fundLine = i + 5;
+                localStorage.setItem("first-name", passedArray[i+2]);
+                localStorage.setItem("last-name", passedArray[i+3]);
+                localStorage.setItem("email", passedArray[i+4]);
+                localStorage.setItem("funds", passedArray[i+5]);
+                localStorage.setItem("ID", customerID);
+                localStorage.setItem("accountArray", JSON.stringify(passedArray));
+                localStorage.setItem("fundsInTxt", fundLine);
+
+                
+                document.getElementById('message').textContent = '';
+                document.getElementById("login").onclick = window.location.href = "AccountOV.html";
+                
+
+                break;
+            } 
+            document.getElementById('message').textContent = 'Login failed. Incorrect username or password.';
         }
-
-        if (username === passedArray[i] && password === passedArray[i+1]) {
-
-            localStorage.setItem("first-name", passedArray[i+2]);
-            localStorage.setItem("last-name", passedArray[i+3]);
-            localStorage.setItem("email", passedArray[i+4]);
-            localStorage.setItem("funds", passedArray[i+5]);
-
-            
-            document.getElementById('message').textContent = '';
-            document.getElementById("login").onclick = window.location.href = "AccountOV.html";
-            
-
-            break;
-        } 
-        document.getElementById('message').textContent = 'Login failed. Incorrect username or password.';
-    }
 });
+}
 //Displays create account box
 function openCreate() {
     document.getElementById("createForm").style.display = "block";
@@ -55,19 +65,41 @@ function accountCreated() {
     alert("Account created! You may now login.");
 }
 
+function openFundsBox(){
+    document.getElementById("addFundsForm").style.display = "block";
+}
+
 function greetingMessage(){
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
     availableFunds = localStorage.getItem("funds");
+    
 
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
     document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
 }
 //Displays available funds at start of page loading.
+function addMoneyToAccount(){
+    const money = document.getElementById('cashAdded').value;
+    fundLine = localStorage.getItem("fundsInTxt");
+    passedArray = localStorage.getItem("accountArray");
+    passedArray = JSON.parse(passedArray);
 
+    availableFunds = parseFloat(availableFunds + money);
+    availableFunds = availableFunds.toFixed(2);
+    passedArray[fundLine] = availableFunds;
+    console.log(fundLine);
+    console.log(passedArray[fundLine]);
+    printAccountArray(passedArray);
+
+    document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
+    localStorage.setItem("accountArray", JSON.stringify(passedArray));
+    
+}
 
 //Searches for stock and its price also makes further buying actions appear.
-document.getElementById('getPrice').addEventListener('click', () => { 
+function getPriceStock(){
+    console.log("hello");
     symbol = document.getElementById('symbol').value; 
     getStockPrice(symbol); 
 
@@ -75,8 +107,9 @@ document.getElementById('getPrice').addEventListener('click', () => {
     document.querySelector('#numberofShares').style.display = 'inline-block';
     document.querySelector('#buyButton').style.display = 'inline-block';
     document.querySelector('#closeBuyButton').style.display = 'inline-block';
-}); 
- 
+
+}
+
 async function getStockPrice(symbol) { 
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`; 
  
@@ -123,38 +156,50 @@ async function getStockPrice(symbol) {
 
 } 
 
-document.getElementById('buyButton').addEventListener('click', () => { 
+function buyStock(){
+
     const purchasedShares = document.getElementById('numberofShares').value;
     
 
     if(purchasedShares <= buyAmount && purchasedShares >= 1){
         availableFunds = availableFunds - (purchasedShares * finalPrice);
+        availableFunds= availableFunds.toFixed(2);
         document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
         document.getElementById("purchaseMessage").innerHTML = `Congratulations!!! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
+        document.getElementById('result').innerHTML =  "";
+        
     } else {
         document.getElementById("purchaseMessage").innerHTML = `You only have enough funds to purchase up to ${buyAmount} shares.`;
     }
-});
 
-document.getElementById('closeBuyButton').addEventListener('click', () => { 
+}
+function closeStock(){
 
     document.querySelector('#shareMessage').style.display = 'none';
     document.querySelector('#numberofShares').style.display = 'none';
     document.querySelector('#buyButton').style.display = 'none';
     document.querySelector('#closeBuyButton').style.display = 'none';
     document.querySelector('#purchaseMessage').style.display = 'none';
-});
 
-function getFinalPrice(){
-    return finalPrice;
 }
 
-function getBuyAmount(){
-    return buyAmount;
-}
-function setAvailableFunds(funds){
-    availableFunds= availableFunds + funds;
-}
-function getAvailableFunds(){
-    return availableFunds;
+function printAccountArray(arr) {
+    passedArray = arr;
+
+    
+    fetch('arrayAccountUpdate.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: passedArray })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+    
 }
