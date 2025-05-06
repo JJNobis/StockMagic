@@ -1,3 +1,6 @@
+/************************************************
+*********          COLOR PALET         **********
+************************************************/
 :root{
   --color-extra-light: #CAFBB4;
   --color-light: #BCF9A1;
@@ -73,11 +76,6 @@
   border: 2px solid; color: var(--color-dark);
   
 }
-
-/****************************************************
-            Setting Color Palette
-****************************************************/
-
 
 
 .createAccount button{
@@ -248,12 +246,20 @@ padding: 2vh 0;
 }
 
 /*Documents tab*/
-.reports {
-  padding: 2em 20vw;
+#reports {
+  padding: 2vh 0;
   font-size: 1.5em;
   text-align: center;
+  list-style: none;
+  width: 35vw;
+  margin: 2vh 25vw 0 40vw;
 }
-table.docLinks:nth-child(2n){
+#reports>li{
+  padding: 1vh 0;
+  background-color: var(--color-med-dark);
+}
+
+#reports>li:nth-child(2n){
 background-color: var(--color-light);
 
 }
