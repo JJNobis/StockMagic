@@ -280,6 +280,15 @@ th,td{
   border-bottom: 1px solid black;
 }
 
+/***** Cash Account Balance******/
+#bal{
+  text-align: center;
+  margin-left: 22vw;
+}
+#fundsInput{
+  text-align: center;
+}
+
 /**** AccSumm ***/
 
 #sumAssets{
@@ -324,11 +333,6 @@ h4{
   padding-top: .5em;
   border: solid var(--color-med);
   border-radius: 1em;
-}
-
-/** H2**/
-h2{
-  text-align: center;
 }
 
 /******** TX History*******/
