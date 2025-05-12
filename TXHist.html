@@ -48,12 +48,12 @@
             ['$MSFT', 'Microsoft', 'BOUGHT', '48', '422.66', '20,287.68', '05/01/2025'],
             ['$CDPR', 'CD Projekt ADR', 'BOUGHT', '87', '16.19', '1408.53', '04/28/2025'],
             ['$AAPL', 'Apple Inc', 'SOLD', "27", '209.43', '5654.61', ' 04/26/2025' ]
-        ]   
+        ]
         for(let i=0; i<TXHistArray.length; i++){
             var table= document.getElementById("TXTable");
             let row = table.insertRow(-1);
             for(let d=0;d<7;d++){
-                var symCell= row.insertCell(d)
+                var symCell= row.insertCell(d);
                 symCell.innerHTML=TXHistArray[i][d];
             }
         }

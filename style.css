@@ -280,7 +280,6 @@ th,td{
   border-bottom: 1px solid black;
 }
 
-<<<<<<< HEAD
 /**** AccSumm ***/
 
 #sumAssets{
@@ -298,7 +297,6 @@ th,td{
   background-color: var(--color-accent);
   margin: 2vh 20vw;
   font-size: 11px;
-=======
 /*********Settings/H4********/
 h4{
   text-decoration: underline;
@@ -330,9 +328,6 @@ h4{
 /** H2**/
 h2{
   text-align: center;
-<<<<<<< HEAD
->>>>>>> 2da520fc66ec14037a1856a4da8112f68586d406
-=======
 }
 
 /******** TX History*******/
@@ -342,5 +337,4 @@ text-align:center;
 margin-top: 10px;
 margin-left:21vw;
 width: 75vw;
->>>>>>> 46bc77de05d384c1a9b01d8007fea7434e4488e4
 }
