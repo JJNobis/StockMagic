@@ -27,7 +27,7 @@
     <h2> Table Location1 </h2>
         <p> Transaction History:</p>
     
-        <table style="margin-top: 10px; margin-left:10px; width: 80%;"class="styled-table;">
+        <table id="TXTable">
             <thead>
                 <tr> 
                     <th>Symbol</th>
@@ -39,31 +39,23 @@
                     <th>Date</th>
                 </tr>
             </thead>
-            <tbody>
-                    <tr class="active-row"> 
-                        <td>A1</td>
-                        <td>A2</td>
-                        <td>A3</th>
-                        <td>A4</th>
-                        <td>A5</th>
-                        <td>A6</td>
-                        <td>A7</td>
-                    </tr>
-                
-        
-                <tr>   
-                    <td>B1</td>
-                    <td>B2</td>
-                    <td>B3</td>
-                    <td>B4</td>
-                    <td>B5</td>
-                    <td>B6</td>
-                    <td>B7</td>
-                </tr>
-            </tbody>
-
-        </p>
         </table>
         
     </body>
-    
+    <script>
+        const TXHistArray=[
+            ['$MSFT', 'Microsoft', 'SOLD', '37', '433.31', '16,032.47', '05/06/2025'],
+            ['$MSFT', 'Microsoft', 'BOUGHT', '48', '422.66', '20,287.68', '05/01/2025'],
+            ['$CDPR', 'CD Projekt ADR', 'BOUGHT', '87', '16.19', '1408.53', '04/28/2025']
+        ]   
+        for(let i=0; i<TXHistArray.length; i++){
+            var table= document.getElementById("TXTable");
+            let row = table.insertRow(-1);
+            for(let d=0;d<7;d++){
+                var symCell= row.insertCell(d)
+                symCell.innerHTML=TXHistArray[i][d];
+            }
+        }
+
+        
+    </script>
