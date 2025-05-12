@@ -203,3 +203,9 @@ function printAccountArray(arr) {
     });
     
 }
+
+//**Script for Contactu us page button click event**//
+
+function sendemail() {
+    window.open("mailto:stockmagic_questions@yahoo.com?subject=subject&body=body");
+}
