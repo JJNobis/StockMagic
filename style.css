@@ -279,3 +279,22 @@ th,td{
   text-align: center;
   border-bottom: 1px solid black;
 }
+
+/**** AccSumm ***/
+
+#sumAssets{
+  background-color: var(--color-light);
+  width: 70vw;
+  margin: 0vh 20vw;
+}
+#Genstocknm{
+  background-color: var(--color-dark);
+  width: 70vw;
+  margin: 2vh 20vw;
+  font-size: 12.5px;
+}
+#Stockdtl{
+  background-color: var(--color-accent);
+  margin: 2vh 20vw;
+  font-size: 11px;
+}
