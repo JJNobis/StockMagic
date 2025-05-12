@@ -5,7 +5,7 @@
   --color-extra-light: #CAFBB4;
   --color-light: #BCF9A1;
   --color-med-light: #AFF88F;
-  --color-med: #A1F77C;
+  --color-med: #5a7280;
   --color-med-dark: #94F669;
   --color-dark: #6FB94F;
   --color-accent: #CB69F6;
@@ -310,19 +310,37 @@ h4{
   text-align: center;
   height: 10vh;
   width: 70vw;
+  padding-top: 1vh;
   padding-bottom: 2vh;
   margin: 0 0 0 4vw;
+  border-radius: 1em;
+  border: solid var(--color-accent);
 }
 
 #settBody{
   height: 80vh;
   width: 78vw;
-  margin-left: 20vw;
-  background-color: var(--color-med);
+  margin-left: 19.5vw;
+  margin-right: .5vw;
+  padding-top: .5em;
+  border: solid var(--color-med);
+  border-radius: 1em;
 }
 
 /** H2**/
 h2{
   text-align: center;
+<<<<<<< HEAD
 >>>>>>> 2da520fc66ec14037a1856a4da8112f68586d406
+=======
+}
+
+/******** TX History*******/
+#TXTable{
+border-collapse: collapse;
+text-align:center;
+margin-top: 10px;
+margin-left:21vw;
+width: 75vw;
+>>>>>>> 46bc77de05d384c1a9b01d8007fea7434e4488e4
 }
