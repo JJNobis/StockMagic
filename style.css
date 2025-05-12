@@ -225,12 +225,17 @@ text-align: center;
 background-color: var(--color-dark);
 padding: 2vh 0;
 }
+
 /*Contact US*/
 .ContactUS {
   background-color: var(--color-extra-light);
   height: fit-content;
   width: 55vw;
   text-align: center;
+  vertical-align: middle;
+  display:flex;
+  align-items:center;
+  justify-content: center;
   margin: 2vh 15vw 0 30vw;
 }
 
