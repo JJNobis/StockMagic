@@ -297,6 +297,7 @@ th,td{
   background-color: var(--color-accent);
   margin: 2vh 20vw;
   font-size: 11px;
+}
 /*********Settings/H4********/
 h4{
   text-decoration: underline;
@@ -336,5 +337,5 @@ border-collapse: collapse;
 text-align:center;
 margin-top: 10px;
 margin-left:21vw;
-width: 75vw;
+width: 70vw;
 }
