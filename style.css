@@ -280,6 +280,7 @@ th,td{
   border-bottom: 1px solid black;
 }
 
+<<<<<<< HEAD
 /**** AccSumm ***/
 
 #sumAssets{
@@ -297,4 +298,31 @@ th,td{
   background-color: var(--color-accent);
   margin: 2vh 20vw;
   font-size: 11px;
+=======
+/*********Settings/H4********/
+h4{
+  text-decoration: underline;
+  text-align: center;
+}
+
+.contact-form{
+  background-color: var(--color-light);
+  text-align: center;
+  height: 10vh;
+  width: 70vw;
+  padding-bottom: 2vh;
+  margin: 0 0 0 4vw;
+}
+
+#settBody{
+  height: 80vh;
+  width: 78vw;
+  margin-left: 20vw;
+  background-color: var(--color-med);
+}
+
+/** H2**/
+h2{
+  text-align: center;
+>>>>>>> 2da520fc66ec14037a1856a4da8112f68586d406
 }
