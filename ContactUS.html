@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <meta charset="udf=8">
     <title>Contact Us</title>
   </head>
@@ -25,6 +26,8 @@
     </nav>
     </div>
     
+    <body style="background: linear-gradient(to bottom, white 0%, #3cf 100%);"></body>
+
     <body>
       <header>
         <h1>Contact Stock Magic</h1>
@@ -34,13 +37,39 @@
       
       <section> 
 
-      <p class="ContactUS">Call Stock Magic at 1-800-555-1212
-      <a href="mailto:stockmagic_questions@yahoo.com">Email Stock Magic</a>
-      </p>
+        <p class="ContactUS">Call Stock Magic at 1-800-555-1212</p>
+        
+          <div class="ContactUS">
+            <form action=""> 
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="firstname" placeholder="Your name.."><br /><br />
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lastname" placeholder="Your last name.."><br /><br />
+              <label for="youremail">Your Email</label>
+              <input type="text" placeholder="Your Email..."><br /><br />
+              <label id="Subject">Subject</label>
+              <textarea name="subject" placeholder="Write something.." style="height:200px"></textarea><br /><br />
+            
+                          
+              
+              <button onclick="myFunction()">Send</button>
 
-    </section>
+            </form>
+          </div>
+      </section>
     </main>
-
   </body>
-
 </html>
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+  </form>
+</div>

@@ -203,3 +203,12 @@ function printAccountArray(arr) {
     });
     
 }
+
+//**Script for Contact Us page button click event**//
+//leaving this commented out until i can figure out what is actually needed here
+//document.getElementById("myButton").addEventListener("click", function);
+//document.getElementById("myButton").onclick = function(mailto:stockmagic_questions@yahoo.com);
+
+
+
+    

@@ -225,12 +225,17 @@ text-align: center;
 background-color: var(--color-dark);
 padding: 2vh 0;
 }
+
 /*Contact US*/
 .ContactUS {
   background-color: var(--color-extra-light);
   height: fit-content;
   width: 55vw;
   text-align: center;
+  vertical-align: middle;
+  display:flex;
+  align-items:center;
+  justify-content: center;
   margin: 2vh 15vw 0 30vw;
 }
 
@@ -280,6 +285,17 @@ th,td{
   border-bottom: 1px solid black;
 }
 
+<<<<<<< HEAD
+=======
+/***** Cash Account Balance******/
+#bal{
+  text-align: center;
+  margin-left: 22vw;
+}
+#fundsInput{
+  text-align: center;
+}
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 
 /**** AccSumm ***/
 
@@ -384,6 +400,7 @@ th,td{
   margin: .5vh 10vw;
   font-size: 11px;
 }
+<<<<<<< HEAD
 #sellAmnt{
   background-color: var(--color-accent);
   text-align: left;
@@ -394,6 +411,8 @@ th,td{
 
 }
 
+=======
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 /*********Settings/H4********/
 h4{
   text-decoration: underline;
@@ -423,17 +442,24 @@ h4{
   border-radius: 1em;
 }
 
+<<<<<<< HEAD
 /** H2**/
 h2{
   text-align:center;
 
 }
 
+=======
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 /******** TX History*******/
 #TXTable{
 border-collapse: collapse;
 text-align:center;
 margin-top: 10px;
 margin-left:21vw;
+<<<<<<< HEAD
 width: 75vw;
+=======
+width: 70vw;
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 }
