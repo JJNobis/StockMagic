@@ -299,7 +299,7 @@ th,td{
 
 /**** AccSumm ***/
 
-.scrollcontainer{
+.scrollcontainer {
   height:550px;
   width:450px;
   border-collapse: collapse;
@@ -319,7 +319,7 @@ th,td{
   width: 425px;
   margin-left: 5px;
   font-size: 12.5px;
-  text-align:right;
+  text-align:center;
   border-radius: 50px;
 }
 #Genstocknm2{
