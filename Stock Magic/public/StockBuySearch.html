@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Real-Time Stock Prices</title>  
+    <link rel="stylesheet" href="style.css">
+    <a href="index.html"><button class="logout">Logout</button></button></a>
+    
+</head>
+<ul class="NavBar">
+    <li><img class="logo" src="img/StockMagicLogo.png"></li>
+    <li>Account Summary</li>
+    <li>Account Overview</li>
+    <li> Settings</li>
+    </ul>
+
+<body>
+    <center>
+        <h1 style="text-align: center;">Find and Buy Stocks</h1> 
+        
+        <h3 id="fundsMessage"></h3>
+
+        <input type="text" id="symbol" placeholder="Enter stock symbol (e.g., AAPL)"> 
+        <button id="getPrice">Get Price</button><br>
+        <div id="result">
+        </div><br><br>
+        <span id="shareMessage" style="display: none;">Enter the number of shares you wish to purchase:</span>
+        <input type="number" id="numberofShares" placeholder="Number of Shares" style="display: none;" min="1"><br>
+        <button id="buyButton" style="display: none;">Buy</button>
+        <button id="closeBuyButton" style="display: none;">Clear</button><br><br>
+        <h4 id="purchaseMessage"></h4>
+    </center>
+ 
+    
+</body> 
+
+<script src="script.js">
+</script> 
+
+</html> 
