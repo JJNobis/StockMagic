@@ -34,12 +34,18 @@
     <button onclick="addBal()">Add funds</button>
     </div>
     <script>
-        let userBal=[0, 0, 0, Number(1372.53)];
-        const accounts=['1234 567 8901234', '9876 543 3210987']
+       // let userBal=[0, 0, 0, Number(1372.53)];
+       /**Maybe ignore?
+        *  fetch('/api/stocks')
+            .then(res => res.json())
+            .then(data => {userBal= users.fundAmount});
         {
+            
         const display = document.getElementById('display');
         display.innerHTML+=userBal[3];
         }
+
+        */
         for(let i=0; i<accounts.length;i++){
             var list = document.getElementById('dropDown');
             const accOP = document.createElement('option');
