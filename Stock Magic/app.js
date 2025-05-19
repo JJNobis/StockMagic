@@ -14,7 +14,7 @@ const sql = require('mssql/msnodesqlv8');
 
 const config = {
     server: 'localhost',
-    database: 'stockMagic',
+    database: 'StockMagic',
     driver: 'msnodesqlv8',
     options: {
         trustedConnection: true
@@ -32,6 +32,7 @@ app.post('/login', async (req,res) => {
             res.json({success: false, message: "Invalid credentials"});
         }
     } catch (err) {
+        console.log(`DB Error: ${err}`)
         res.status(500).send(err.message);
     }
 });

@@ -11,14 +11,14 @@
         <a class="active" href="index.html">Home</a>
         <a  href="contactUs.html">Contact</a>
         <div class="login-container">
-            <form id="loginForm">
+            <div id="loginForm">
                 
-                <input type="text" id= "username" placeholder="Username" name="username">
-                <input type="password" id="password" placeholder="Password" name="psw">
-                <button type="submit" id="login" onclick="login()">Login</button>
+                <input type="text" id= "username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button id="login" onclick="login()">Login</button>
                 <br>
                 <span id="message" style="color: rgb(243, 20, 20);"></span>
-            </form>
+            </div>
     
          </div>
     </nav>
@@ -73,14 +73,14 @@
         </form>
     </div>
     
-    <script src="script.js">
-                function login(){
+    <script>
+            function login(){
             const username= document.getElementById('username').value;
             const password=document.getElementById('password').value;
             fetch('http://localhost:3000/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                boody: JSON. stringify({ username, passworkd})
+                body: JSON. stringify({ username, password})
             })
             .then(res => {
                 if (!res.ok) throw new Error("Login failed");
