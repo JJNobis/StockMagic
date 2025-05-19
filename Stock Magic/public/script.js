@@ -1,5 +1,3 @@
-const sql = require('mssql/msnodesqlv8');
-
 const apiKey = '8G92EAMNYI9SW94C';  //API key to connect to Stock Market
 
 const config = {
@@ -24,7 +22,7 @@ var passedArray;
 var fundLine;
 //Future plan --- Make sure when creating account that username doesn't already exist.
 
-
+/*
 function loginAccount() {
     const form = document.getElementById('loginForm');
 
@@ -65,6 +63,7 @@ function loginAccount() {
         }
 });
 }
+*/
 //Displays create account box
 function openCreate() {
     document.getElementById("createForm").style.display = "block";

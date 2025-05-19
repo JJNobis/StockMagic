@@ -17,6 +17,21 @@ const config = {
     }
 };
  
+app.post('/login', async (req,res) => {
+    const { username, password} =req.body;
+    try {
+        await sql.connect(config);
+        const result = await sql.query`SELECt * from users where username = ${username}`;
+        const user = result.recordset[0];
+
+        if (user && await bcrypt.compare(password, user.pwd)) {
+            res.json({success: false, message: "Invalid credentials"});
+        }
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+
 app.get('/api/stocks', async (req, res) => {
     try {
         await sql.connect(config);
