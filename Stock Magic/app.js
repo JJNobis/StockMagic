@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 
 app.use(express.json());
@@ -28,9 +29,13 @@ app.post('/login', async (req,res) => {
         const result = await sql.query`SELECt * from users where username = ${username}`;
         const user = result.recordset[0];
 
-        if (user && await bcrypt.compare(password, user.pwd)) {
+       // if (user && await bcrypt.compare(password, user.pwd)) {
+        if (user && password==user.pwd){
             res.json({success: false, message: "Invalid credentials"});
+        } else {
+            res.status(401).json({ success: false, message:"Invalid Credentials"});
         }
+        
     } catch (err) {
         console.log(`DB Error: ${err}`)
         res.status(500).send(err.message);
