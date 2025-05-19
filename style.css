@@ -285,6 +285,8 @@ th,td{
   border-bottom: 1px solid black;
 }
 
+<<<<<<< HEAD
+=======
 /***** Cash Account Balance******/
 #bal{
   text-align: center;
@@ -293,30 +295,130 @@ th,td{
 #fundsInput{
   text-align: center;
 }
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 
 /**** AccSumm ***/
+
+.scrollcontainer {
+  height:550px;
+  width:450px;
+  border-collapse: collapse;
+  overflow-y:scroll;
+  border-radius: 50px;
+  display: block;
+  text-align: center;
+}
 
 #sumAssets{
   background-color: var(--color-light);
   width: 70vw;
   margin: 0vh 20vw;
 }
-#Genstocknm{
+#Genstocknm1{
   background-color: var(--color-dark);
-  width: 70vw;
-  margin: 2vh 20vw;
+  width: 425px;
+  margin-left: 5px;
   font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
 }
+#Genstocknm2{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm3{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm4{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm5{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm6{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm7{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm8{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm9{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+#Genstocknm10{
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align:center;
+  border-radius: 50px;
+}
+
 #Stockdtl{
-  background-color: var(--color-accent);
-  margin: 2vh 20vw;
+  background-color: var(--color-dark);
+  margin: .5vh 10vw;
   font-size: 11px;
 }
+<<<<<<< HEAD
+#sellAmnt{
+  background-color: var(--color-accent);
+  text-align: left;
+  width: 500px;
+  margin-block-start: 15vw;
+  margin-block-end: 15vw;
+
+
+}
+
+=======
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 /*********Settings/H4********/
 h4{
   text-decoration: underline;
   text-align: center;
 }
+
 
 .contact-form{
   background-color: var(--color-light);
@@ -340,11 +442,24 @@ h4{
   border-radius: 1em;
 }
 
+<<<<<<< HEAD
+/** H2**/
+h2{
+  text-align:center;
+
+}
+
+=======
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 /******** TX History*******/
 #TXTable{
 border-collapse: collapse;
 text-align:center;
 margin-top: 10px;
 margin-left:21vw;
+<<<<<<< HEAD
+width: 75vw;
+=======
 width: 70vw;
+>>>>>>> a300657174979a64582d368a2b4adb6807acecae
 }
