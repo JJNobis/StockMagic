@@ -5,7 +5,7 @@ create table users(
 	pwd text not null,
 	fName text not null,
 	lName text not null,
-	funds decimal (10,2) not null,
+	funds money not null,
 	routingNums integer not null);
 
 create table fundsTXHist(
@@ -22,7 +22,7 @@ create table stockTXHist(
 	buySell bit not null,
 	userID integer not null,
 	qty integer not null,
-	sellPrice decimal not null,
+	sellPrice money not null,
 	txDate datetime default getdate(),
 	foreign key (userID) references users(userID)
 	);
@@ -38,7 +38,7 @@ create table stockTXHist(
 
 
 	insert into stockTXHist(txID, sym, buySell, userID, qty, sellPrice) values
-	(123456795, '$SONY', 1, 0000000004, 12, 24.67); 
+	(123456795, '$SONY', 1, 0000000004, 12, 24.67), 
 	(123456789, '$GOOG', 1, 0000000001, 11, 159.27),
 	(123456790, '$MSFT', 1, 0000000002, 17, 452.04),
 	(123456791, '$NVDA', 1, 0000000003, 7, 134.11),
@@ -57,6 +57,9 @@ create table stockTXHist(
 	select * from fundsTXHist
 	select * from stockTXHist
 	select * from users
+
+	alter table users
+	alter column username nvarchar(32) not null;
 
 	/*
 	select * from stockTXHist
@@ -89,3 +92,5 @@ alter column fundsID int primary key;
 	select * from fundsTXHist
 	select * from stockTXHist
 	select * from users
+
+	*/
