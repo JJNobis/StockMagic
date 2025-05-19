@@ -86,7 +86,7 @@
                 if (!res.ok) throw new Error("Login failed");
                 return res.json();
             })
-            .then(data=> {
+            .then(user=> {
                 localStorage.setItem('loggedIn', 'true');
                 localStorage.setItem('userIDStor', user.userID);
                 window.location.href="accountOV.html";
@@ -97,6 +97,7 @@
         }
         function logout() {
             localStorage.removeItem('loggedIn');
+            localStorage.removeItem('userIDStor');
             location.reload();
         }
     </script>

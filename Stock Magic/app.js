@@ -32,7 +32,7 @@ app.post('/login', async (req,res) => {
 
        // if (user && await bcrypt.compare(password, user.pwd)) {
         if (user && password==user.pwd){
-            res.json({success: false, message: "Invalid credentials"});
+            res.json(user);
         } else {
             res.status(401).json({ success: false, message:"Invalid Credentials"});
         }
