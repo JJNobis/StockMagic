@@ -1,16 +1,14 @@
-const fs = require('fs');
-const mysql = require('mysql2');
-
-
-const con = mysql.createConnection({
-   host: 'localhost',
-   user: "root",
-   password: "stockmagic",
-   database: "stockmagicaccounts"
-
-});
-
 const apiKey = '8G92EAMNYI9SW94C';  //API key to connect to Stock Market
+
+const config = {
+    server: 'localhost',
+    database: 'StockMarketDB',
+    driver: 'msnodesqlv8',
+    options: {
+        trustedConnection: true,
+        trustServerCertificat: true
+    }
+};
 
 let finalPrice; //Used to display the price of a stock
 let buyAmount; //Maximum number of shares that can be purchased. 
@@ -24,7 +22,7 @@ var passedArray;
 var fundLine;
 //Future plan --- Make sure when creating account that username doesn't already exist.
 
-
+/*
 function loginAccount() {
     const form = document.getElementById('loginForm');
 
@@ -65,6 +63,7 @@ function loginAccount() {
         }
 });
 }
+*/
 //Displays create account box
 function openCreate() {
     document.getElementById("createForm").style.display = "block";
@@ -76,16 +75,17 @@ function closeForm() {
 //Display alert that account was created
 function accountCreated() {
 
+
     alert("Account created! You may now login.");
     closeForm();
 }
+
 
 function openFundsBox(){
     document.getElementById("addFundsForm").style.display = "block";
 }
 
 function greetingMessage(){
-    console.log("test");
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
     availableFunds = localStorage.getItem("funds");
@@ -105,15 +105,12 @@ function addMoneyToAccount(){
 
     document.getElementById("hiddenArray").innerHTML = passedArray;
     document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
-    console.log(availableFunds);
-    console.log(passedArray);
     document.getElementById('addFundsForm').style.display = 'block';
     
 }
 
 //Searches for stock and its price also makes further buying actions appear.
 function getPriceStock(){
-    console.log("hello");
     symbol = document.getElementById('symbol').value; 
     getStockPrice(symbol); 
 
@@ -180,7 +177,6 @@ function buyStock(){
         availableFunds= availableFunds.toFixed(2);
         document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
         document.getElementById("purchaseMessage").innerHTML = `Congratulations!!! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
-        console.log("hello2");
         document.getElementById('result').innerHTML =  "";
         
     } else {
@@ -211,3 +207,4 @@ function setAvailableFunds(funds){
 function getAvailableFunds(){
     return availableFunds;
 }
+

@@ -22,7 +22,7 @@
     
          </div>
 
-         <script>
+         <script> /*
             const form = document.getElementById('loginForm');
             const message = document.getElementById('message');
     
@@ -43,7 +43,7 @@
                 } else {
                     message.textContent = 'Login failed. Incorrect username or password.';
                 }
-            });
+            });*/
         </script>
     </nav>
 
@@ -96,15 +96,40 @@
     </div>
 
     <script>
+        function login(){
+            const username= document.getElementById('username').value;
+            const password=document.getElementById('password').value;
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                boody: JSON. stringify({ username, passworkd})
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Login failed");
+                return res.json();
+            })
+            .then(data=> {
+                localStorage.setItem('loggendIn', 'true');
+                showStocks();
+            })
+            .catch(err=> {
+                document.getElementById('loginMessage').innerText='Invalid login';
+            });
+        }
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            location.reload();
+        }
 
         function openCreate() {
-
             document.getElementById("createForm").style.display = "block";
         }
 
         function closeForm() {
             document.getElementById("createForm").style.display = "none";
         }
+
+        
     </script>
 
     <footer style="position: fixed; bottom: 10px; left: 44vw;">

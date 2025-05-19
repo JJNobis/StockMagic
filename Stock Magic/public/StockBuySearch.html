@@ -10,38 +10,26 @@
 </head>
 <ul class="NavBar">
     <li><img class="logo" src="img/StockMagicLogo.png"></li>
-    <li><a href="AccountOV.html">Account Overview</a></li>
-    <li><a href=>Account Summary</a></li>
-    <li><a href=>Account Balance</a></li>
-    <li><a href=>Stock Buy/Search</a></li>
-    <li><a href="documents.html">Documents</a></li>
-    <li><a href=>Transaction History</a></li>
-    <li><a href="Settings.html">Settings</a></li>
-    <li><a href="ContactUS.html">Contact Us</a></li>
-    <li><a href="index.php">Log Out</a></li>
+    <li>Account Summary</li>
+    <li>Account Overview</li>
+    <li> Settings</li>
     </ul>
-    <header>
-        <h1>Find and Buy Stocks</h1>
-        </header>
 
-
-<body onload="greetingMessage()">
+<body>
     <center>
-                
-        <h2 id="greeting">temp</h2>
+        <h1 style="text-align: center;">Find and Buy Stocks</h1> 
+        
         <h3 id="fundsMessage"></h3>
 
         <input type="text" id="symbol" placeholder="Enter stock symbol (e.g., AAPL)"> 
-        <button id="getPrice" onclick="getPriceStock()">Get Price</button><br>
+        <button id="getPrice">Get Price</button><br>
         <div id="result">
         </div><br><br>
         <span id="shareMessage" style="display: none;">Enter the number of shares you wish to purchase:</span>
         <input type="number" id="numberofShares" placeholder="Number of Shares" style="display: none;" min="1"><br>
-        <button id="buyButton" style="display: none;" onclick="buyStock()">Buy</button>
-        <button id="closeBuyButton" style="display: none;" onclick="closeStock()">Clear</button><br><br>
+        <button id="buyButton" style="display: none;">Buy</button>
+        <button id="closeBuyButton" style="display: none;">Clear</button><br><br>
         <h4 id="purchaseMessage"></h4>
-
-
     </center>
  
     
