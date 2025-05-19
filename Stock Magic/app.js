@@ -28,6 +28,7 @@ app.post('/login', async (req,res) => {
         await sql.connect(config);
         const result = await sql.query`SELECt * from users where username = ${username}`;
         const user = result.recordset[0];
+        console.log(user);
 
        // if (user && await bcrypt.compare(password, user.pwd)) {
         if (user && password==user.pwd){
@@ -51,6 +52,16 @@ app.post('/api/signUp', async (req, res) => {
                    ('${first}', '${last}', '${emailAddress}', '${username}', '${password}', '${fundsAccount}', '${bankAccount}')`);
     } catch (err) {
         res.status(500).send(err.message);
+    }
+});
+
+app.post(`/api/OVName/`, async (req, res) => {
+    const userIDStor= req.body;
+    try {
+        await sql.connect(config);
+            await sql.query(`select username from users where ${userIDStor}=userID`)
+    } catch(err){
+        logInName = 'Error';
     }
 });
 
