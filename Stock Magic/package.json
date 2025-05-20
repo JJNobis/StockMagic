@@ -8,7 +8,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
@@ -18,8 +17,11 @@
     "express-session": "^1.18.1",
     "msnodesqlv8": "^4.5.0",
     "mssql": "^11.0.1",
+    "node": "^20.19.2",
     "node-sspi": "^0.2.11",
     "passport": "^0.7.0",
-    "passport-local": "^1.0.0"
-  }
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
+  },
+  "description": ""
 }

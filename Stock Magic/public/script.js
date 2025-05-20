@@ -2,7 +2,7 @@ const apiKey = '8G92EAMNYI9SW94C';  //API key to connect to Stock Market
 
 const config = {
     server: 'localhost',
-    database: 'StockMarketDB',
+    database: 'StockMagic',
     driver: 'msnodesqlv8',
     options: {
         trustedConnection: true,
@@ -22,48 +22,42 @@ var passedArray;
 var fundLine;
 //Future plan --- Make sure when creating account that username doesn't already exist.
 
-/*
-function loginAccount() {
-    const form = document.getElementById('loginForm');
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        customerID = 0;
-        pullArray();
-
-        username = document.getElementById('username').value;//Input values from user to attempt to login
-        password = document.getElementById('password').value;//Input values from user to attempt to login
-        
-        //Check with array to see if the user input matches what was used when they created the account. Password is always one element more then the username. 
-        for (let i = 0; i < passedArray.length; i++){
-
-            if (passedArray[i] == "Contact"){
-                customerID++;
-            }
-
-            if (username === passedArray[i] && password === passedArray[i+1]) {
-
-                fundLine = i + 5;
-                localStorage.setItem("first-name", passedArray[i+2]);
-                localStorage.setItem("last-name", passedArray[i+3]);
-                localStorage.setItem("email", passedArray[i+4]);
-                localStorage.setItem("funds", passedArray[i+5]);
-                localStorage.setItem("ID", customerID);
-                localStorage.setItem("accountArray", passedArray);
-                localStorage.setItem("fundsInTxt", fundLine);
-
-                
-                document.getElementById('message').textContent = '';
-                document.getElementById("login").onclick = window.location.href = "AccountOV.html";
-                
-
-                break;
-            } 
-            document.getElementById('message').textContent = 'Login failed. Incorrect username or password.';
-        }
-});
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Login failed");
+            return res.json();
+        })
+        .then(user => {
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('userIDStor', user.userID);
+            localStorage.setItem("first-name", user.fName);
+            localStorage.setItem("last-name", user.lName);
+            localStorage.setItem("email", user.email);
+            localStorage.setItem("funds", user.funds);
+            localStorage.setItem("ID", user.userID);
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('userIDStor', user.userID);
+            window.location.href = "AccountOV.html";
+        })
+        .catch(err => {
+            document.getElementById('message').innerText = 'Invalid login';
+        });
 }
-*/
+function logout() {
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userIDStor');
+    location.reload();
+    window.location.href = "index.html";
+}
+
 //Displays create account box
 function openCreate() {
     document.getElementById("createForm").style.display = "block";
@@ -81,23 +75,22 @@ function accountCreated() {
 }
 
 
-function openFundsBox(){
+function openFundsBox() {
     document.getElementById("addFundsForm").style.display = "block";
 }
 
-function greetingMessage(){
+function greetingMessage() {
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
     availableFunds = localStorage.getItem("funds");
-    passedArray = localStorage.getItem("accountArray");
     fundLine = localStorage.getItem("fundsInTxt");
-    document.getElementById("hiddenArray").innerHTML = passedArray;
+    console.log(userFirstName);
 
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
     document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
 }
 //Displays available funds at start of page loading.
-function addMoneyToAccount(){
+function addMoneyToAccount() {
     const money = document.getElementById('cashAdded').value;
 
     availableFunds = availableFunds + money;
@@ -106,13 +99,13 @@ function addMoneyToAccount(){
     document.getElementById("hiddenArray").innerHTML = passedArray;
     document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
     document.getElementById('addFundsForm').style.display = 'block';
-    
+
 }
 
 //Searches for stock and its price also makes further buying actions appear.
-function getPriceStock(){
-    symbol = document.getElementById('symbol').value; 
-    getStockPrice(symbol); 
+function getPriceStock() {
+    symbol = document.getElementById('symbol').value;
+    getStockPrice(symbol);
 
     document.querySelector('#shareMessage').style.display = 'inline-block';
     document.querySelector('#numberofShares').style.display = 'inline-block';
@@ -121,25 +114,25 @@ function getPriceStock(){
 
 }
 
-async function getStockPrice(symbol) { 
-    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`; 
- 
-    try { 
-        const response = await fetch(url); 
-        const data = await response.json(); 
- 
-        if (data['Time Series (1min)']) { 
-            const latestTime = Object.keys(data['Time Series (1min)'])[0]; 
-            const latestData = data['Time Series (1min)'][latestTime]; 
-            const price = latestData['1. open']; 
+async function getStockPrice(symbol) {
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data['Time Series (1min)']) {
+            const latestTime = Object.keys(data['Time Series (1min)'])[0];
+            const latestData = data['Time Series (1min)'][latestTime];
+            const price = latestData['1. open'];
 
             finalPrice = parseFloat(price).toFixed(2);
-            
+
             buyAmount = Math.floor(availableFunds / price);
             document.querySelector('#numberofShares').setAttribute('max', buyAmount);
-            
-            if(buyAmount==0){
-                document.getElementById('result').innerHTML = 
+
+            if (buyAmount == 0) {
+                document.getElementById('result').innerHTML =
                     `Sorry you don't have enough funds to purchase any shares of ${symbol.toUpperCase()}, 1 share currently cost $${finalPrice}.`;
 
                 document.querySelector('#shareMessage').style.display = 'none';
@@ -147,44 +140,44 @@ async function getStockPrice(symbol) {
                 document.querySelector('#buyButton').style.display = 'none';
                 document.querySelector('#closeBuyButton').style.display = 'none';
                 document.querySelector('#purchaseMessage').style.display = 'none';
-                
+
             } else {
-            document.getElementById('result').innerHTML =  
-                `<strong>${symbol.toUpperCase()}:</strong> $${finalPrice} at ${latestTime}. You may buy up to ${buyAmount} shares of <strong>${symbol.toUpperCase()}</strong>`;
-            }    
-    
-        } else { 
-            document.getElementById('result').innerHTML =  
-                `<strong>Error:</strong> ${data['Note'] || 'Stock symbol not found.'}`; 
-        } 
-    } catch (error) { 
-        console.error('Error fetching data:', error); 
-        document.getElementById('result').innerHTML =  
-            `<strong>Error:</strong> Unable to retrieve stock data.`; 
-    } 
+                document.getElementById('result').innerHTML =
+                    `<strong>${symbol.toUpperCase()}:</strong> $${finalPrice} at ${latestTime}. You may buy up to ${buyAmount} shares of <strong>${symbol.toUpperCase()}</strong>`;
+            }
 
-   
+        } else {
+            document.getElementById('result').innerHTML =
+                `<strong>Error:</strong> ${data['Note'] || 'Stock symbol not found.'}`;
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        document.getElementById('result').innerHTML =
+            `<strong>Error:</strong> Unable to retrieve stock data.`;
+    }
 
-} 
 
-function buyStock(){
+
+}
+
+function buyStock() {
 
     const purchasedShares = document.getElementById('numberofShares').value;
-    
 
-    if(purchasedShares <= buyAmount && purchasedShares >= 1){
+
+    if (purchasedShares <= buyAmount && purchasedShares >= 1) {
         availableFunds = availableFunds - (purchasedShares * finalPrice);
-        availableFunds= availableFunds.toFixed(2);
+        availableFunds = availableFunds.toFixed(2);
         document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
         document.getElementById("purchaseMessage").innerHTML = `Congratulations!!! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
-        document.getElementById('result').innerHTML =  "";
-        
+        document.getElementById('result').innerHTML = "";
+
     } else {
         document.getElementById("purchaseMessage").innerHTML = `You only have enough funds to purchase up to ${buyAmount} shares.`;
     }
 
 }
-function closeStock(){
+function closeStock() {
 
     document.querySelector('#shareMessage').style.display = 'none';
     document.querySelector('#numberofShares').style.display = 'none';
@@ -194,17 +187,17 @@ function closeStock(){
 
 }
 
-function getFinalPrice(){
+function getFinalPrice() {
     return finalPrice;
 }
 
-function getBuyAmount(){
+function getBuyAmount() {
     return buyAmount;
 }
-function setAvailableFunds(funds){
-    availableFunds= availableFunds + funds;
+function setAvailableFunds(funds) {
+    availableFunds = availableFunds + funds;
 }
-function getAvailableFunds(){
+function getAvailableFunds() {
     return availableFunds;
 }
 
