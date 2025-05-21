@@ -1,6 +1,6 @@
 create table users(
 	userID integer primary key,
-	username text not null,
+	username nvarchar(32) not null,
 	email text not null,
 	pwd text not null,
 	fName text not null,
@@ -61,6 +61,10 @@ create table stockTXHist(
 	alter table users
 	alter column username nvarchar(32) not null;
 
+
+	select funds from users
+	where userID =1;
+	select sum(
 	/*
 	select * from stockTXHist
 

@@ -79,12 +79,13 @@ app.post('/api/signUp', async (req, res) => {
     }
 });
 
-app.post(`/api/OVName/`, async (req, res) => {
-    const userIDStor = req.body;
+app.post(`/api/OVBal/`, async (req, res) => {
+    const userIDStor= req.body;
     try {
         await sql.connect(config);
-        await sql.query(`select username from users where ${userIDStor}=userID`)
-    } catch (err) {
+        const result= await sql.query(`select funds from users where ${userIDStor}=userID`);
+        const user = result.record
+    } catch(err){
         logInName = 'Error';
     }
 });
