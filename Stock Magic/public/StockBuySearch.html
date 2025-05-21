@@ -1,41 +1,54 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Real-Time Stock Prices</title>  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Stock Prices</title>
     <link rel="stylesheet" href="style.css">
     <a href="index.html"><button class="logout">Logout</button></button></a>
-    
+
 </head>
 <ul class="NavBar">
-    <li><img class="logo" src="img/StockMagicLogo.png"></li>
-    <li>Account Summary</li>
-    <li>Account Overview</li>
-    <li> Settings</li>
-    </ul>
+    li><img class="logo" src="img/StockMagicLogo.png"></li>
+    <li><a href="AccountOV.html">Account Overview</a></li>
+    <li><a href="AcctSum.html">Account Summary</a></li>
+    <li><a href="CashAcctBalance.html">Account Balance</a></li>
+    <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
+    <li><a href="documents.html">Documents</a></li>
+    <li><a href="TXHist.html">Transaction History</a></li>
+    <li><a href="Settings.html">Settings</a></li>
+    <li><a href="ContactUS.html">Contact Us</a></li>
+    <li><a href="index.html">Log Out</a></li>
+</ul>
+<header>
+    <h1>Find and Buy Stocks</h1>
+</header>
 
-<body>
+
+<body onload="greetingMessage()">
     <center>
-        <h1 style="text-align: center;">Find and Buy Stocks</h1> 
-        
+
+        <h2 id="greeting">temp</h2>
         <h3 id="fundsMessage"></h3>
 
-        <input type="text" id="symbol" placeholder="Enter stock symbol (e.g., AAPL)"> 
-        <button id="getPrice">Get Price</button><br>
+        <input type="text" id="symbol" placeholder="Enter stock symbol (e.g., AAPL)">
+        <button id="getPrice" onclick="getPriceStock()">Get Price</button><br>
         <div id="result">
         </div><br><br>
         <span id="shareMessage" style="display: none;">Enter the number of shares you wish to purchase:</span>
         <input type="number" id="numberofShares" placeholder="Number of Shares" style="display: none;" min="1"><br>
-        <button id="buyButton" style="display: none;">Buy</button>
-        <button id="closeBuyButton" style="display: none;">Clear</button><br><br>
+        <button id="buyButton" style="display: none;" onclick="buyStock()">Buy</button>
+        <button id="closeBuyButton" style="display: none;" onclick="closeStock()">Clear</button><br><br>
         <h4 id="purchaseMessage"></h4>
+
+
     </center>
- 
-    
-</body> 
+
+
+</body>
 
 <script src="script.js">
-</script> 
+</script>
 
-</html> 
+</html>

@@ -25,7 +25,7 @@ const config = {
 
 app.post('/addFunds', async (req, res) => {
     const { moneyIncome, accountID } = req.body;
-
+    console.log(moneyIncome);
     let addFunds = JSON.parse(moneyIncome);
     let userID = JSON.parse(accountID);
 
@@ -36,6 +36,7 @@ app.post('/addFunds', async (req, res) => {
 
 
         addFunds = addFunds + user.funds;
+        console.log(addFunds);
         await sql.query(`UPDATE users SET funds = ${addFunds} WHERE userID = ${userID}`);
 
 
@@ -43,6 +44,33 @@ app.post('/addFunds', async (req, res) => {
         console.log(`DB Error: ${err}`)
         res.status(500).send(err.message);
     }
+    await sql.close();
+});
+
+app.post('/subtractFunds', async (req, res) => {
+    const { outgoingMoney, accountID } = req.body;
+
+    console.log(outgoingMoney);
+    let subtractFunds = JSON.parse(outgoingMoney);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`SELECT * from users where userID = ${userID}`);
+        const user = result.recordset[0];
+
+
+        subtractFunds = user.funds - subtractFunds;
+
+        await sql.query(`UPDATE users SET funds = ${subtractFunds} WHERE userID = ${userID}`);
+
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+
 });
 
 app.post('/login', async (req, res) => {
@@ -65,6 +93,7 @@ app.post('/login', async (req, res) => {
         console.log(`DB Error: ${err}`)
         res.status(500).send(err.message);
     }
+    await sql.close();
 });
 
 app.post('/api/signUp', async (req, res) => {
@@ -77,15 +106,16 @@ app.post('/api/signUp', async (req, res) => {
     } catch (err) {
         res.status(500).send(err.message);
     }
+    await sql.close();
 });
 
 app.post(`/api/OVBal/`, async (req, res) => {
-    const userIDStor= req.body;
+    const userIDStor = req.body;
     try {
         await sql.connect(config);
-        const result= await sql.query(`select funds from users where ${userIDStor}=userID`);
+        const result = await sql.query(`select funds from users where ${userIDStor}=userID`);
         const user = result.record
-    } catch(err){
+    } catch (err) {
         logInName = 'Error';
     }
 });
