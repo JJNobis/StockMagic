@@ -20,6 +20,7 @@ var userLastName;
 var userEmail;
 var passedArray;
 var fundLine;
+var userID;
 //Future plan --- Make sure when creating account that username doesn't already exist.
 
 
@@ -44,7 +45,6 @@ function login() {
             localStorage.setItem("funds", user.funds);
             localStorage.setItem("ID", user.userID);
             localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('userIDStor', user.userID);
             window.location.href = "AccountOV.html";
         })
         .catch(err => {
@@ -53,7 +53,7 @@ function login() {
 }
 function logout() {
     localStorage.removeItem('loggedIn');
-    localStorage.removeItem('userIDStor');
+    localStorage.removeItem('ID');
     location.reload();
     window.location.href = "index.html";
 }
@@ -78,27 +78,54 @@ function accountCreated() {
 function openFundsBox() {
     document.getElementById("addFundsForm").style.display = "block";
 }
-
+//Display user information on page
 function greetingMessage() {
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
     availableFunds = localStorage.getItem("funds");
-    fundLine = localStorage.getItem("fundsInTxt");
-    console.log(userFirstName);
+    userID = localStorage.getItem("ID");
+    console.log(userID);
 
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
-    document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
+    document.getElementById("fundsDisplay").innerHTML = `$${availableFunds}`;
 }
-//Displays available funds at start of page loading.
-function addMoneyToAccount() {
-    const money = document.getElementById('cashAdded').value;
 
-    availableFunds = availableFunds + money;
-    passedArray[fundLine] = availableFunds;
+function askForMoney() {
+    const accountID = localStorage.getItem("ID");
+    availableFunds = localStorage.getItem("funds");
+    let addMoney = prompt("Please enter amount of money to add to account:", "0.00");
+    addMoney = parseFloat(addMoney).toFixed(2);
+    if (!isNaN(addMoney && addMoney !== '' && addMoney > 0)) {
+        alert(`Successfully added $${addMoney} to your account`);
+        addMoneyToAccount(addMoney, accountID);
+        const num1 = parseFloat(availableFunds);
+        const num2 = parseFloat(addMoney);
+        const sum = num1 + num2;
+        localStorage.setItem("funds", sum);
+        document.getElementById("fundsDisplay").innerHTML = `$${sum}`;
+        window.location.reload();
 
-    document.getElementById("hiddenArray").innerHTML = passedArray;
-    document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
-    document.getElementById('addFundsForm').style.display = 'block';
+    } else {
+        alert('Invalid input.')
+    }
+}
+
+function addMoneyToAccount(moneyIncome, accountID) {
+    fetch('http://localhost:3000/addFunds', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ moneyIncome, accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add Money");
+            return res.json();
+        })
+        .then(user => {
+            document.getElementById("fundsDisplay").innerHTML = `$${user.funds}`;
+        })
+        .catch(err => {
+            document.getElementById('fundsDisplay').innerText = 'ERROR';
+        });
 
 }
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <style>
-    .container{
+    .container {
         display: flex;
         border: 2 px solid black;
     }
+
     .box {
         flex: 1;
         margin: 15px;
@@ -12,47 +13,53 @@
     }
 </style>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Documents</title>
-        <link rel="icon" type="image/png" href="img/StockMagicLogo.png">
-        <link rel="stylesheet" href="style.css">
-        
-    </head>
 
-    <ul class="NavBar">
-        li><img class="logo" src="img/StockMagicLogo.png"></li>
-        <li><a href="AccountOV.html">Account Overview</a></li>
-        <li><a href="AcctSum.html">Account Summary</a></li>
-        <li><a href="CashAcctBalance.html">Account Balance</a></li>
-        <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="TXHist.html">Transaction History</a></li>
-        <li><a href="Settings.html">Settings</a></li>
-        <li><a href="ContactUS.html">Contact Us</a></li>
-        <li><a href="index.html">Log Out</a></li>
-        </ul>
-    <header>
+<head>
+    <meta charset="utf-8">
+    <title>Documents</title>
+    <link rel="icon" type="image/png" href="img/StockMagicLogo.png">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<ul class="NavBar">
+    li><img class="logo" src="img/StockMagicLogo.png"></li>
+    <li><a href="AccountOV.html">Account Overview</a></li>
+    <li><a href="AcctSum.html">Account Summary</a></li>
+    <li><a href="CashAcctBalance.html">Account Balance</a></li>
+    <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
+    <li><a href="documents.html">Documents</a></li>
+    <li><a href="TXHist.html">Transaction History</a></li>
+    <li><a href="Settings.html">Settings</a></li>
+    <li><a href="ContactUS.html">Contact Us</a></li>
+    <li><a href="index.html">Log Out</a></li>
+</ul>
+<header>
     <h1>Account Overview</h1>
-    </header>
+</header>
 
-    <body onload="greetingMessage()">
-        <center>
+<body onload="greetingMessage()">
+    <center>
 
-            <h2 id="greeting">temp</h2>
-            <p id="fundsMessage">Message should be above here.</p>
+        <h2 id="greeting">temp</h2>
 
-        </center>
-            <div class="container">
-                <div class="box"> Total Account Balnance</div>
-                <div class="box"> Available Funds</div>
-                <div class="box"> Total Stock Value</div>
-            </div>
+    </center>
+    <div class="container">
+        <div class="box"> Total Account Balance</div>
+        <div class="box"> Available Funds
+
+            <h3 id="fundsDisplay">
+            </h3>
+
+            <button onclick="askForMoney()">Add Funds</button>
+        </div>
+        <div class="box"> Total Stock Value</div>
+    </div>
 
 
-    </body>
-    <script src="script.js">
+</body>
+<script src="script.js">
 
-    </script>
+</script>
 
 </html>
