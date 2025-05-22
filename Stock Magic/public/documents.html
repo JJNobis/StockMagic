@@ -45,7 +45,7 @@
         const link = docLinks[i][1];
         const year = docLinks[i][2];
         const linkName= (quarter==0)? `Annual report ${year}`: `Quarter ${quarter} ${year}`;
-        doc.innerHTML = `<a href="${link}" target="_blank">${linkName}</a>`;
+        doc.innerHTML = `<a href="${link}" download>${linkName}</a>`;
         container.appendChild(doc);
    }
 </script>
