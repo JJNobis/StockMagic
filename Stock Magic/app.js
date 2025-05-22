@@ -81,8 +81,6 @@ app.post('/login', async (req, res) => {
         const result = await sql.query(`SELECt * from users where username = '${username}'`);
         const user = result.recordset[0];
 
-
-        // if (user && await (password, user.pwd)) {
         if (user && password == user.pwd) {
             res.json(user);
         } else {
@@ -118,6 +116,24 @@ app.post(`/api/OVBal/`, async (req, res) => {
     } catch (err) {
         logInName = 'Error';
     }
+});
+
+//TX Hist load in
+app.post('/pullTXHist', async(req, res) => {
+    console.log(req.body);
+    const { accountID } = req.body;
+   console.log(`Test C ${accountID}`);
+   console.log(req.body);
+   try{
+    await sql.connect(config);
+    const result = await sql.query(`select * from StockTXHist where userID = ${accountID}`);
+    const user = result.recordset;
+    console.log(user);
+    res.json(user);
+} catch (err) {
+    TXHistArray = [['ERROR']];
+   }
+console.log(`break`);
 });
 
 app.listen(3000, () => {
