@@ -109,15 +109,18 @@ app.post('/api/signUp', async (req, res) => {
     await sql.close();
 });
 
-app.post(`/api/OVBal/`, async (req, res) => {
-    const userIDStor = req.body;
+
+app.post('/addStock', async (req, res) => {
+    const { symbol, accountID, qty, sellPrice } = req.body;
+
     try {
         await sql.connect(config);
-        const result = await sql.query(`select funds from users where ${userIDStor}=userID`);
-        const user = result.record
+        await sql.query(`INSERT INTO stockTXHist (sym, buySell, userID, qty, sellPrice ) VALUES 
+                   ('${symbol}', 1, ${accountID}, ${qty}, ${sellPrice})`);
     } catch (err) {
-        logInName = 'Error';
+        res.status(500).send(err.message);
     }
+    await sql.close();
 });
 
 app.listen(3000, () => {
