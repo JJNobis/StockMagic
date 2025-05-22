@@ -1,465 +1,509 @@
 /************************************************
 *********          COLOR PALET         **********
 ************************************************/
-:root{
-    --color-extra-light: #CAFBB4;
-    --color-light: #BCF9A1;
-    --color-med-light: #AFF88F;
-    --color-med: #5a7280;
-    --color-med-dark: #94F669;
-    --color-dark: #6FB94F;
-    --color-accent: #CB69F6;
+:root {
+  --color-extra-light: #CAFBB4;
+  --color-light: #BCF9A1;
+  --color-med-light: #AFF88F;
+  --color-med: #5a7280;
+  --color-med-dark: #94F669;
+  --color-dark: #6FB94F;
+  --color-accent: #CB69F6;
+}
+
+
+
+.topnav {
+  background-color: #0a071f;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1rem 0 1rem 0;
+
+
+}
+
+.topnav a.active {
+  background-color: #1d8325;
+  color: white;
+}
+
+.topnav a {
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav .login-container {
+  float: right;
+  padding-right: 1rem;
+}
+
+.topnav input[type=text] {
+  padding-left: .25rem;
+  padding-right: .25rem;
+  font-size: 17px;
+  border: none;
+  width: 15vw;
+  /* adjust as needed (as long as it doesn't break the topnav) */
+}
+
+.topnav .login-container button {
+  padding-left: 5px;
+  padding-right: .25rem;
+  background: color-light;
+  font-size: 17px;
+  border-radius: .5rem;
+}
+
+.index-background {
+  background-image: url("img/stockbackground.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+
+}
+
+
+
+.content {
+  margin-left: 2%;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  position: float;
+  background-color: var(--color-med);
+  border: 2px solid;
+  color: var(--color-dark);
+
+}
+
+
+.createAccount button {
+  background-image: radial-gradient(var(--color-dark), var(--color-extra-light));
+  position: fixed;
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  top: 46vh;
+  left: 46vw;
+  height: 10vw;
+  width: 10vw;
+  border-radius: 50%;
+}
+
+.createAccount button:hover {
+  background-image: radial-gradient(var(--color-extra-light), var(--color-dark));
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  border: 3px solid white;
+  z-index: 9;
+}
+
+.formCreate {
+  max-width: 50vw;
+  padding: 10px;
+  color: white;
+  background-color: #0a071f;
+}
+
+.formCreate input[type=text],
+.formCreate input[type=password],
+.formCreate input[type=email] {
+  width: 95%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.formCreate .createButton {
+  padding-left: 5px;
+  padding-right: .25rem;
+  background: rgb(24, 228, 24);
+  font-size: 17px;
+  border-radius: .5rem;
+}
+
+.formCreate .cancelButton {
+  padding-left: 5px;
+  padding-right: .25rem;
+  background: red;
+  font-size: 17px;
+  border-radius: .5rem;
+}
+
+
+
+#changingMessage {
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+  width: 100%;
+  display: block;
+
+}
+
+#flip {
+  display: inline-block;
+  height: 50px;
+  overflow: hidden;
+}
+
+#flip>div>div {
+  color: #fff;
+  padding: 3px 10px;
+  height: 45px;
+  margin-bottom: 45px;
+  display: inline-block;
+}
+
+#flip div:first-child {
+  animation: show 8s linear infinite;
+}
+
+#flip div div {
+  background: #42c58a;
+}
+
+#flip div:first-child div {
+  background: #4ec7f3;
+}
+
+#flip div:last-child div {
+  background: #DC143C;
+}
+
+@keyframes show {
+  0% {
+    margin-top: -270px;
   }
-  
-  
-  
-  .topnav {
-    background-color: #0a071f;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    padding: 1rem 0 1rem 0;
-    
-    
+
+  5% {
+    margin-top: -160px;
   }
-  .topnav a.active {
-    background-color: #1d8325;
-    color: white;
+
+  33% {
+    margin-top: -160px;
   }
-  
-  .topnav a {
-    color: white;
-    text-align: center;
-    padding: 14px;
-    text-decoration: none;
-    font-size: 17px;
+
+  38% {
+    margin-top: -69px;
   }
-  
-  .topnav .login-container {
-    float: right;
-    padding-right: 1rem;
+
+  66% {
+    margin-top: -69px;
   }
-  
-  .topnav input[type=text] {
-    padding-left: .25rem;
-    padding-right: .25rem;
-    font-size: 17px;
-    border: none;
-    width: 15vw; /* adjust as needed (as long as it doesn't break the topnav) */
+
+  71% {
+    margin-top: 11px;
   }
-  
-  .topnav .login-container button {
-    padding-left: 5px;
-    padding-right: .25rem;
-    background: color-light;
-    font-size: 17px;
-    border-radius: .5rem;
-  } 
-  
-  .index-background {
-    background-image: url("img/stockbackground.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment:fixed;
-    background-size: 100% 100%;
-  
+
+  99.99% {
+    margin-top: 11px;
   }
-  
-  
-  
-  .content{   
-    margin-left: 2%;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    position: float;
-    background-color: var(--color-med);
-    border: 2px solid; color: var(--color-dark);
-    
+
+  100% {
+    margin-top: -270px;
   }
-  
-  
-  .createAccount button{
-    background-image: radial-gradient(var(--color-dark), var(--color-extra-light));
-    position: fixed;
-    text-align: center;
-    font-size: 20px;
-    color: black;
-    top: 46vh;
-    left: 46vw;
-    height: 10vw;
-    width: 10vw;
-    border-radius: 50%;
-  }
-  
-  .createAccount button:hover{
-    background-image: radial-gradient(var(--color-extra-light), var(--color-dark));
-  }
-  
-  .form-popup {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    border: 3px solid white;
-    z-index: 9;
-  }
-  
-  .formCreate {
-    max-width: 50vw;
-    padding: 10px;
-    color: white;
-    background-color: #0a071f;
-  }
-  
-  .formCreate input[type=text], .formCreate input[type=password], .formCreate input[type=email] {
-    width: 95%;
-    padding:15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
-  
-  .formCreate .createButton{
-    padding-left: 5px;
-    padding-right: .25rem;
-    background: rgb(24, 228, 24);
-    font-size: 17px;
-    border-radius: .5rem;
-  }
-  
-  .formCreate .cancelButton{
-    padding-left: 5px;
-    padding-right: .25rem;
-    background: red;
-    font-size: 17px;
-    border-radius: .5rem;
-  }
-  
-  
-  
-  #changingMessage {
-    color:#ffffff;
-    text-align: center;
-    text-transform: uppercase;
-    font-size:24px;
-    font-weight:bold;  
-    position:relative;
-    width:100%;
-    display:block;
-  
-  }
-  
-  #flip {
-    display: inline-block;
-    height:50px;
-    overflow:hidden;
-  }
-  
-  #flip > div > div {
-    color:#fff;
-    padding:3px 10px;
-    height:45px;
-    margin-bottom:45px;
-    display:inline-block;
-  }
-  
-  #flip div:first-child {
-    animation: show 8s linear infinite;
-  }
-  
-  #flip div div {
-    background:#42c58a;
-  }
-  #flip div:first-child div {
-    background:#4ec7f3;
-  }
-  #flip div:last-child div {
-    background:#DC143C;
-  }
-  
-  @keyframes show {
-    0% {margin-top:-270px;}
-    5% {margin-top:-160px;}
-    33% {margin-top:-160px;}
-    38% {margin-top:-69px;}
-    66% {margin-top:-69px;}
-    71% {margin-top:11px;}
-    99.99% {margin-top:11px;}
-    100% {margin-top:-270px;}
-  }
-  
-  /*************************************8
+}
+
+/*************************************8
   *      Navigation Bar formatting     */
-  .NavBar{
-      list-style-type: none;
-      font-size: 1.25vw;
-      background-color: var(--color-light);
-      outline: 3px solid var(--color-dark);
-      height: 90vh;
-      width: 12vw;
-      text-align: left;
-      padding: .1vh 2em;
-    line-height: 2vh;
-    float: left;
-    margin-left: 2%;
-  }
-  
-  .NavBar li:nth-child(n+2){
-    display: block;
-    width: 12vw;
-    height: 2vh;
-    margin: 2vh 0 2vh;
-    padding: 2vh 0 2vh;
-    background-color: var(--color-med-dark);
-  }
-  
-   .logo{
-      display:block;
-      max-height:5em;
-      max-width:5em;
-  }
-  
-  /*header:********************************/
-  h1{
+.NavBar {
+  list-style-type: none;
+  font-size: 1.25vw;
+  background-color: var(--color-light);
+  outline: 3px solid var(--color-dark);
+  height: 90vh;
+  width: 12vw;
+  text-align: left;
+  padding: .1vh 2em;
+  line-height: 2vh;
+  float: left;
+  margin-left: 2%;
+}
+
+.NavBar li:nth-child(n+2) {
+  display: block;
+  width: 12vw;
+  height: 2vh;
+  margin: 2vh 0 2vh;
+  padding: 2vh 0 2vh;
+  background-color: var(--color-med-dark);
+}
+
+.logo {
+  display: block;
+  max-height: 5em;
+  max-width: 5em;
+}
+
+/*header:********************************/
+h1 {
   text-align: center;
   background-color: var(--color-dark);
   padding: 2vh 0;
-  }
-  
-  /*Contact US*/
-  .ContactUS {
-    background-color: var(--color-extra-light);
-    height: fit-content;
-    width: 55vw;
-    text-align: center;
-    vertical-align: middle;
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    margin: 2vh 15vw 0 30vw;
-  }
-  
-  /*Log out button*/
-  .logout{
-    float: right;
-    padding: 12px;
-    width: 96px;
-    background: #007AFF;
-    color: white;
-    font-size: 16px;
-    border-radius: 96px;
-  }
-  
-  /*Documents tab*/
-  #reports {
-    padding: 2vh 0;
-    font-size: 1.5em;
-    text-align: center;
-    list-style: none;
-    width: 35vw;
-    margin: 2vh 25vw 0 40vw;
-  }
-  #reports>li{
-    padding: 1vh 0;
-    background-color: var(--color-med-dark);
-  }
-  
-  #reports>li:nth-child(2n){
+}
+
+/*Contact US*/
+.ContactUS {
+  background-color: var(--color-extra-light);
+  height: fit-content;
+  width: 55vw;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh 15vw 0 30vw;
+}
+
+/*Log out button*/
+.logout {
+  float: right;
+  padding: 12px;
+  width: 96px;
+  background: #007AFF;
+  color: white;
+  font-size: 16px;
+  border-radius: 96px;
+}
+
+/*Documents tab*/
+#reports {
+  padding: 2vh 0;
+  font-size: 1.5em;
+  text-align: center;
+  list-style: none;
+  width: 35vw;
+  margin: 2vh 25vw 0 40vw;
+}
+
+#reports>li {
+  padding: 1vh 0;
+  background-color: var(--color-med-dark);
+}
+
+#reports>li:nth-child(2n) {
   background-color: var(--color-light);
-  
-  }
-  
-  /************* Transaction History Table ********/
-  
-  table{
-    border-collapse: collapse;
-    width: 100%;
-    text-align:center;
-  }
-  
-  tr:hover {background-color: var(--color-extra-light)}
-  
-  th,td{
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid black;
-  }
-  
-  <<<<<<< HEAD
-  =======
-  /***** Cash Account Balance******/
-  #bal{
-    text-align: center;
-    margin-left: 22vw;
-  }
-  #fundsInput{
-    text-align: center;
-  }
-  >>>>>>> a300657174979a64582d368a2b4adb6807acecae
-  
-  /**** AccSumm ***/
-  
-  .scrollcontainer {
-    height:550px;
-    width:450px;
-    border-collapse: collapse;
-    overflow-y:scroll;
-    border-radius: 50px;
-    display: block;
-    text-align: center;
-  }
-  
-  #sumAssets{
-    background-color: var(--color-light);
-    width: 70vw;
-    margin: 0vh 20vw;
-  }
-  #Genstocknm1{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin-left: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm2{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm3{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm4{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm5{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm6{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm7{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm8{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm9{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  #Genstocknm10{
-    background-color: var(--color-dark);
-    width: 425px;
-    margin: 5px;
-    font-size: 12.5px;
-    text-align:center;
-    border-radius: 50px;
-  }
-  
-  #Stockdtl{
-    background-color: var(--color-dark);
-    margin: .5vh 10vw;
-    font-size: 11px;
-  }
-  <<<<<<< HEAD
-  #sellAmnt{
-    background-color: var(--color-accent);
-    text-align: left;
-    width: 500px;
-    margin-block-start: 15vw;
-    margin-block-end: 15vw;
-  
-  
-  }
-  
-  =======
-  >>>>>>> a300657174979a64582d368a2b4adb6807acecae
-  /*********Settings/H4********/
-  h4{
-    text-decoration: underline;
-    text-align: center;
-  }
-  
-  
-  .contact-form{
-    background-color: var(--color-light);
-    text-align: center;
-    height: 10vh;
-    width: 70vw;
-    padding-top: 1vh;
-    padding-bottom: 2vh;
-    margin: 0 0 0 4vw;
-    border-radius: 1em;
-    border: solid var(--color-accent);
-  }
-  
-  #settBody{
-    height: 80vh;
-    width: 78vw;
-    margin-left: 19.5vw;
-    margin-right: .5vw;
-    padding-top: .5em;
-    border: solid var(--color-med);
-    border-radius: 1em;
-  }
-  
-  <<<<<<< HEAD
-  /** H2**/
-  h2{
-    text-align:center;
-  
-  }
-  
-  =======
-  >>>>>>> a300657174979a64582d368a2b4adb6807acecae
-  /******** TX History*******/
-  #TXTable{
+
+}
+
+/************* Transaction History Table ********/
+
+table {
   border-collapse: collapse;
-  text-align:center;
-  margin-top: 10px;
-  margin-left:21vw;
-  <<<<<<< HEAD
-  width: 75vw;
-  =======
+  width: 100%;
+  text-align: center;
+}
+
+tr:hover {
+  background-color: var(--color-extra-light)
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+<<<<<<< HEAD=======
+
+/***** Cash Account Balance******/
+#bal {
+  text-align: center;
+  margin-left: 22vw;
+}
+
+#fundsInput {
+  text-align: center;
+}
+
+>>>>>>>a300657174979a64582d368a2b4adb6807acecae
+/**** AccSumm ***/
+
+.scrollcontainer {
+  height: 550px;
+  width: 450px;
+  border-collapse: collapse;
+  overflow-y: scroll;
+  border-radius: 50px;
+  display: block;
+  text-align: center;
+}
+
+#sumAssets {
+  background-color: var(--color-light);
   width: 70vw;
-  >>>>>>> a300657174979a64582d368a2b4adb6807acecae
-  }
+  margin: 0vh 20vw;
+}
+
+#Genstocknm1 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin-left: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm2 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm3 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm4 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm5 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm6 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm7 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm8 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm9 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Genstocknm10 {
+  background-color: var(--color-dark);
+  width: 425px;
+  margin: 5px;
+  font-size: 12.5px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+#Stockdtl {
+  background-color: var(--color-dark);
+  margin: .5vh 10vw;
+  font-size: 11px;
+}
+
+<<<<<<< HEAD #sellAmnt {
+  background-color: var(--color-accent);
+  text-align: left;
+  width: 500px;
+  margin-block-start: 15vw;
+  margin-block-end: 15vw;
+
+
+}
+
+=======>>>>>>>a300657174979a64582d368a2b4adb6807acecae
+
+/*********Settings/H4********/
+h4 {
+  text-decoration: underline;
+  text-align: center;
+}
+
+
+.contact-form {
+  background-color: var(--color-light);
+  text-align: center;
+  height: 10vh;
+  width: 70vw;
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+  margin: 0 0 0 4vw;
+  border-radius: 1em;
+  border: solid var(--color-accent);
+}
+
+#settBody {
+  height: 80vh;
+  width: 78vw;
+  margin-left: 19.5vw;
+  margin-right: .5vw;
+  padding-top: .5em;
+  border: solid var(--color-med);
+  border-radius: 1em;
+}
+
+<<<<<<< HEAD
+
+/** H2**/
+h2 {
+  text-align: center;
+
+}
+
+=======>>>>>>>a300657174979a64582d368a2b4adb6807acecae
+
+/******** TX History*******/
+#TXTable {
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 21vw;
+  <<<<<<< HEAD width: 75vw;
+  =======width: 70vw;
+  >>>>>>>a300657174979a64582d368a2b4adb6807acecae
+}

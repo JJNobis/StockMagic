@@ -2,9 +2,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 
-
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public'))); // Serve HTML/JS
 app.use(express.urlencoded({ extended: true }));
@@ -22,9 +23,58 @@ const config = {
     }
 };
 
+app.post('/addFunds', async (req, res) => {
+    const { moneyIncome, accountID } = req.body;
+    console.log(moneyIncome);
+    let addFunds = JSON.parse(moneyIncome);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`SELECT * from users where userID = ${userID}`);
+        const user = result.recordset[0];
+
+
+        addFunds = addFunds + user.funds;
+        console.log(addFunds);
+        await sql.query(`UPDATE users SET funds = ${addFunds} WHERE userID = ${userID}`);
+
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+app.post('/subtractFunds', async (req, res) => {
+    const { outgoingMoney, accountID } = req.body;
+
+    console.log(outgoingMoney);
+    let subtractFunds = JSON.parse(outgoingMoney);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`SELECT * from users where userID = ${userID}`);
+        const user = result.recordset[0];
+
+
+        subtractFunds = user.funds - subtractFunds;
+
+        await sql.query(`UPDATE users SET funds = ${subtractFunds} WHERE userID = ${userID}`);
+
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+
+});
+
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-
 
     try {
         await sql.connect(config);
@@ -32,7 +82,7 @@ app.post('/login', async (req, res) => {
         const user = result.recordset[0];
 
 
-        // if (user && await bcrypt.compare(password, user.pwd)) {
+        // if (user && await (password, user.pwd)) {
         if (user && password == user.pwd) {
             res.json(user);
         } else {
@@ -43,6 +93,7 @@ app.post('/login', async (req, res) => {
         console.log(`DB Error: ${err}`)
         res.status(500).send(err.message);
     }
+    await sql.close();
 });
 
 app.post('/api/signUp', async (req, res) => {
@@ -55,15 +106,16 @@ app.post('/api/signUp', async (req, res) => {
     } catch (err) {
         res.status(500).send(err.message);
     }
+    await sql.close();
 });
 
 app.post(`/api/OVBal/`, async (req, res) => {
-    const userIDStor= req.body;
+    const userIDStor = req.body;
     try {
         await sql.connect(config);
-        const result= await sql.query(`select funds from users where ${userIDStor}=userID`);
+        const result = await sql.query(`select funds from users where ${userIDStor}=userID`);
         const user = result.record
-    } catch(err){
+    } catch (err) {
         logInName = 'Error';
     }
 });

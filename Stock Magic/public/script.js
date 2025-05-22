@@ -20,6 +20,7 @@ var userLastName;
 var userEmail;
 var passedArray;
 var fundLine;
+var userID;
 //Future plan --- Make sure when creating account that username doesn't already exist.
 
 
@@ -44,7 +45,6 @@ function login() {
             localStorage.setItem("funds", user.funds);
             localStorage.setItem("ID", user.userID);
             localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('userIDStor', user.userID);
             window.location.href = "AccountOV.html";
         })
         .catch(err => {
@@ -53,7 +53,7 @@ function login() {
 }
 function logout() {
     localStorage.removeItem('loggedIn');
-    localStorage.removeItem('userIDStor');
+    localStorage.removeItem('ID');
     location.reload();
     window.location.href = "index.html";
 }
@@ -78,27 +78,94 @@ function accountCreated() {
 function openFundsBox() {
     document.getElementById("addFundsForm").style.display = "block";
 }
-
+//Display user information on page
 function greetingMessage() {
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
     availableFunds = localStorage.getItem("funds");
-    fundLine = localStorage.getItem("fundsInTxt");
-    console.log(userFirstName);
-
+    userID = localStorage.getItem("ID");
+    availableFunds = parseFloat(availableFunds).toFixed(2);
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
-    document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
+    document.getElementById("fundsDisplay").innerHTML = `$${availableFunds}`;
+    document.getElementById("stockMoney").innerHTML = `$0`;
+    document.getElementById("totalMoney").innerHTML = `$${availableFunds}`;
 }
-//Displays available funds at start of page loading.
-function addMoneyToAccount() {
-    const money = document.getElementById('cashAdded').value;
 
-    availableFunds = availableFunds + money;
-    passedArray[fundLine] = availableFunds;
+function withdrawMoney() {
+    const accountID = localStorage.getItem("ID");
+    availableFunds = localStorage.getItem("funds");
+    const num1 = parseFloat(availableFunds);
+    let subtractMoney = prompt(`Please enter withdrawal amount (Max withdrawal amount: $${availableFunds}): `);
+    const num2 = parseFloat(subtractMoney).toFixed(2);
+    if (!isNaN(num2) && subtractMoney !== '' && num2 > 0 && num2 <= num1) {
+        withdrawMoneyFromAccount(num2, accountID);
 
-    document.getElementById("hiddenArray").innerHTML = passedArray;
-    document.getElementById("fundsMessage").innerHTML = `Your available funds are: $${availableFunds}.`;
-    document.getElementById('addFundsForm').style.display = 'block';
+        const sum = num1 - num2;
+        localStorage.setItem("funds", sum.toFixed(2));
+        document.getElementById("fundsDisplay").innerHTML = `$${sum.toFixed(2)}`;
+        window.location.reload();
+
+    } else {
+        alert('Invalid input.')
+    }
+}
+
+function withdrawMoneyFromAccount(outgoingMoney, accountID) {
+    fetch('http://localhost:3000/subtractFunds', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ outgoingMoney, accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add Money");
+            return res.json();
+        })
+        .then(user => {
+            document.getElementById("fundsDisplay").innerHTML = `$${user.funds}`;
+        })
+        .catch(err => {
+            document.getElementById('fundsDisplay').innerText = 'ERROR';
+        });
+
+
+
+}
+
+function askForMoney() {
+    const accountID = localStorage.getItem("ID");
+    availableFunds = localStorage.getItem("funds");
+    let addMoney = prompt("Please enter amount of money to add to account:");
+    addMoney = parseFloat(addMoney).toFixed(2);
+    if (!isNaN(addMoney) && addMoney !== '' && addMoney > 0) {
+        addMoneyToAccount(addMoney, accountID);
+        const num1 = parseFloat(availableFunds);
+        const num2 = parseFloat(addMoney);
+        const sum = num1 + num2;
+        localStorage.setItem("funds", sum);
+        document.getElementById("fundsDisplay").innerHTML = `$${sum}`;
+        window.location.reload();
+
+    } else {
+        alert('Invalid input.')
+    }
+}
+
+function addMoneyToAccount(moneyIncome, accountID) {
+    fetch('http://localhost:3000/addFunds', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ moneyIncome, accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add Money");
+            return res.json();
+        })
+        .then(user => {
+            document.getElementById("fundsDisplay").innerHTML = `$${user.funds}`;
+        })
+        .catch(err => {
+            document.getElementById('fundsDisplay').innerText = 'ERROR';
+        });
 
 }
 
@@ -163,15 +230,18 @@ async function getStockPrice(symbol) {
 function buyStock() {
 
     const purchasedShares = document.getElementById('numberofShares').value;
-
+    const accountID = localStorage.getItem("ID")
 
     if (purchasedShares <= buyAmount && purchasedShares >= 1) {
+        let price = purchasedShares * finalPrice;
+        price = price.toFixed(2);
         availableFunds = availableFunds - (purchasedShares * finalPrice);
         availableFunds = availableFunds.toFixed(2);
+        withdrawMoneyFromAccount(price, accountID);
         document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
-        document.getElementById("purchaseMessage").innerHTML = `Congratulations!!! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
+        document.getElementById("purchaseMessage").innerHTML = `Congratulations! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
         document.getElementById('result').innerHTML = "";
-
+        localStorage.setItem("funds", availableFunds);
     } else {
         document.getElementById("purchaseMessage").innerHTML = `You only have enough funds to purchase up to ${buyAmount} shares.`;
     }
@@ -187,17 +257,5 @@ function closeStock() {
 
 }
 
-function getFinalPrice() {
-    return finalPrice;
-}
 
-function getBuyAmount() {
-    return buyAmount;
-}
-function setAvailableFunds(funds) {
-    availableFunds = availableFunds + funds;
-}
-function getAvailableFunds() {
-    return availableFunds;
-}
 
