@@ -120,6 +120,8 @@ app.post(`/api/OVBal/`, async (req, res) => {
     }
 });
 
+app.get(/api/)
+
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });
