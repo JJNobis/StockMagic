@@ -120,20 +120,19 @@ app.post(`/api/OVBal/`, async (req, res) => {
 
 //TX Hist load in
 app.post('/pullTXHist', async(req, res) => {
-    console.log(req.body);
+    // Error Test: console.log(req.body);
     const { accountID } = req.body;
-   console.log(`Test C ${accountID}`);
-   console.log(req.body);
+   //Error Test: console.log(`Test C ${accountID}`);
+   //Error Test: console.log(req.body);
    try{
     await sql.connect(config);
     const result = await sql.query(`select * from StockTXHist where userID = ${accountID}`);
     const user = result.recordset;
-    console.log(user);
+    //Error Test: console.log(user);
     res.json(user);
 } catch (err) {
     TXHistArray = [['ERROR']];
    }
-console.log(`break`);
 });
 
 app.listen(3000, () => {
