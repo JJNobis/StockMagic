@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="eng">
 
-  <head>
+<head>
     <link rel="stylesheet" href="style.css">
     <meta charset="udf=8">
     <title>$tockMagi&cent;</title>
-  </head>
-  <ul class="NavBar">
+</head>
+<ul class="NavBar">
     <li><img class="logo" src="img/StockMagicLogo.png"></li>
     <li><a href="AccountOV.html">Account Overview</a></li>
     <li><a href="AcctSum.html">Account Summary</a></li>
@@ -20,43 +20,25 @@
 </ul>
 
 
-<body>
+<body onload="loadTXHist()">
 
     <h1> Transaction History</h1>
-    
-    <h2> Table Location1 </h2>
-        <p> Transaction History:</p>
-    
-        <table id="TXTable">
-            <thead>
-                <tr> 
-                    <th>Symbol</th>
-                    <th>Name</th>
-                    <th>Transaction</th>
-                    <th>Quantity</th>
-                    <th>Price/Share</th>
-                    <th>Total</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-        </table>
-        
-    </body>
-    <script>
-        const TXHistArray=[
-            ['$MSFT', 'Microsoft', 'SOLD', '37', '433.31', '16,032.47', '05/06/2025'],
-            ['$MSFT', 'Microsoft', 'BOUGHT', '48', '422.66', '20,287.68', '05/01/2025'],
-            ['$CDPR', 'CD Projekt ADR', 'BOUGHT', '87', '16.19', '1408.53', '04/28/2025'],
-            ['$AAPL', 'Apple Inc', 'SOLD', "27", '209.43', '5654.61', ' 04/26/2025' ]
-        ]
-        for(let i=0; i<TXHistArray.length; i++){
-            var table= document.getElementById("TXTable");
-            let row = table.insertRow(-1);
-            for(let d=0;d<7;d++){
-                var symCell= row.insertCell(d);
-                symCell.innerHTML=TXHistArray[i][d];
-            }
-        }
 
-        
-    </script>
+    <h2> Table Location1 </h2>
+    <p> Transaction History:</p>
+
+    <table id="TXTable">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Transaction</th>
+                <th>Quantity</th>
+                <th>Price/Share</th>
+                <th>Total</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+    </table>
+
+</body>
+<script src="script.js"></script>
