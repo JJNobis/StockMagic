@@ -138,6 +138,42 @@ app.post('/pullTXHist', async(req, res) => {
    }
 });
 
+//settings page change name and email//
+app.post('/changeEmail', async (req, res) => {
+    const { newEmail, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET email = '${newEmail}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)        
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+app.post('/lname', async (req, res) => {
+    const { newlname, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET lname = '${newlname}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)        
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });
