@@ -111,7 +111,6 @@ function withdrawMoney() {
 }
 
 function withdrawMoneyFromAccount(outgoingMoney, accountID) {
-    console.log("Running subtract funds function...");
     fetch('http://localhost:3000/subtractFunds', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -120,6 +119,9 @@ function withdrawMoneyFromAccount(outgoingMoney, accountID) {
         .then(res => {
             if (!res.ok) throw new Error("Failed to add Money");
             return res.json();
+        })
+        .then(user => {
+            document.getElementById("fundsDisplay").innerHTML = `$${user.funds}`;
         })
         .catch(err => {
             document.getElementById('fundsDisplay').innerText = 'ERROR';
@@ -149,7 +151,6 @@ function askForMoney() {
 }
 
 function addMoneyToAccount(moneyIncome, accountID) {
-    console.log("Running Add funds function...");
     fetch('http://localhost:3000/addFunds', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -159,27 +160,13 @@ function addMoneyToAccount(moneyIncome, accountID) {
             if (!res.ok) throw new Error("Failed to add Money");
             return res.json();
         })
+        .then(user => {
+            document.getElementById("fundsDisplay").innerHTML = `$${user.funds}`;
+        })
         .catch(err => {
             document.getElementById('fundsDisplay').innerText = 'ERROR';
         });
 
-}
-
-function addStockToDatabase(symbol, qty, sellPrice) {
-    const accountID = localStorage.getItem("ID");
-
-    fetch('http://localhost:3000/addStock', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ symbol, accountID, qty, sellPrice })
-    })
-        .then(res => {
-            if (!res.ok) throw new Error("Failed to add stock");
-            return res.json();
-        })
-        .catch(err => {
-            console.log(err);
-        });
 }
 
 //Searches for stock and its price also makes further buying actions appear.
@@ -250,18 +237,11 @@ function buyStock() {
         price = price.toFixed(2);
         availableFunds = availableFunds - (purchasedShares * finalPrice);
         availableFunds = availableFunds.toFixed(2);
-
-
         withdrawMoneyFromAccount(price, accountID);
-        addStockToDatabase(symbol.toUpperCase(), purchasedShares, finalPrice);
-
-
         document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
         document.getElementById("purchaseMessage").innerHTML = `Congratulations! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
         document.getElementById('result').innerHTML = "";
         localStorage.setItem("funds", availableFunds);
-
-
     } else {
         document.getElementById("purchaseMessage").innerHTML = `You only have enough funds to purchase up to ${buyAmount} shares.`;
     }
@@ -280,7 +260,7 @@ function closeStock() {
 /**********TXHist load in*******/
 function loadTXHist(){
     const accountID = localStorage.getItem("ID");
-    console.log(`test A ${accountID}`);
+    // Error test: console.log(`test A ${accountID}`);
     fetch('http://localhost:3000/pullTXHist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
@@ -291,10 +271,10 @@ function loadTXHist(){
             return res.json();
         })
         .then( user => {
-            console.log("Received transactions:", user);
+           //Error test: console.log("Received transactions:", user);
             const table = document.getElementById("TXTable");
             user.forEach(tx => {
-                console.log("Single TX object:", tx);
+                //Error test: console.log("Single TX object:", tx);
                 let row = table.insertRow(-1);
                 const fields = [
                     tx.sym, //Symbol
@@ -304,7 +284,7 @@ function loadTXHist(){
                     `$${(tx.qty * tx.sellPrice).toFixed(2)}`,  //Tota;
                     new Date(tx.txDate).toLocaleDateString() //Date
                 ];
-                console.log("TX row values:", fields);
+                //Error test: console.log("TX row values:", fields);
                 fields.forEach(value => {
                     const cell = row.insertCell();
                     cell.innerHTML =value ?? '-'; //fallback in case value is undefined
