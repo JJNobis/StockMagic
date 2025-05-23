@@ -257,5 +257,24 @@ function closeStock() {
 
 }
 
+function updateBankAcc() {
+    console.log("hello");
+    const accountID = localStorage.getItem("ID");
+    const bankAccount = document.getElementById('routingNumber').value;
 
+    console.log(bankAccount);
+    
+    fetch('http://localhost:3000/changeBank', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bankAccount, accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to Update Bank Account");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err)
+        });
+}
 

@@ -120,7 +120,25 @@ app.post(`/api/OVBal/`, async (req, res) => {
     }
 });
 
-app.get(/api/)
+app.post('/changeBank', async (req, res) => {
+    const { bankAccount, accountID } = req.body;
+    console.log(req.body);
+    let changeBank = JSON.parse(bankAccount);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+
+        await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
+
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
