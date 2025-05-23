@@ -168,7 +168,7 @@ function addMoneyToAccount(moneyIncome, accountID) {
         });
 
 }
-//settings page//
+//settings page start//
 
 function updateEmail() {
 
@@ -195,6 +195,31 @@ const accountID = localStorage.getItem("ID");
 
         alert("Email changed");
 }
+
+function passChange() {
+const newPassword = document.getElementById("password").value;
+console.log(newPassword);
+const accountID = localStorage.getItem("ID");
+    fetch('http://localhost:3000/passchange', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newPassword, accountID })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to update password");
+            return res.json();
+        })
+        .then(data => {
+            // handle success, e.g. shows a message
+            console.log("Password updated successfully", data);
+        })
+        
+        .catch(err => {
+        console.log(err);
+        });
+
+        alert("Password changed");
+ }
 
 function addStockToDatabase(symbol, qty, sellPrice) {
     const accountID = localStorage.getItem("ID");

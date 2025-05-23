@@ -34,56 +34,51 @@
       
       <section>
            
-        <h2>Change Password and Banking Information.</h2>
+        <h2>Change Email, Password and Banking Information.</h2>
 
         <h4>Name and Email</h4>
 
         <form id="fname" class="contact-form" action="" method="post">
         
         <label for="fname">First Name</label>
-        <input type="text" id="fname" name="fname" placeholder="First Name">
+        <input type="text" id="firstName" name="fname" placeholder="First Name">
         <span></span>
         
         <label for="lname"> Last Name</label>
-        <input type="text" id="lname" name="Last Name" placeholder="Last Name" required>
+        <input type="text" id="lastName" name="Last Name" placeholder="Last Name">
         <span></span><br /><br />
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+        <input type="email" id="email" name="email" placeholder="example@gmail.com">
+        <button onclick="updateEmail()">Change Email</button>
         <span></span>
       </form>
 
       <h4>Change Password</h4>
       <form id="passChange" class="contact-form">
-        <label for="currentpassword"> Current Password</label>
-        <input type="text" id="currentpassword" name="Current Password" placeholder="**********" required>
+        <label for="currentPassword"> Current Password</label>
+        <input type="text" id="currentPassword" name="Current Password" placeholder="**********">
         <span></span>
 
-        <label for="newpassword"> New Password</label>
-        <input type="text" id="newpassword" name="New Password" placeholder="**********" required>
+        <label for="newPassword"> New Password</label>
+        <input type="text" id="newPassword" name="New Password" placeholder="**********">
         <span></span><br /> <br />
-
-
-        <input id="ChangePassword_button" type="submit" value="Change Password">
-        <input id="Cancel" type="submit" value="Cancel">
+        <button onclick="passChange()">Change Password</button>
+        
 
       </form>
       <h4>Change Banking</h4>
       <form id="bankChange" class="contact-form">
         <label for="bankname"> Bank Name</label>
-        <input type="text" id="bankname" name="Bank Name" placeholder="Premier Credit Union" required>
+        <input type="text" id="bankname" name="Bank Name" placeholder="Premier Credit Union">
         <span></span>
 
         <label for="bankaccount">Bank Account #</label>
-        <select id="bankaccount" name="bankaccount" required>
-          <option value=""></option>
-          <option value="Account #">xxxxx6789</option>
-          <option value="Account #">xxxxx1234</option>
-        </select>
+        <input type="number" id="BankAccount" name="Account #" placeholder="xxxxx1234">  
+        
         <span></span>
-        <input type="number" id=" Account #" name="Account #" placeholder="xxxxx1234" required>
-          
-          <span></span>
+
+       <span></span>
         <label for="routingnumber"> Routing #</label>
         <input type="text" id="routingnumber" name="Routing #" placeholder="273073848" required>
         <span></span> <br /> <br />
@@ -97,5 +92,5 @@
   </main>
 
 </body>
-
+<script src="script.js"></script>
 </html>

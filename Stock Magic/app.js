@@ -138,7 +138,7 @@ app.post('/pullTXHist', async(req, res) => {
    }
 });
 
-//settings page change name and email//
+//settings page change email//
 app.post('/changeEmail', async (req, res) => {
     const { newEmail, accountID } = req.body;
     console.log(req.body);
@@ -156,14 +156,15 @@ app.post('/changeEmail', async (req, res) => {
     await sql.close();
 });
 
-app.post('/lname', async (req, res) => {
-    const { newlname, accountID } = req.body;
+//settings change password//
+app.post('/passChange', async (req, res) => {
+    const { newPassword, accountID } = req.body;
     console.log(req.body);
     let userID = JSON.parse(accountID);
 
     try {
         await sql.connect(config);
-        await sql.query(`UPDATE users SET lname = '${newlname}' WHERE userID = ${userID}`);
+        await sql.query(`UPDATE users SET currentPassword = '${newPassword}' WHERE userID = ${userID}`);
  
 
     } catch (err) {
