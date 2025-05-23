@@ -182,7 +182,22 @@ app.post('/lname', async (req, res) => {
     await sql.close();
 });
 
-
+//Funds Hist load in
+app.post('/pullFundsHist', async(req, res) => {
+    // Error Test: console.log(req.body);
+    const { accountID } = req.body;
+   //Error Test: console.log(`Test C ${accountID}`);
+   //Error Test: console.log(req.body);
+   try{
+    await sql.connect(config);
+    const result = await sql.query(`select * from fundsTXHist where userID = ${accountID}`);
+    const user = result.recordset;
+    //Error Test: console.log(user);
+    res.json(user);
+} catch (err) {
+    TXHistArray = [['ERROR']];
+   }
+});
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
