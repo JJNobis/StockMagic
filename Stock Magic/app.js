@@ -138,7 +138,6 @@ app.post('/pullTXHist', async(req, res) => {
    }
 });
 
-
 //settings page change bank//
 app.post('/changeBank', async (req, res) => {
         const { bankAccount, accountID } = req.body;
@@ -149,6 +148,7 @@ app.post('/changeBank', async (req, res) => {
         } catch (err) {
         console.log(`DB Error: ${err}`)
     }
+
 });
 
 //settings page change name and email//
