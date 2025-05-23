@@ -137,21 +137,18 @@ app.post('/pullTXHist', async(req, res) => {
     TXHistArray = [['ERROR']];
    }
 });
-//change bank acc info//
-app.post('/changeBank', async (req, res) => {
-    const { bankAccount, accountID } = req.body;
-    console.log(req.body);
-    let changeBank = JSON.parse(bankAccount);
-    let userID = JSON.parse(AccountID);
 
-    try { 
-        await sql.connnect(config);
-        await sql.query(`Update users SET routingNums = ${changeBank} Where userID = ${userID}`);
-    } catch(err){
+//settings page change bank//
+app.post('/changeBank', async (req, res) => {
+        const { bankAccount, accountID } = req.body;
+        console.log(req.body);
+        try{
+        let changeBank = JSON.parse(bankAccount);
+            await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
+        } catch (err) {
         console.log(`DB Error: ${err}`)
-        res.status(500).send(err.message);
     }
-    await sql.close();
+
 });
 
 //settings page change name and email//
@@ -162,25 +159,23 @@ app.post('/changeEmail', async (req, res) => {
 
     try {
         await sql.connect(config);
-
         await sql.query(`UPDATE users SET email = '${newEmail}' WHERE userID = ${userID}`);
- 
-
-    } catch (err) {
+     } catch (err) {
         console.log(`DB Error: ${err}`)        
         res.status(500).send(err.message);
     }
     await sql.close();
 });
 
-app.post('/lname', async (req, res) => {
-    const { newlname, accountID } = req.body;
+//settings change password//
+app.post('/passChange', async (req, res) => {
+    const { newPassword, accountID } = req.body;
     console.log(req.body);
     let userID = JSON.parse(accountID);
 
     try {
         await sql.connect(config);
-        await sql.query(`UPDATE users SET lname = '${newlname}' WHERE userID = ${userID}`);
+        await sql.query(`UPDATE users SET currentPassword = '${newPassword}' WHERE userID = ${userID}`);
  
 
     } catch (err) {
@@ -190,6 +185,22 @@ app.post('/lname', async (req, res) => {
     await sql.close();
 });
 
+//Funds Hist load in
+app.post('/pullFundsHist', async(req, res) => {
+    // Error Test: console.log(req.body);
+    const { accountID } = req.body;
+   //Error Test: console.log(`Test C ${accountID}`);
+   //Error Test: console.log(req.body);
+   try{
+    await sql.connect(config);
+    const result = await sql.query(`select * from fundsTXHist where userID = ${accountID}`);
+    const user = result.recordset;
+    //Error Test: console.log(user);
+    res.json(user);
+} catch (err) {
+    TXHistArray = [['ERROR']];
+   }
+});
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');

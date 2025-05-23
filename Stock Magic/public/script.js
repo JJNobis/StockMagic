@@ -168,7 +168,7 @@ function addMoneyToAccount(moneyIncome, accountID) {
         });
 
 }
-//settings page//
+//settings page start//
 
 function updateEmail() {
 
@@ -195,6 +195,31 @@ const accountID = localStorage.getItem("ID");
 
         alert("Email changed");
 }
+
+function passChange() {
+const newPassword = document.getElementById("password").value;
+console.log(newPassword);
+const accountID = localStorage.getItem("ID");
+    fetch('http://localhost:3000/passchange', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newPassword, accountID })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to update password");
+            return res.json();
+        })
+        .then(data => {
+            // handle success, e.g. shows a message
+            console.log("Password updated successfully", data);
+        })
+        
+        .catch(err => {
+        console.log(err);
+        });
+
+        alert("Password changed");
+ }
 
 function addStockToDatabase(symbol, qty, sellPrice) {
     const accountID = localStorage.getItem("ID");
@@ -338,5 +363,87 @@ function updateBankAcc() {
         .catch(err => {
             console.log(err)
         });
+}
+
+
+/**********TXHist load in*******/
+function loadTXHist(){
+    const accountID = localStorage.getItem("ID");
+    // Error test: console.log(`test A ${accountID}`);
+    fetch('http://localhost:3000/pullTXHist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({accountID})
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load Transactions");
+            return res.json();
+        })
+        .then( user => {
+           //Error test: console.log("Received transactions:", user);
+            const table = document.getElementById("TXTable");
+            user.forEach(tx => {
+                //Error test: console.log("Single TX object:", tx);
+                let row = table.insertRow(-1);
+                const fields = [
+                    tx.sym, //Symbol
+                    tx.buySell? "BOUGHT":"SOLD", //Transaction Type
+                    tx.qty, //Quantity
+                    `$${tx.sellPrice.toFixed(2)}`, //Price/Share
+                    `$${(tx.qty * tx.sellPrice).toFixed(2)}`,  //Tota;
+                    new Date(tx.txDate).toLocaleDateString() //Date
+                ];
+                //Error test: console.log("TX row values:", fields);
+                fields.forEach(value => {
+                    const cell = row.insertCell();
+                    cell.innerHTML =value ?? '-'; //fallback in case value is undefined
+                });
+            });
+        })
+        .catch(err => {
+            console.error("Error loading transaction history:", err);
+        });
+    }
+
+/**********fundsHist load in*******/
+function loadFundsHist(){
+    const accountID = localStorage.getItem("ID");
+    // Error test: console.log(`test A ${accountID}`);
+    fetch('http://localhost:3000/pullFundsHist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({accountID})
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load Transactions");
+            return res.json();
+        })
+        .then( user => {
+           //Error test: console.log("Received transactions:", user);
+            const table = document.getElementById("fundsTable");
+            user.forEach(tx => {
+                //Error test: console.log("Single TX object:", tx);
+                let row = table.insertRow(-1);
+                const fields = [
+                    tx.depWtih? "DEPOSIT":"WITHDRAWL", //Transaction Type
+                    tx.fundAmount,
+                    new Date(tx.txDate).toLocaleDateString() //Date
+                ];
+                //Error test: console.log("TX row values:", fields);
+                fields.forEach(value => {
+                    const cell = row.insertCell();
+                    cell.innerHTML =value ?? '-'; //fallback in case value is undefined
+                });
+            });
+        })
+        .catch(err => {
+            console.error("Error loading transaction history:", err);
+        });
+    }
+
+/*function to load greeting and then Funds hist, b/c you can't do multiple onloads*/
+function accountOVPage(){
+    greetingMessage()
+    loadFundsHist()
 }
 
