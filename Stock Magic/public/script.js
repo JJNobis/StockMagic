@@ -168,6 +168,50 @@ function addMoneyToAccount(moneyIncome, accountID) {
         });
 
 }
+//settings page//
+
+function updateEmail() {
+
+const newEmail = document.getElementById("email").value;
+console.log(newEmail);
+const accountID = localStorage.getItem("ID");
+    fetch('http://localhost:3000/changeEmail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newEmail, accountID })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to update Email");
+            return res.json();
+        })
+        .then(data => {
+            // handle success, e.g. shows a message
+            console.log("Email updated successfully", data);
+        })
+        
+        .catch(err => {
+        console.log(err);
+        });
+
+        alert("Email changed");
+}
+
+function addStockToDatabase(symbol, qty, sellPrice) {
+    const accountID = localStorage.getItem("ID");
+
+    fetch('http://localhost:3000/addStock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol, accountID, qty, sellPrice })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add stock");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 //Searches for stock and its price also makes further buying actions appear.
 function getPriceStock() {

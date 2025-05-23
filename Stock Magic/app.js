@@ -114,7 +114,7 @@ app.post('/addStock', async (req, res) => {
     try {
         await sql.connect(config);
         await sql.query(`INSERT INTO stockTXHist (sym, buySell, userID, qty, sellPrice ) VALUES 
-                   ('${symbol}', 1, ${accountID}, ${qty}, ${sellPrice})`);
+                   ('$${symbol}', 1, ${accountID}, ${qty}, ${sellPrice})`);
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -138,20 +138,52 @@ app.post('/pullTXHist', async(req, res) => {
    }
 });
 
+<<<<<<< HEAD
 app.post('/changeBank', async (req, res) => {
     const { bankAccount, accountID } = req.body;
     console.log(req.body);
     let changeBank = JSON.parse(bankAccount);
+=======
+//settings page change name and email//
+app.post('/changeEmail', async (req, res) => {
+    const { newEmail, accountID } = req.body;
+    console.log(req.body);
+>>>>>>> 0aff17b7c00338461436b7bed110da8e010a188c
     let userID = JSON.parse(accountID);
 
     try {
         await sql.connect(config);
+<<<<<<< HEAD
 
         await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
 
 
     } catch (err) {
         console.log(`DB Error: ${err}`)
+=======
+        await sql.query(`UPDATE users SET email = '${newEmail}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)        
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+app.post('/lname', async (req, res) => {
+    const { newlname, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET lname = '${newlname}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)        
+>>>>>>> 0aff17b7c00338461436b7bed110da8e010a188c
         res.status(500).send(err.message);
     }
     await sql.close();
