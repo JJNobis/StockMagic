@@ -138,33 +138,27 @@ app.post('/pullTXHist', async(req, res) => {
    }
 });
 
-<<<<<<< HEAD
 app.post('/changeBank', async (req, res) => {
-    const { bankAccount, accountID } = req.body;
-    console.log(req.body);
-    let changeBank = JSON.parse(bankAccount);
-=======
+        const { bankAccount, accountID } = req.body;
+        console.log(req.body);
+        try{
+        let changeBank = JSON.parse(bankAccount);
+            await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
+        } catch (err) {
+        console.log(`DB Error: ${err}`)
+    }
+});
+
 //settings page change name and email//
 app.post('/changeEmail', async (req, res) => {
     const { newEmail, accountID } = req.body;
     console.log(req.body);
->>>>>>> 0aff17b7c00338461436b7bed110da8e010a188c
     let userID = JSON.parse(accountID);
 
     try {
         await sql.connect(config);
-<<<<<<< HEAD
-
-        await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
-
-
-    } catch (err) {
-        console.log(`DB Error: ${err}`)
-=======
         await sql.query(`UPDATE users SET email = '${newEmail}' WHERE userID = ${userID}`);
- 
-
-    } catch (err) {
+     } catch (err) {
         console.log(`DB Error: ${err}`)        
         res.status(500).send(err.message);
     }
@@ -183,11 +177,11 @@ app.post('/lname', async (req, res) => {
 
     } catch (err) {
         console.log(`DB Error: ${err}`)        
->>>>>>> 0aff17b7c00338461436b7bed110da8e010a188c
         res.status(500).send(err.message);
     }
     await sql.close();
 });
+
 
 
 app.listen(3000, () => {
