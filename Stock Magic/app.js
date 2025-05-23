@@ -114,7 +114,7 @@ app.post('/addStock', async (req, res) => {
     try {
         await sql.connect(config);
         await sql.query(`INSERT INTO stockTXHist (sym, buySell, userID, qty, sellPrice ) VALUES 
-                   ('${symbol}', 1, ${accountID}, ${qty}, ${sellPrice})`);
+                   ('$${symbol}', 1, ${accountID}, ${qty}, ${sellPrice})`);
     } catch (err) {
         res.status(500).send(err.message);
     }
