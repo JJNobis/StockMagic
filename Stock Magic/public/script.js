@@ -169,6 +169,23 @@ function addMoneyToAccount(moneyIncome, accountID) {
 
 }
 
+function addStockToDatabase(symbol, qty, sellPrice) {
+    const accountID = localStorage.getItem("ID");
+
+    fetch('http://localhost:3000/addStock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol, accountID, qty, sellPrice })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add stock");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
 //Searches for stock and its price also makes further buying actions appear.
 function getPriceStock() {
     symbol = document.getElementById('symbol').value;
