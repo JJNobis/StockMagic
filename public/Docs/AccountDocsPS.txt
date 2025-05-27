@@ -1,0 +1,13 @@
+//Display Document List Page
+
+Function: DisplayDocsList()
+	Get list of docs from DB/storage
+	For each Docs in list:
+		Display doc title, date
+		Allow user to click on doc
+
+Function: DisplaydocumentationDetails(DocumentID)
+	Get doc details from DB/storage using documentID
+	Display document title, date
+	Allow user to download the document
+

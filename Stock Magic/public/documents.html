@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Documents</title>
-        <link rel="icon" type="image/png" href="img/StockMagicLogo.png">
-        <link rel="stylesheet" href="style.css">
-        
-    </head>
-    <ul class="NavBar">
-        <li><img class="logo" src="img/StockMagicLogo.png"></li>
-        <li><a href="AccountOV.html">Account Overview</a></li>
-        <li><a href="AcctSum.html">Account Summary</a></li>
-        <li><a href="CashAcctBalance.html">Account Balance</a></li>
-        <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="TXHist.html">Transaction History</a></li>
-        <li><a href="Settings.html">Settings</a></li>
-        <li><a href="ContactUS.html">Contact Us</a></li>
-        <li><a href="index.html">Log Out</a></li>
+
+<head>
+    <meta charset="utf-8">
+    <title>Documents</title>
+    <link rel="icon" type="image/png" href="img/StockMagicLogo.png">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<ul class="NavBar">
+    <li><img class="logo" src="img/StockMagicLogo.png"></li>
+    <li><a href="AccountOV.html">Account Overview</a></li>
+    <li><a href="AcctSum.html">Account Summary</a></li>
+    <li><a href="CashAcctBalance.html">Account Balance</a></li>
+    <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
+    <li><a href="documents.html">Documents</a></li>
+    <li><a href="TXHist.html">Transaction History</a></li>
+    <li><a href="Settings.html">Settings</a></li>
+    <li><a href="ContactUS.html">Contact Us</a></li>
+    <li><a href="index.html">Log Out</a></li>
 </ul>
 
-    <header>
+<header>
     <h1>Documents</h1>
-    </header>
-<!--
+</header>
+
+<body style="background: linear-gradient(to bottom, white 0%, #3cf 100%);">
+    <!--
     <section style="background-color: var(--color-light);">
-    --><ul id="reports" class="docLinks"></ul>
-    </html>
+    -->
+    <ul id="reports" class="docLinks"></ul>
+
+</html>
 
 <div style="background-color: var(--color-light);">
-    </div>  
+</div>
+</body>
 <script>
-    const docLinks=[
-        [2, "Docs/Q22024.txt", 2024], 
-        [3, 'Docs/Q32024.txt', 2024], 
+    const docLinks = [
+        [2, "Docs/Q22024.txt", 2024],
+        [3, 'Docs/Q32024.txt', 2024],
         [4, "Docs/Q42024.txt", 2024],
         [0, "Docs/annual2024.txt", 2024],
         [1, "Docs/Q12025.txt", 2025]
-        ];
-    for (let i=docLinks.length-1; i>-1;i--){
-        const quarter= docLinks[i][0];
+    ];
+    for (let i = docLinks.length - 1; i > -1; i--) {
+        const quarter = docLinks[i][0];
         const container = document.getElementById("reports");
         const doc = document.createElement("li");
         const link = docLinks[i][1];
         const year = docLinks[i][2];
-        const linkName= (quarter==0)? `Annual report ${year}`: `Quarter ${quarter} ${year}`;
+        const linkName = (quarter == 0) ? `Annual report ${year}` : `Quarter ${quarter} ${year}`;
         doc.innerHTML = `<a href="${link}" download>${linkName}</a>`;
         container.appendChild(doc);
-   }
+    }
 </script>

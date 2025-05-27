@@ -1,15 +1,5 @@
 const apiKey = '8G92EAMNYI9SW94C';  //API key to connect to Stock Market
 
-const config = {
-    server: 'localhost',
-    database: 'StockMagic',
-    driver: 'msnodesqlv8',
-    options: {
-        trustedConnection: true,
-        trustServerCertificat: true
-    }
-};
-
 let finalPrice; //Used to display the price of a stock
 let buyAmount; //Maximum number of shares that can be purchased. 
 var availableFunds; // Funds that are available for buying stocks. This will get updated later to incorporate the array. 
@@ -23,7 +13,7 @@ var fundLine;
 var userID;
 //Future plan --- Make sure when creating account that username doesn't already exist.
 
-
+// Function for logging in calls app /login to check credentials
 function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -50,6 +40,7 @@ function login() {
             document.getElementById('message').innerText = 'Invalid login';
         });
 }
+//clear data for logging back in. 
 function logout() {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('ID');
@@ -163,9 +154,6 @@ function getStockValue() {
                 total = total + (stock.qty * stock.Current_price);
             })
             localStorage.setItem("total", total);
-            // let completeValue = parseFloat(availableFunds) + total;
-            // document.getElementById("totalMoney").innerHTML = `$${completeValue.toFixed(2)}`;
-            //document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
 
         })
 
@@ -647,6 +635,7 @@ function addButtonsToTable(tableId) {
             const symbol = row.cells[0].textContent;
             let qty = parseFloat(row.cells[1].textContent);
             let currentPrice = row.cells[3].textContent;
+            availableFunds = parseFloat(localStorage.getItem("funds"));
             currentPrice = currentPrice.replace(/\$/g, '');
             currentPrice = parseFloat(currentPrice);
             accountID = localStorage.getItem("ID");
@@ -666,10 +655,12 @@ function addButtonsToTable(tableId) {
                 if (newQty > 0) {
                     changeQuantity(symbol, newQty, accountID, qty);
                     alert(`${symbol} shares sold for a total of ${addMoney.toFixed(2)}`);
+                    updateSoldHistory(symbol, num, currentPrice, addMoney);
                     window.location.reload();
                 } else if (newQty == 0) {
                     deleteStocks(symbol, qty, accountID)
                     alert(`All shares of ${symbol} sold for a total of $${addMoney.toFixed(2)}`);
+                    updateSoldHistory(symbol, num, currentPrice, addMoney);
                     window.location.reload();
 
                 }
@@ -682,6 +673,22 @@ function addButtonsToTable(tableId) {
         cell.appendChild(button);
         row.appendChild(cell);
     }
+}
+
+function updateSoldHistory(sym, qty, price, total) {
+    accountID = localStorage.getItem("ID");
+    fetch('http://localhost:3000/updateTxTable', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sym, qty, price, accountID, total })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to update");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
 
 function changeQuantity(sym, newQty, accountID, qty) {
