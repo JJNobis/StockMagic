@@ -181,6 +181,7 @@ function withdrawMoney() {
     } else {
         alert('Invalid input.')
     }
+    location.reload();
 }
 
 function withdrawMoneyFromAccount(outgoingMoney, accountID) {
@@ -213,11 +214,11 @@ function askForMoney() {
         const sum = num1 + num2;
         localStorage.setItem("funds", sum);
         document.getElementById("fundsDisplay").innerHTML = `$${sum}`;
-        window.location.reload();
 
     } else {
         alert('Invalid input.')
     }
+    location.reload()
 }
 
 function addMoneyToAccount(moneyIncome, accountID) {
@@ -552,7 +553,7 @@ function loadFundsHist() {
                 //Error test: console.log("Single TX object:", tx);
                 let row = table.insertRow(-1);
                 const fields = [
-                    tx.depWith ? "DEPOSIT" : "WITHDRAWL", //Transaction Type
+                    tx.depWith ? "WITHDRAWL" : "DEPOSIT", //Transaction Type
                     tx.fundAmount,
                     new Date(tx.txDate).toLocaleDateString() //Date
                 ];
