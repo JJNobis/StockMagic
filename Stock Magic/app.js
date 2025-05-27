@@ -33,11 +33,12 @@ app.post('/addFunds', async (req, res) => {
         await sql.connect(config);
         const result = await sql.query(`SELECT * from users where userID = ${userID}`);
         const user = result.recordset[0];
-
+        const amt= addFunds;
 
         addFunds = addFunds + user.funds;
         console.log(addFunds);
         await sql.query(`UPDATE users SET funds = ${addFunds} WHERE userID = ${userID}`);
+        await sql.query(`insert into fundsTXHist(userID, depWith, fundAmount) values (${userID}, 0, ${amt});`);
 
 
     } catch (err) {
@@ -75,11 +76,12 @@ app.post('/subtractFunds', async (req, res) => {
         await sql.connect(config);
         const result = await sql.query(`SELECT * from users where userID = ${userID}`);
         const user = result.recordset[0];
-
+        const amt = subtractFunds;
 
         subtractFunds = user.funds - subtractFunds;
 
         await sql.query(`UPDATE users SET funds = ${subtractFunds} WHERE userID = ${userID}`);
+        await sql.query(`insert into fundsTXHist(userID, depWith, fundAmount) values (${userID}, 1, ${amt});`);
 
 
     } catch (err) {
@@ -278,17 +280,17 @@ app.post('/pullTXHist', async (req, res) => {
     }
 });
 
-
 //settings page change bank//
 app.post('/changeBank', async (req, res) => {
-        const { bankAccount, accountID } = req.body;
-        console.log(req.body);
-        try{
+    const { bankAccount, accountID } = req.body;
+    console.log(req.body);
+    try {
         let changeBank = JSON.parse(bankAccount);
-            await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
-        } catch (err) {
+        await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
+    } catch (err) {
         console.log(`DB Error: ${err}`)
     }
+
 });
 
 //settings page change name and email//
@@ -300,8 +302,8 @@ app.post('/changeEmail', async (req, res) => {
     try {
         await sql.connect(config);
         await sql.query(`UPDATE users SET email = '${newEmail}' WHERE userID = ${userID}`);
-     } catch (err) {
-        console.log(`DB Error: ${err}`)        
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
         res.status(500).send(err.message);
     }
     await sql.close();
@@ -317,31 +319,60 @@ app.post('/passChange', async (req, res) => {
     try {
         await sql.connect(config);
         await sql.query(`UPDATE users SET pwd = '${nPass}' WHERE userID = ${userID}`);
- 
 
     } catch (err) {
-        console.log(`DB Error: ${err}`)        
+        console.log(`DB Error: ${err}`)
         res.status(500).send(err.message);
     }
     await sql.close();
 });
 
 //Funds Hist load in
-app.post('/pullFundsHist', async(req, res) => {
+app.post('/pullFundsHist', async (req, res) => {
     // Error Test: console.log(req.body);
     const { accountID } = req.body;
-   //Error Test: console.log(`Test C ${accountID}`);
-   //Error Test: console.log(req.body);
-   try{
-    await sql.connect(config);
-    const result = await sql.query(`select * from fundsTXHist where userID = ${accountID}`);
-    const user = result.recordset;
-    //Error Test: console.log(user);
-    res.json(user);
-} catch (err) {
-    TXHistArray = [['ERROR']];
-   }
+    //Error Test: console.log(`Test C ${accountID}`);
+    //Error Test: console.log(req.body);
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`select * from fundsTXHist where userID = ${accountID}`);
+        const user = result.recordset;
+        //Error Test: console.log(user);
+        res.json(user);
+    } catch (err) {
+        TXHistArray = [['ERROR']];
+    }
 });
+
+app.post('/accAdd', async (req, res) => {
+    const { newAccNum, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET accountNumber = '${newAccNum}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)  
+    }});
+          
+app.post('/updateTxTable', async (req, res) => {
+    const { sym, qty, price, accountID, total } = req.body;
+
+    try {
+        await sql.connect(config);
+        await sql.query(`INSERT INTO stockTXHist (sym, buySell, userID, qty, sellPrice ) VALUES 
+                   ('${sym}', 0, ${accountID}, ${qty}, ${price})`);
+
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');

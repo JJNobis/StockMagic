@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
   <head>
     <meta charset="utf-8">
     <title>Settings Page</title>
@@ -12,16 +13,15 @@
         
     <nav>
       <ul class="NavBar">
-        <li><img class="logo" src="img/StockMagicLogo.png"></li>
-        <li><a href="AccountOV.html">Account Overview</a></li>
-        <li><a href="AcctSum.html">Account Summary</a></li>
-        <li><a href="CashAcctBalance.html">Account Balance</a></li>
-        <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="TXHist.html">Transaction History</a></li>
-        <li><a href="Settings.html">Settings</a></li>
-        <li><a href="ContactUS.html">Contact Us</a></li>
-        <li><a href="index.html">Log Out</a></li>
+      <li><img class="logo" src="img/StockMagicLogo.png"></li>
+      <li><a href="AccountOV.html">Account Overview</a></li>
+      <li><a href="AcctSum.html">Account Summary</a></li>
+      <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
+      <li><a href="documents.html">Documents</a></li>
+      <li><a href="TXHist.html">Transaction History</a></li>
+      <li><a href="Settings.html">Settings</a></li>
+      <li><a href="ContactUS.html">Contact Us</a></li>
+      <li><a href="index.html">Log Out</a></li>
 </ul>
 
     </nav>
@@ -46,11 +46,11 @@
         
         <label for="lname"> Last Name</label>
         <input type="text" id="lastName" name="Last Name" placeholder="Last Name">
+
         <span></span><br /><br />
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="example@gmail.com">
-        <button onclick="updateEmail()">Change Email</button>
+        <input type="email" id="email" name="email" placeholder="us***@yahoo.com" required>
         <span></span>
       </form>
 
@@ -58,13 +58,12 @@
       <form id="passChange" class="contact-form">
         <label for="CurrentPassword"> Current Password</label>
         <input type="text" id="CurrentPassword" name="Current Password" placeholder="**********">
+
         <span></span>
 
-        <label for="newPassword"> New Password</label>
-        <input type="text" id="newPassword" name="New Password" placeholder="**********">
-        <span></span><br /> <br />
-        <button onclick="passChange()">Change Password</button>
-        
+        <label for="newpassword"> New Password</label>
+        <input type="text" id="newPassword" name="New Password" placeholder="**********" required>
+        <button id="changePassword" type="submit" value="Change Password"> Change Password</button>
 
       </form>
       <h4>Change Banking</h4>
@@ -74,9 +73,9 @@
         <span></span>
 
         <label for="bankaccount">Bank Account #</label>
-        <input type="number" id="BankAccount" name="Account #" placeholder="xxxxx1234">  
-        
-        <span></span>
+        <input type="number" id="routingNumber" placeholder="Enter Bank Account Number" required>
+        <button onclick="updateBankAcc()"> Submit changes </button>
+
 
        <span></span>
         <label for="routingnumber"> Routing #</label>
