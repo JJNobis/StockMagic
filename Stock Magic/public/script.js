@@ -279,10 +279,10 @@ function updateEmail() {
 }
 
 function passChange() {
-    const newPassword = document.getElementById("password").value;
-    console.log(newPassword);
-    const accountID = localStorage.getItem("ID");
-    fetch('http://localhost:3000/passchange', {
+const newPassword = document.getElementById("CurrentPassword").value;
+console.log(newPassword);
+const accountID = localStorage.getItem("ID");
+    fetch('http://localhost:3000/passChange', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword, accountID })
@@ -293,7 +293,7 @@ function passChange() {
         })
         .then(data => {
             // handle success, e.g. shows a message
-            console.log("Password updated successfully", data);
+            console.log("Password updated successfully");
         })
 
         .catch(err => {
