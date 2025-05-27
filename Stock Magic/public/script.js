@@ -552,7 +552,7 @@ function loadFundsHist() {
                 //Error test: console.log("Single TX object:", tx);
                 let row = table.insertRow(-1);
                 const fields = [
-                    tx.depWtih ? "DEPOSIT" : "WITHDRAWL", //Transaction Type
+                    tx.depWith ? "DEPOSIT" : "WITHDRAWL", //Transaction Type
                     tx.fundAmount,
                     new Date(tx.txDate).toLocaleDateString() //Date
                 ];

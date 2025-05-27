@@ -33,11 +33,12 @@ app.post('/addFunds', async (req, res) => {
         await sql.connect(config);
         const result = await sql.query(`SELECT * from users where userID = ${userID}`);
         const user = result.recordset[0];
-
+        const amt= addFunds;
 
         addFunds = addFunds + user.funds;
         console.log(addFunds);
         await sql.query(`UPDATE users SET funds = ${addFunds} WHERE userID = ${userID}`);
+        await sql.query(`insert into fundsTXHist(userID, depWith, fundAmount) values (${userID}, 0, ${amt});`);
 
 
     } catch (err) {
@@ -75,12 +76,12 @@ app.post('/subtractFunds', async (req, res) => {
         await sql.connect(config);
         const result = await sql.query(`SELECT * from users where userID = ${userID}`);
         const user = result.recordset[0];
-
+        const amt = subtractFunds;
 
         subtractFunds = user.funds - subtractFunds;
 
         await sql.query(`UPDATE users SET funds = ${subtractFunds} WHERE userID = ${userID}`);
-        await sql.query(`insert into fundsTXHist(userID, depWith, fundAmount) values (${userID}, 1, ${subtractFunds});`);
+        await sql.query(`insert into fundsTXHist(userID, depWith, fundAmount) values (${userID}, 1, ${amt});`);
 
 
     } catch (err) {
