@@ -41,5 +41,16 @@ app.get('/api/stocks', async (req, res) => {
         res.status(500).send(err.message);
     }
 });
- 
+
+const userID= localStorage.getItem("userID")
+post('/api/user/`${userid}`/fundAmount');
+try{
+    await sql.connect(config);
+    const result = await sql.query('SELECT fundAmount FROM `${userID}`')
+    const user = result.recordset[0]
+}
+catch(err){
+    res.status(500).send(err.message);
+}
+
 app.listen(3000, () => console.log('Server running on http://localhost:3000'));

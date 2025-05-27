@@ -297,7 +297,7 @@ th,td{
 }
 >>>>>>> a300657174979a64582d368a2b4adb6807acecae
 
-/**** AccSumm ***/
+/************************************************************************ AccSumm ***/
 
 .scrollcontainer {
   height:550px;
@@ -396,7 +396,7 @@ th,td{
 }
 
 #Stockdtl{
-  background-color: var(--color-dark);
+  background-color: var(--color-med);
   margin: .5vh 10vw;
   font-size: 11px;
 }
@@ -463,3 +463,17 @@ width: 75vw;
 width: 70vw;
 >>>>>>> a300657174979a64582d368a2b4adb6807acecae
 }
+
+/*****AccountOverview*******************************/
+.container{
+        display: flex;
+        border: 2 px solid black;
+        text-align: center;
+    }
+    .box {
+        flex: 1;
+        margin: 15px;
+        padding: 40px;
+        border: 2px solid #6FB94F;
+        border-radius: 35px;
+    }

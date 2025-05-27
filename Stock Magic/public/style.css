@@ -319,11 +319,11 @@ h1 {
 
 }
 
-/************* Transaction History Table ********/
+/************* Transaction History Table *******/
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 75vw;
   text-align: center;
 }
 
@@ -338,8 +338,6 @@ td {
   border-bottom: 1px solid black;
 }
 
-<<<<<<< HEAD=======
-
 /***** Cash Account Balance******/
 #bal {
   text-align: center;
@@ -350,7 +348,6 @@ td {
   text-align: center;
 }
 
->>>>>>>a300657174979a64582d368a2b4adb6807acecae
 /**** AccSumm ***/
 
 .scrollcontainer {
@@ -465,17 +462,13 @@ td {
   font-size: 11px;
 }
 
-<<<<<<< HEAD #sellAmnt {
+#sellAmnt {
   background-color: var(--color-accent);
   text-align: left;
   width: 500px;
   margin-block-start: 15vw;
   margin-block-end: 15vw;
-
-
 }
-
-=======>>>>>>>a300657174979a64582d368a2b4adb6807acecae
 
 /*********Settings/H4********/
 h4 {
@@ -506,15 +499,11 @@ h4 {
   border-radius: 1em;
 }
 
-<<<<<<< HEAD
-
 /** H2**/
 h2 {
   text-align: center;
 
 }
-
-=======>>>>>>>a300657174979a64582d368a2b4adb6807acecae
 
 /******** TX History*******/
 #TXTable {

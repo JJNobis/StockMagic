@@ -278,6 +278,70 @@ app.post('/pullTXHist', async (req, res) => {
     }
 });
 
+
+//settings page change bank//
+app.post('/changeBank', async (req, res) => {
+        const { bankAccount, accountID } = req.body;
+        console.log(req.body);
+        try{
+        let changeBank = JSON.parse(bankAccount);
+            await sql.query(`UPDATE users SET routingNums = ${changeBank} WHERE userID = ${userID}`);
+        } catch (err) {
+        console.log(`DB Error: ${err}`)
+    }
+});
+
+//settings page change name and email//
+app.post('/changeEmail', async (req, res) => {
+    const { newEmail, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET email = '${newEmail}' WHERE userID = ${userID}`);
+     } catch (err) {
+        console.log(`DB Error: ${err}`)        
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+//settings change password//
+app.post('/passChange', async (req, res) => {
+    const { newPassword, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET currentPassword = '${newPassword}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)        
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+//Funds Hist load in
+app.post('/pullFundsHist', async(req, res) => {
+    // Error Test: console.log(req.body);
+    const { accountID } = req.body;
+   //Error Test: console.log(`Test C ${accountID}`);
+   //Error Test: console.log(req.body);
+   try{
+    await sql.connect(config);
+    const result = await sql.query(`select * from fundsTXHist where userID = ${accountID}`);
+    const user = result.recordset;
+    //Error Test: console.log(user);
+    res.json(user);
+} catch (err) {
+    TXHistArray = [['ERROR']];
+   }
+});
+
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });
