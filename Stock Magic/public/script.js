@@ -715,3 +715,20 @@ function deleteStocks(sym, qty, accountID) {
             console.log(err);
         });
 }
+
+function accAdd(bankAccount, accountID) {
+
+    fetch('http://localhost:3000/sellStocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bankAccount, accountID, qty })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add Money");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+}

@@ -342,6 +342,23 @@ app.post('/pullFundsHist', async(req, res) => {
    }
 });
 
+app.post('/accAdd', async (req, res) => {
+    const { newAccNum, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET accountNumber = '${newAccNum}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)        
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
 });
