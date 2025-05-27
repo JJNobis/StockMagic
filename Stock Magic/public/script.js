@@ -18,7 +18,7 @@ let customerID;
 var userFirstName;
 var userLastName;
 var userEmail;
-var passedArray;
+let total;
 var fundLine;
 var userID;
 //Future plan --- Make sure when creating account that username doesn't already exist.
@@ -37,14 +37,13 @@ function login() {
             return res.json();
         })
         .then(user => {
-            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('loggedIn', 1);
             localStorage.setItem('userIDStor', user.userID);
             localStorage.setItem("first-name", user.fName);
             localStorage.setItem("last-name", user.lName);
             localStorage.setItem("email", user.email);
             localStorage.setItem("funds", user.funds);
             localStorage.setItem("ID", user.userID);
-            localStorage.setItem('loggedIn', 'true');
             window.location.href = "AccountOV.html";
         })
         .catch(err => {
@@ -78,17 +77,103 @@ function accountCreated() {
 function openFundsBox() {
     document.getElementById("addFundsForm").style.display = "block";
 }
+
+function stockBySearchMessage() {
+    userFirstName = localStorage.getItem("first-name");
+    userLastName = localStorage.getItem("last-name");
+    availableFunds = localStorage.getItem("funds");
+    userID = localStorage.getItem("ID");
+    document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
+}
 //Display user information on page
 function greetingMessage() {
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
     availableFunds = localStorage.getItem("funds");
     userID = localStorage.getItem("ID");
-    availableFunds = parseFloat(availableFunds).toFixed(2);
+    availableFunds = parseFloat(availableFunds);
+    let previousTotal = parseFloat(localStorage.getItem("previousTotal"));
+    let total = parseFloat(localStorage.getItem("total"));
+
+    let check = localStorage.getItem('loggedIn');
+    if (check == 1) {
+        getActiveStocks();
+
+    }
+    getStockValue();
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
-    document.getElementById("fundsDisplay").innerHTML = `$${availableFunds}`;
-    document.getElementById("stockMoney").innerHTML = `$0`;
-    document.getElementById("totalMoney").innerHTML = `$${availableFunds}`;
+    document.getElementById("fundsDisplay").innerHTML = `$${availableFunds.toFixed(2)}`;
+    document.getElementById("totalMoney").innerHTML = `$${(availableFunds + total).toFixed(2)}`;
+    document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
+    document.getElementById("priceChange").innerHTML = `Price change since last login $${(total - previousTotal).toFixed(2)}`;
+
+
+}
+
+function getActiveStocks() {
+    accountID = localStorage.getItem('ID');
+    localStorage.setItem("total", 0);
+    let previousTotal = 0;
+    fetch('http://localhost:3000/getStocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to get Stocks");
+            return res.json();
+        })
+        .then(user => {
+            user.forEach(stock => {
+                previousTotal = previousTotal + (stock.qty * stock.Current_price);
+                localStorage.setItem("qty", stock.qty);
+                setCurrentPrice(stock.sym);
+
+            })
+            localStorage.setItem("previousTotal", previousTotal);
+            localStorage.setItem('loggedIn', 0);
+            // let completeValue = parseFloat(availableFunds) + total;
+            // document.getElementById("totalMoney").innerHTML = `$${completeValue.toFixed(2)}`;
+            //document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
+        })
+
+        .catch(err => {
+            console.log(err);
+        });
+
+
+}
+
+
+function getStockValue() {
+    accountID = localStorage.getItem('ID');
+    localStorage.setItem("total", 0);
+    let total = 0;
+    fetch('http://localhost:3000/getStocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to get Stocks");
+            return res.json();
+        })
+        .then(user => {
+            user.forEach(stock => {
+                total = total + (stock.qty * stock.Current_price);
+            })
+            localStorage.setItem("total", total);
+            // let completeValue = parseFloat(availableFunds) + total;
+            // document.getElementById("totalMoney").innerHTML = `$${completeValue.toFixed(2)}`;
+            //document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
+
+        })
+
+        .catch(err => {
+            console.log(err);
+        });
+
+
 }
 
 function withdrawMoney() {
@@ -124,9 +209,6 @@ function withdrawMoneyFromAccount(outgoingMoney, accountID) {
         .catch(err => {
             document.getElementById('fundsDisplay').innerText = 'ERROR';
         });
-
-
-
 }
 
 function askForMoney() {
@@ -160,7 +242,7 @@ function addMoneyToAccount(moneyIncome, accountID) {
             return res.json();
         })
         .catch(err => {
-            document.getElementById('fundsDisplay').innerText = 'ERROR';
+            console.log(err);
         });
 
 }
@@ -169,6 +251,23 @@ function addStockToDatabase(symbol, qty, sellPrice) {
     const accountID = localStorage.getItem("ID");
 
     fetch('http://localhost:3000/addStock', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol, accountID, qty, sellPrice })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add stock");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+function addActiveStock(symbol, qty, sellPrice) {
+    const accountID = localStorage.getItem("ID");
+
+    fetch('http://localhost:3000/purchaseStock', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ symbol, accountID, qty, sellPrice })
@@ -194,8 +293,43 @@ function getPriceStock() {
 
 }
 
+async function setCurrentPrice(symbol) {
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
+    accountID = localStorage.getItem("ID");
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data['Time Series (1min)']) {
+            const latestTime = Object.keys(data['Time Series (1min)'])[0];
+            const latestData = data['Time Series (1min)'][latestTime];
+            const price = latestData['1. open'];
+
+            let getStockPrice = parseFloat(price);
+            //
+            fetch('http://localhost:3000/updateCurrentPrice', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ symbol, getStockPrice, accountID })
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to add Money");
+                    return res.json();
+                })
+                .catch(err => {
+
+                    console.log(err);
+                });
+        }
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
 async function getStockPrice(symbol) {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
+    console.log("Hello")
 
     try {
         const response = await fetch(url);
@@ -210,7 +344,7 @@ async function getStockPrice(symbol) {
 
             buyAmount = Math.floor(availableFunds / price);
             document.querySelector('#numberofShares').setAttribute('max', buyAmount);
-
+            console.log(buyAmount);
             if (buyAmount == 0) {
                 document.getElementById('result').innerHTML =
                     `Sorry you don't have enough funds to purchase any shares of ${symbol.toUpperCase()}, 1 share currently cost $${finalPrice}.`;
@@ -235,15 +369,14 @@ async function getStockPrice(symbol) {
         document.getElementById('result').innerHTML =
             `<strong>Error:</strong> Unable to retrieve stock data.`;
     }
-
-
-
 }
+
+
 
 function buyStock() {
 
     const purchasedShares = document.getElementById('numberofShares').value;
-    const accountID = localStorage.getItem("ID")
+    const accountID = localStorage.getItem("ID");
 
     if (purchasedShares <= buyAmount && purchasedShares >= 1) {
         let price = purchasedShares * finalPrice;
@@ -254,6 +387,7 @@ function buyStock() {
 
         withdrawMoneyFromAccount(price, accountID);
         addStockToDatabase(symbol.toUpperCase(), purchasedShares, finalPrice);
+        addActiveStock(symbol.toUpperCase(), purchasedShares, finalPrice);
 
 
         document.getElementById("fundsMessage").innerHTML = `Your Available Funds: $${availableFunds}`;
@@ -277,5 +411,169 @@ function closeStock() {
 
 }
 
+function loadTXHist() {
+    const accountID = localStorage.getItem("ID");
+    // Error test: console.log(`test A ${accountID}`);
+    fetch('http://localhost:3000/pullTXHist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load Transactions");
+            return res.json();
+        })
+        .then(user => {
+            //Error test: console.log("Received transactions:", user);
+            const table = document.getElementById("TXTable");
+            user.forEach(tx => {
+                //Error test: console.log("Single TX object:", tx);
+                let row = table.insertRow(-1);
+                const fields = [
+                    tx.sym, //Symbol
+                    tx.buySell ? "BOUGHT" : "SOLD", //Transaction Type
+                    tx.qty, //Quantity
+                    `$${tx.sellPrice.toFixed(2)}`, //Price/Share
+                    `$${(tx.qty * tx.sellPrice).toFixed(2)}`,  //Tota;
+                    new Date(tx.txDate).toLocaleDateString() //Date
+                ];
+                //Error test: console.log("TX row values:", fields);
+                fields.forEach(value => {
+                    const cell = row.insertCell();
+                    cell.innerHTML = value ?? '-'; //fallback in case value is undefined
+                });
+            });
+        })
+        .catch(err => {
+            console.error("Error loading transaction history:", err);
+        });
+}
 
+function loadOwnedStocks() {
+    const accountID = localStorage.getItem("ID");
+    // Error test: console.log(`test A ${accountID}`);
+    let currentPrice;
+    fetch('http://localhost:3000/updateStocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load stocks");
+            return res.json();
+        })
+        .then(user => {
+            //Error test: console.log("Received transactions:", user);
+            const table = document.getElementById("stockTable");
+            user.forEach(stock => {
+                //Error test: console.log("Single TX object:", tx);
+                console.log(finalPrice);
+                let row = table.insertRow(-1);
+                const fields = [
+                    stock.sym, //Symbol
+                    stock.qty, //Quantity
+                    `$${stock.Bought_price.toFixed(2)}`,
+                    `$${stock.Current_price.toFixed(2)}`,
+                    //Price/Share
+                    //Total;
 
+                ];
+                //Error test: console.log("TX row values:", fields);
+                fields.forEach(value => {
+                    const cell = row.insertCell();
+                    cell.innerHTML = value ?? '-'; //fallback in case value is undefined
+                });
+            });
+            addButtonsToTable("stockTable");
+        })
+        .catch(err => {
+            console.error("Error loading stocks:", err);
+        });
+}
+
+function addButtonsToTable(tableId) {
+    const table = document.getElementById(tableId);
+    if (!table) {
+        console.error('Table not found');
+        return;
+    }
+
+    const rows = table.rows;
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+
+        const button = document.createElement('button');
+        button.textContent = 'Sell';
+        button.classList.add('my-button');
+        button.addEventListener('click', function () {
+            const symbol = row.cells[0].textContent;
+            let qty = parseFloat(row.cells[1].textContent);
+            let currentPrice = row.cells[3].textContent;
+            currentPrice = currentPrice.replace(/\$/g, '');
+            currentPrice = parseFloat(currentPrice);
+            accountID = localStorage.getItem("ID");
+
+            let purchase = prompt(`How many shares of ${symbol} would you like to Sell: `);
+            let num = parseFloat(purchase);
+            if (!isNaN(num) && purchase !== '' && num > 0 && num <= qty) {
+                let addMoney = num * currentPrice;
+                console.log(addMoney);
+                addMoneyToAccount(addMoney, accountID);
+                const num1 = parseFloat(availableFunds);
+                const num2 = parseFloat(addMoney);
+                const sum = num1 + num2;
+                localStorage.setItem("funds", sum);
+
+                let newQty = qty - num;
+                if (newQty > 0) {
+                    changeQuantity(symbol, newQty, accountID, qty);
+                    alert(`${symbol} shares sold for a total of ${addMoney.toFixed(2)}`);
+                    window.location.reload();
+                } else if (newQty == 0) {
+                    deleteStocks(symbol, qty, accountID)
+                    alert(`All shares of ${symbol} sold for a total of $${addMoney.toFixed(2)}`);
+                    window.location.reload();
+
+                }
+            } else {
+                alert("Invalid response");
+            }
+        });
+
+        const cell = document.createElement('td');
+        cell.appendChild(button);
+        row.appendChild(cell);
+    }
+}
+
+function changeQuantity(sym, newQty, accountID, qty) {
+
+    fetch('http://localhost:3000/sellStocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sym, newQty, accountID, qty })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add Money");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+}
+
+function deleteStocks(sym, qty, accountID) {
+    fetch('http://localhost:3000/deleteStocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sym, qty, accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add Money");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}

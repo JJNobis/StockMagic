@@ -47,6 +47,23 @@ app.post('/addFunds', async (req, res) => {
     await sql.close();
 });
 
+app.post('/getStockPrices', async (req, res) => {
+    const { accountID } = req.body;
+
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`SELECT * from userStocks where userID = ${userID}`);
+        const user = result.recordset;
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
 app.post('/subtractFunds', async (req, res) => {
     const { outgoingMoney, accountID } = req.body;
 
@@ -116,12 +133,135 @@ app.post('/addStock', async (req, res) => {
     try {
         await sql.connect(config);
         await sql.query(`INSERT INTO stockTXHist (sym, buySell, userID, qty, sellPrice ) VALUES 
-                   ('$${symbol}', 1, ${accountID}, ${qty}, ${sellPrice})`);
+                   ('${symbol}', 1, ${accountID}, ${qty}, ${sellPrice})`);
+
     } catch (err) {
         res.status(500).send(err.message);
     }
     await sql.close();
 });
+
+
+
+app.post('/purchaseStock', async (req, res) => {
+    const { symbol, accountID, qty, sellPrice } = req.body;
+    try {
+        await sql.connect(config);
+
+        await sql.query(`INSERT INTO userStocks (userID, sym, qty, Bought_price, Current_price) VALUES
+                (${accountID}, '${symbol}', ${qty}, ${sellPrice}, ${sellPrice})`);
+
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+app.post('/pullTXHist', async (req, res) => {
+    // Error Test: console.log(req.body);
+    const { accountID } = req.body;
+    //Error Test: console.log(`Test C ${accountID}`);
+    //Error Test: console.log(req.body);
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`select * from StockTXHist where userID = ${accountID}`);
+        const user = result.recordset;
+        //Error Test: console.log(user);
+        res.json(user);
+    } catch (err) {
+        TXHistArray = [['ERROR']];
+    }
+});
+
+app.post('/updateStocks', async (req, res) => {
+    const { accountID, symbol, price } = req.body;
+
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`select * from userStocks where userID = ${accountID}`);
+        const user = result.recordset;
+
+        res.json(user);
+    } catch (err) {
+        console.log(err);
+    }
+
+});
+app.post('/getStocks', async (req, res) => {
+    const { accountID } = req.body;
+
+    let userID = JSON.parse(accountID);
+
+
+    try {
+        await sql.connect(config);
+        const result = await sql.query(`SELECT * FROM userStocks WHERE userID = ${userID}`);
+        const user = result.recordset;
+        res.json(user);
+
+    } catch (err) {
+        console.log(err);
+    }
+
+
+});
+
+app.post('/updateCurrentPrice', async (req, res) => {
+    const { symbol, getStockPrice, accountID } = req.body;
+
+    let userID = JSON.parse(accountID);
+    console.log(req.body);
+    try {
+        await sql.connect(config);
+
+        await sql.query(`UPDATE userStocks SET Current_price = ${getStockPrice} WHERE userID = ${userID} AND sym = '${symbol}'`);
+
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+
+});
+
+app.post('/sellStocks', async (req, res) => {
+    const { sym, newQty, accountID, qty } = req.body;
+    console.log(req.body);
+    let leftoverQTY = JSON.parse(newQty);
+    let userID = JSON.parse(accountID);
+    let oldQty = JSON.parse(qty);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE userStocks SET qty = ${leftoverQTY} WHERE userID = ${userID} AND sym = '${sym}' AND qty = ${oldQty} `);
+
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
+app.post('/deleteStocks', async (req, res) => {
+    const { sym, accountID, qty } = req.body;
+
+    let userID = JSON.parse(accountID);
+    let oldQty = JSON.parse(qty);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`DELETE FROM userStocks WHERE userID = ${userID} AND sym = '${sym}' AND qty = ${oldQty} `);
+
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)
+        res.status(500).send(err.message);
+    }
+    await sql.close();
+});
+
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');

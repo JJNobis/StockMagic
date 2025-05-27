@@ -248,17 +248,21 @@
   max-height: 5em;
   max-width: 5em;
 }
+
 /*TX Hist**************************/
-#TXTable{
+#TXTable {
   border-collapse: collapse;
   width: 75vw;
   margin-left: 20vw;
-  text-align:center;
+  text-align: center;
 }
 
-tr:hover {background-color: var(--color-extra-light)}
+tr:hover {
+  background-color: var(--color-extra-light)
+}
 
-th,td{
+th,
+td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid black;
@@ -514,6 +518,16 @@ h2 {
 
 /******** TX History*******/
 #TXTable {
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 21vw;
+  <<<<<<< HEAD width: 75vw;
+  =======width: 70vw;
+  >>>>>>>a300657174979a64582d368a2b4adb6807acecae
+}
+
+#stockTable {
   border-collapse: collapse;
   text-align: center;
   margin-top: 10px;
