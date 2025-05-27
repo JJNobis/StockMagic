@@ -249,9 +249,20 @@
   max-width: 5em;
 }
 
-tr:hover {background-color: var(--color-extra-light)}
+/*TX Hist**************************/
+#TXTable {
+  border-collapse: collapse;
+  width: 75vw;
+  margin-left: 20vw;
+  text-align: center;
+}
 
-th,td{
+tr:hover {
+  background-color: var(--color-extra-light)
+}
+
+th,
+td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid black;
@@ -500,13 +511,13 @@ h2 {
   text-align: center;
   margin-top: 10px;
   margin-left: 21vw;
-    width: 70vw;
-  }
-
-  /*Funds Hist**************************/
-#fundsTable{
-  border-collapse: collapse;
   width: 75vw;
-  margin-left: 20vw;
-  text-align:center;
+}
+
+#stockTable {
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 21vw;
+  width: 75vw;
 }

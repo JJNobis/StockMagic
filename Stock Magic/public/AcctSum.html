@@ -1,234 +1,45 @@
- <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Documents</title>
-        <link rel="icon" type="image/png" href="img/StockMagicLogo.png">
-        <link rel="stylesheet" href="style.css">
-        
-    </head>
+<!DOCTYPE html>
+<html lang="eng">
 
-   <ul class="NavBar">
-        <li><img class="logo" src="img/StockMagicLogo.png"></li>
-        <li><a href="AccountOV.html">Account Overview</a></li>
-        <li><a href="AcctSum.html">Account Summary</a></li>
-        <li><a href="CashAcctBalance.html">Account Balance</a></li>
-        <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href="TXHist.html">Transaction History</a></li>
-        <li><a href="Settings.html">Settings</a></li>
-        <li><a href="ContactUS.html">Contact Us</a></li>
-        <li><a href="index.html">Log Out</a></li>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="udf=8">
+    <title>$tockMagi&cent;</title>
+</head>
+<ul class="NavBar">
+    <li><img class="logo" src="img/StockMagicLogo.png"></li>
+    <li><a href="AccountOV.html">Account Overview</a></li>
+    <li><a href="AcctSum.html">Account Summary</a></li>
+    <li><a href="CashAcctBalance.html">Account Balance</a></li>
+    <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
+    <li><a href="documents.html">Documents</a></li>
+    <li><a href="TXHist.html">Transaction History</a></li>
+    <li><a href="Settings.html">Settings</a></li>
+    <li><a href="ContactUS.html">Contact Us</a></li>
+    <li><a href="index.html">Log Out</a></li>
 </ul>
-    <header>
-    <h1>Account Summary</h1>
-    </header>
-    <body>
-        <div id="sumAssets"> 
-             <h2 id="totAssets">
-                    Total Assets: 
-            </h2>
-            <h2 id="Balance">
-                    Balance:
-            </h2>
-        </div>
-<div class="scrollcontainer" style="
-  height:550px;
-  width:450px;
-  border-collapse: collapse;
-  overflow-y:scroll;
-  border-radius: 50px;
-  display: block;
-  text-align: center;"> <!--start of scrolling bar(?)-->
-        
-    <div id="Genstocknm1">
-    <h2 id="TickerSym1">
-        Generic Stock Name 1  
-    </h2>
-    <h2>
-        <label for="Stock1"></label>
-        <select name="Stock" id="Stock1"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity1"></label>
-        <select name="Test red" id="select1">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;" />
-        </select>
-    </h2>
+
+
+<body onload="loadOwnedStocks()">
+    <h1> Stocks Owned</h1>
+
+    <h2> Table Location1 </h2>
+    <p> stocks:</p>
+    <div>
+        <table id="stockTable">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Quantity</th>
+                    <th>Purchase price</th>
+                    <th>Current Price</th>
+                    <th>Sell</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 
-<div id="Genstocknm2">
-    <h2 id="TickerSym2">
-        Generic Stock Name  2  
-    </h2>
-    <h2>
-        <label for="Stock2"></label>
-        <select name="Stock" id="Stock2"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity2"></label>
-        <select name="Test red" id="select2">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="100" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
 
-<div id="Genstocknm3">
-    <h2 id="TickerSym3">
-        Generic Stock Name   3 
-    </h2>
-    <h2>
-        <label for="Stock3"></label>
-        <select name="Stock" id="Stock3"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity3"></label>
-        <select name="Test red" id="select3">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
 
-<div id="Genstocknm4">
-    <h2 id="TickerSym4">
-        Generic Stock Name    4
-    </h2>
-    <h2>
-        <label for="Stock4"></label>
-        <select name="Stock" id="Stock4"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity4"></label>
-        <select name="Test red" id="select4">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
-
-<div id="Genstocknm5">
-    <h2 id="TickerSym5">
-        Generic Stock Name    5
-    </h2>
-    <h2>
-        <label for="Stock5"></label>
-        <select name="Stock" id="Stock5"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity5"></label>
-        <select name="Test red" id="select5">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
-<div id="Genstocknm5">
-    <h2 id="TickerSym5">
-        Generic Stock Name    6
-    </h2>
-    <h2>
-        <label for="Stock6"></label>
-        <select name="Stock" id="Stock6"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity6"></label>
-        <select name="Test red" id="select6">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
-<div id="Genstocknm7">
-    <h2 id="TickerSym7">
-        Generic Stock Name    7
-    </h2>
-    <h2>
-        <label for="Stock7"></label>
-        <select name="Stock" id="Stock7"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity7"></label>
-        <select name="Test red" id="select7">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
-<div id="Genstocknm8">
-    <h2 id="TickerSym8">
-        Generic Stock Name    8
-    </h2>
-    <h2>
-        <label for="Stock8"></label>
-        <select name="Stock" id="Stock8"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity8"></label>
-        <select name="Test red" id="select8">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
-<div id="Genstocknm9">
-    <h2 id="TickerSym9">
-        Generic Stock Name    9
-    </h2>
-    <h2>
-        <label for="Stock9"></label>
-        <select name="Stock" id="Stock9"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity9"></label>
-        <select name="Test red" id="select9">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-</div>
-<div id="Genstocknm10">
-    <h2 id="TickerSym10">
-        Generic Stock Name    10
-    </h2>
-    <h2>
-        <label for="Stock10"></label>
-        <select name="Stock" id="Stock10"> 
-            <option value="Buy"> Buy</option>
-            <option value="Sell"> Sell</option>
-        </select>
-        <label for="Quantity10"></label>
-        <select name="Test red" id="select10">
-            <option value="Amount"> Amount in %</option>
-            <input type="number" min="0" max="1" step="0.01" style="
-            margin-left: 5px;">
-        </select>
-    </h2>
-    </div>
-</div> <!--this should end the scroll-->
-           
-      <body>
-        
-      </body>  
-    
-    </body>
+</body>
+<script src="script.js"></script>
