@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-Time Stock Prices</title>
     <link rel="stylesheet" href="style.css">
-    <a href="index.html"><button class="logout">Logout</button></button></a>
 
 </head>
 <ul class="NavBar">
@@ -26,20 +25,21 @@
 </header>
 
 
-<body onload="stockBySearchMessage()" style="background: linear-gradient(to bottom, white 0%, #3cf 100%);">
+<body onload="stockBySearchMessage()"
+    style="background: linear-gradient(to bottom, white 0%, rgb(158, 157, 115) 100%);">
     <center>
 
         <h2 id="greeting">temp</h2>
         <h3 id="fundsMessage"></h3>
 
         <input type="text" id="symbol" placeholder="Enter stock symbol (e.g., AAPL)">
-        <button id="getPrice" onclick="getPriceStock()">Get Price</button><br>
+        <button class="logout" id="getPrice" onclick="getPriceStock()">Get Price</button><br>
         <div id="result">
         </div><br><br>
         <span id="shareMessage" style="display: none;">Enter the number of shares you wish to purchase:</span>
         <input type="number" id="numberofShares" placeholder="Number of Shares" style="display: none;" min="1"><br>
-        <button id="buyButton" style="display: none;" onclick="buyStock()">Buy</button>
-        <button id="closeBuyButton" style="display: none;" onclick="closeStock()">Clear</button><br><br>
+        <button class="logout" id="buyButton" style="display: none;" onclick="buyStock()">Buy</button>
+        <button class="logout" id="closeBuyButton" style="display: none;" onclick="closeStock()">Clear</button><br><br>
         <h4 id="purchaseMessage"></h4>
 
 

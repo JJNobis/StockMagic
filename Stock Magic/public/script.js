@@ -630,7 +630,7 @@ function addButtonsToTable(tableId) {
 
         const button = document.createElement('button');
         button.textContent = 'Sell';
-        button.classList.add('my-button');
+        button.classList.add('sellbuttons');
         button.addEventListener('click', function () {
             const symbol = row.cells[0].textContent;
             let qty = parseFloat(row.cells[1].textContent);
