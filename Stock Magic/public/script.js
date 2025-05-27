@@ -196,7 +196,6 @@ function withdrawMoney() {
 }
 
 function withdrawMoneyFromAccount(outgoingMoney, accountID) {
-    console.log("Running subtract funds function...");
     fetch('http://localhost:3000/subtractFunds', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -205,6 +204,9 @@ function withdrawMoneyFromAccount(outgoingMoney, accountID) {
         .then(res => {
             if (!res.ok) throw new Error("Failed to add Money");
             return res.json();
+        })
+        .then(user => {
+            document.getElementById("fundsDisplay").innerHTML = `$${user.funds}`;
         })
         .catch(err => {
             document.getElementById('fundsDisplay').innerText = 'ERROR';
@@ -231,7 +233,6 @@ function askForMoney() {
 }
 
 function addMoneyToAccount(moneyIncome, accountID) {
-    console.log("Running Add funds function...");
     fetch('http://localhost:3000/addFunds', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -240,6 +241,9 @@ function addMoneyToAccount(moneyIncome, accountID) {
         .then(res => {
             if (!res.ok) throw new Error("Failed to add Money");
             return res.json();
+        })
+        .then(user => {
+            document.getElementById("fundsDisplay").innerHTML = `$${user.funds}`;
         })
         .catch(err => {
             console.log(err);
@@ -383,8 +387,6 @@ function buyStock() {
         price = price.toFixed(2);
         availableFunds = availableFunds - (purchasedShares * finalPrice);
         availableFunds = availableFunds.toFixed(2);
-
-
         withdrawMoneyFromAccount(price, accountID);
         addStockToDatabase(symbol.toUpperCase(), purchasedShares, finalPrice);
         addActiveStock(symbol.toUpperCase(), purchasedShares, finalPrice);
@@ -394,8 +396,6 @@ function buyStock() {
         document.getElementById("purchaseMessage").innerHTML = `Congratulations! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
         document.getElementById('result').innerHTML = "";
         localStorage.setItem("funds", availableFunds);
-
-
     } else {
         document.getElementById("purchaseMessage").innerHTML = `You only have enough funds to purchase up to ${buyAmount} shares.`;
     }
@@ -409,6 +409,45 @@ function closeStock() {
     document.querySelector('#closeBuyButton').style.display = 'none';
     document.querySelector('#purchaseMessage').style.display = 'none';
 
+}
+
+/**********TXHist load in*******/
+function loadTXHist() {
+    const accountID = localStorage.getItem("ID");
+    // Error test: console.log(`test A ${accountID}`);
+    fetch('http://localhost:3000/pullTXHist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountID })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load Transactions");
+            return res.json();
+        })
+        .then(user => {
+            //Error test: console.log("Received transactions:", user);
+            const table = document.getElementById("TXTable");
+            user.forEach(tx => {
+                //Error test: console.log("Single TX object:", tx);
+                let row = table.insertRow(-1);
+                const fields = [
+                    tx.sym, //Symbol
+                    tx.buySell ? "BOUGHT" : "SOLD", //Transaction Type
+                    tx.qty, //Quantity
+                    `$${tx.sellPrice.toFixed(2)}`, //Price/Share
+                    `$${(tx.qty * tx.sellPrice).toFixed(2)}`,  //Tota;
+                    new Date(tx.txDate).toLocaleDateString() //Date
+                ];
+                //Error test: console.log("TX row values:", fields);
+                fields.forEach(value => {
+                    const cell = row.insertCell();
+                    cell.innerHTML = value ?? '-'; //fallback in case value is undefined
+                });
+            });
+        })
+        .catch(err => {
+            console.error("Error loading transaction history:", err);
+        });
 }
 
 function loadTXHist() {

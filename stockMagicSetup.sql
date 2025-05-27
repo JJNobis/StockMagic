@@ -54,9 +54,10 @@ create table stockTXHist(
 	(0000000003, 1, 3049),
 	(0000000003, 1, 401),
 	(0000000004, 0, 1245.96);
-	select * from fundsTXHist
+	select * from fundsTXHist where userID =4
 	select * from stockTXHist
-	select * from users
+	sp_help stockTXHist
+	select * from users where userID = 4
 /*
 	alter table users
 	alter column username nvarchar(32) not null;
