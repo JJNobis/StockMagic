@@ -314,11 +314,11 @@ app.post('/passChange', async (req, res) => {
     const { newPassword, accountID } = req.body;
     console.log(req.body);
     let userID = JSON.parse(accountID);
+    let nPass = JSON.parse(newPassword);
 
     try {
         await sql.connect(config);
-        await sql.query(`UPDATE users SET currentPassword = '${newPassword}' WHERE userID = ${userID}`);
-
+        await sql.query(`UPDATE users SET pwd = '${nPass}' WHERE userID = ${userID}`);
 
     } catch (err) {
         console.log(`DB Error: ${err}`)
