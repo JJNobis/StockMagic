@@ -1,65 +1,70 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Documents</title>
-        <link rel="icon" type="image/png" href="img/StockMagicLogo.png">
-        <link rel="stylesheet" href="style.css">
-        
-    </head>
 
-    <ul class="NavBar">
-        <li><img class="logo" src="img/StockMagicLogo.png"></li>
-        <li><a href="AccountOV.html">Account Overview</a></li>
-        <li><a href="AcctSum.html">Account Summary</a></li>
-        <li><a href="CashAcctBalance.html">Account Balance</a></li>
-        <li><a href=>Stock Buy/Search</a></li>
-        <li><a href="documents.html">Documents</a></li>
-        <li><a href=>Transaction History</a></li>
-        <li><a href="Settings.html">Settings</a></li>
-        <li><a href="ContactUS.html">Contact Us</a></li>
-        <li><a href="index.html">Log Out</a></li>
-        </ul>
-    <header>
+<head>
+    <meta charset="utf-8">
+    <title>Documents</title>
+    <link rel="icon" type="image/png" href="img/StockMagicLogo.png">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<ul class="NavBar">
+    <li><img class="logo" src="img/StockMagicLogo.png"></li>
+    <li><a href="AccountOV.html">Account Overview</a></li>
+    <li><a href="AcctSum.html">Account Summary</a></li>
+    <li><a href="CashAcctBalance.html">Account Balance</a></li>
+    <li><a href="StockBuySearch.html">Stock Buy/Search</a></li>
+    <li><a href="documents.html">Documents</a></li>
+    <li><a href="TXHist.html">Transaction History</a></li>
+    <li><a href="Settings.html">Settings</a></li>
+    <li><a href="ContactUS.html">Contact Us</a></li>
+    <li><a href="index.html">Log Out</a></li>
+</ul>
+<header>
     <h1>Cash Account Balance</h1>
-    </header>
+</header>
+
+<body style="background: linear-gradient(to bottom, white 0%, #3cf 100%);">
     <div id="bal">
         <h2 id="cashBalance" style="padding:1vh 1vw;">Account balance:</h2>
-        <h2 id="display" style="padding:1vh 1vw;"></h2><br/>
+        <h2 id="display" style="padding:1vh 1vw;"></h2><br />
     </div>
     <div id="fundsInput">
-    <input id="inputVal" type="number"/>
-    <select id="dropDown"></select><br /><br/>
-    <button onclick="subBal()">Withdraw funds</button>
-    <button onclick="addBal()">Add funds</button>
+        <input id="inputVal" type="number" />
+        <select id="dropDown"></select><br /><br />
+        <button onclick="subBal()">Withdraw funds</button>
+        <button onclick="addBal()">Add funds</button>
     </div>
-    <script>
-       // let userBal=[0, 0, 0, Number(1372.53)];
-       /**Maybe ignore?
-        *  fetch('/')
-            .then(res => res.json())
-            .then(data => {userBal= users.fundAmount});
-        {
-            
-        const display = document.getElementById('display');
-        display.innerHTML+=userBal[3];
-        }
 
-        */
-        for(let i=0; i<accounts.length;i++){
-            var list = document.getElementById('dropDown');
-            const accOP = document.createElement('option');
-            accOP.innerHTML=`Account ending in ${accounts[i].substr(12)}`;
-            list.appendChild(accOP);
-        }
-        function addBal(){
-            userBal[3]+=Number(document.getElementById('inputVal').value);
-            display.innerHTML=userBal[3];
-        }
-        function subBal(){
-            userBal[3]-=Number(document.getElementById('inputVal').value);
-            display.innerHTML=userBal[3];
+</body>
+<script>
+    // let userBal=[0, 0, 0, Number(1372.53)];
+    /**Maybe ignore?
+     *  fetch('/')
+         .then(res => res.json())
+         .then(data => {userBal= users.fundAmount});
+     {
+         
+     const display = document.getElementById('display');
+     display.innerHTML+=userBal[3];
+     }
 
-        }
+     */
+    for (let i = 0; i < accounts.length; i++) {
+        var list = document.getElementById('dropDown');
+        const accOP = document.createElement('option');
+        accOP.innerHTML = `Account ending in ${accounts[i].substr(12)}`;
+        list.appendChild(accOP);
+    }
+    function addBal() {
+        userBal[3] += Number(document.getElementById('inputVal').value);
+        display.innerHTML = userBal[3];
+    }
+    function subBal() {
+        userBal[3] -= Number(document.getElementById('inputVal').value);
+        display.innerHTML = userBal[3];
 
-    </script>
+    }
+
+</script>
