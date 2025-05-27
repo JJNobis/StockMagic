@@ -80,6 +80,7 @@ app.post('/subtractFunds', async (req, res) => {
         subtractFunds = user.funds - subtractFunds;
 
         await sql.query(`UPDATE users SET funds = ${subtractFunds} WHERE userID = ${userID}`);
+        await sql.query(`insert into fundsTXHist(userID, depWith, fundAmount) values (${userID}, 1, ${subtractFunds});`);
 
 
     } catch (err) {
