@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <title>Settings Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-</head>
 
-<body style="background: linear-gradient(to bottom, white 0%, #3cf 100%);">
-
-  <nav>
-    <ul class="NavBar">
+  <head>
+    <meta charset="utf-8">
+    <title>Settings Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  
+  <body style="background: linear-gradient(to bottom, white 0%, #94F669 100%);">
+        
+    <nav>
+      <ul class="NavBar">
       <li><img class="logo" src="img/StockMagicLogo.png"></li>
       <li><a href="AccountOV.html">Account Overview</a></li>
       <li><a href="AcctSum.html">Account Summary</a></li>
@@ -21,30 +22,31 @@
       <li><a href="Settings.html">Settings</a></li>
       <li><a href="ContactUS.html">Contact Us</a></li>
       <li><a href="index.html">Log Out</a></li>
-    </ul>
+</ul>
 
-  </nav>
+    </nav>
+    
+    <header>
+      <h1>Settings</h1>
+    </header>
+      
+    <main id="settBody">
+      
+      <section>
+           
+        <h2>Change Email, Password and Banking Information.</h2>
 
-  <header>
-    <h1>Settings</h1>
-  </header>
 
-  <main id="settBody">
+        <h4>Name and Email</h4>
 
-    <section>
-
-      <h2>Change Email, Password and Banking Information.</h2>
-
-
-      <h4>Username, Display Name and Email</h4>
-      <form id="username" class="contact-form" action="" method="post">
-
-        <label for="username">UserName</label>
-        <input type="text" id="username" name="UserName" placeholder="User Name">
+        <form id="Name" class="contact-form" action="" method="post">
+        <label>Name</label>
+        <input type="text" id="firstName" placeholder="First Name">
         <span></span>
+        
+        <label for="lname"> Last Name</label>
+        <input type="text" id="lastName" name="Last Name" placeholder="Last Name">
 
-        <label for="displayname"> Display Name</label>
-        <input type="text" id="displayname" name="Display Name" placeholder="Display Name" required>
         <span></span><br /><br />
 
         <label for="email">Email</label>
@@ -54,8 +56,9 @@
 
       <h4>Change Password</h4>
       <form id="passChange" class="contact-form">
-        <label for="currentpassword"> Current Password</label>
-        <input type="text" id="currentPassword" name="Current Password" placeholder="**********" required>
+        <label for="CurrentPassword"> Current Password</label>
+        <input type="text" id="CurrentPassword" name="Current Password" placeholder="**********">
+
         <span></span>
 
         <label for="newpassword"> New Password</label>
@@ -65,75 +68,28 @@
       </form>
       <h4>Change Banking</h4>
       <form id="bankChange" class="contact-form">
+        <label for="bankname"> Bank Name</label>
+        <input type="text" id="bankname" name="Bank Name" placeholder="Bank Name">
+        <span></span>
 
         <label for="bankaccount">Bank Account #</label>
         <input type="number" id="routingNumber" placeholder="Enter Bank Account Number" required>
         <button onclick="updateBankAcc()"> Submit changes </button>
 
 
+       <span></span>
+        <label for="routingnumber"> Routing #</label>
+        <input type="text" id="routingnumber" name="Routing #" placeholder="273073848">
+        <span></span> <br /> <br />
+        <input id="ChangeBankAcct_button" type="submit" value="Change Banking">
+        <input id="Cancel" type="submit" value="Cancel">
+        
       </form>
+     
+      </section>
 
-    </section>
+    </main>
 
-  </main>
-
-</body>
-<script src="script.js"></script>
-<h4>Name and Email</h4>
-
-<form id="fname" class="contact-form" action="" method="post">
-
-  <label for="fname">First Name</label>
-  <input type="text" id="firstName" name="fname" placeholder="First Name">
-  <span></span>
-
-  <label for="lname"> Last Name</label>
-  <input type="text" id="lastName" name="Last Name" placeholder="Last Name">
-  <span></span><br /><br />
-
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" placeholder="example@gmail.com">
-  <button onclick="updateEmail()">Change Email</button>
-  <span></span>
-</form>
-
-<h4>Change Password</h4>
-<form id="passChange" class="contact-form">
-  <label for="currentPassword"> Current Password</label>
-  <input type="text" id="currentPassword" name="Current Password" placeholder="**********">
-  <span></span>
-
-  <label for="newPassword"> New Password</label>
-  <input type="text" id="newPassword" name="New Password" placeholder="**********">
-  <span></span><br /> <br />
-  <button onclick="passChange()">Change Password</button>
-
-
-</form>
-<h4>Change Banking</h4>
-<form id="bankChange" class="contact-form">
-  <label for="bankname"> Bank Name</label>
-  <input type="text" id="bankname" name="Bank Name" placeholder="Premier Credit Union">
-  <span></span>
-
-  <label for="bankaccount">Bank Account #</label>
-  <input type="number" id="BankAccount" name="Account #" placeholder="xxxxx1234">
-
-  <span></span>
-
-  <span></span>
-  <label for="routingnumber"> Routing #</label>
-  <input type="text" id="routingnumber" name="Routing #" placeholder="273073848" required>
-  <span></span> <br /> <br />
-  <input id="ChangeBankAcct_button" type="submit" value="Change Banking">
-  <input id="Cancel" type="submit" value="Cancel">
-
-</form>
-
-</section>
-
-</main>
-
-</body>
-
+  </body>
+     <script src="script.js"></script>
 </html>
