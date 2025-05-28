@@ -280,13 +280,14 @@ function updateEmail() {
 }
 //function to call app to update password
 function passChange() {
-    const newPassword = document.getElementById("CurrentPassword").value;
+    const currentPassword = document.getElementById("CurrentPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
     console.log(newPassword);
     const accountID = localStorage.getItem("ID");
     fetch('http://localhost:3000/passChange', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ newPassword, accountID })
+        body: JSON.stringify({ currentPassword, newPassword, accountID })
     })
         .then(res => {
             if (!res.ok) throw new Error("Failed to update password");
