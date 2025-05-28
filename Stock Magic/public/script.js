@@ -69,11 +69,11 @@ function accountCreated() {
     closeForm();
 }
 
-
+//makes the addfunds form appear
 function openFundsBox() {
     document.getElementById("addFundsForm").style.display = "block";
 }
-
+//creates header information at the top of stocksearch page. 
 function stockBySearchMessage() {
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
@@ -81,7 +81,7 @@ function stockBySearchMessage() {
     userID = localStorage.getItem("ID");
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
 }
-//Display user information on page
+//Display user information on page searches for updated stock prices as well
 function greetingMessage() {
     userFirstName = localStorage.getItem("first-name");
     userLastName = localStorage.getItem("last-name");
@@ -97,11 +97,11 @@ function greetingMessage() {
     getStockValue();
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
     document.getElementById("fundsDisplay").innerHTML = `$${availableFunds.toFixed(2)}`;
-    document.getElementById("totalMoney").innerHTML = `LOADING...`;
-    document.getElementById("stockMoney").innerHTML = `LOADING...`;
+    document.getElementById("totalMoney").innerHTML = `$0`;
+    document.getElementById("stockMoney").innerHTML = `$0`;
 
 }
-
+//updates stock price by getting stocks and sending them to setCurrentPrice function
 async function getActiveStocks() {
     accountID = localStorage.getItem('ID');
     localStorage.setItem("total", 0);
@@ -119,7 +119,6 @@ async function getActiveStocks() {
             user.forEach(stock => {
                 //  previousTotal = previousTotal + (stock.qty * stock.Current_price);
                 localStorage.setItem("qty", stock.qty);
-                localStorage.setItem("previousTotal", previousTotal);
                 setCurrentPrice(stock.sym);
 
 
@@ -138,7 +137,7 @@ async function getActiveStocks() {
 
 }
 
-
+//Gets the newest stock prices and displays the price on AccountOV page
 function getStockValue() {
     accountID = localStorage.getItem('ID');
     localStorage.setItem("total", 0);
@@ -173,6 +172,7 @@ function getStockValue() {
 
 }
 
+//funcition to prompt for withdrawing funds
 function withdrawMoney() {
     const accountID = localStorage.getItem("ID");
     availableFunds = localStorage.getItem("funds");
@@ -193,6 +193,7 @@ function withdrawMoney() {
     location.reload();
 }
 
+// calls the app to update sql table with new available funds
 function withdrawMoneyFromAccount(outgoingMoney, accountID) {
     fetch('http://localhost:3000/subtractFunds', {
         method: 'POST',
@@ -211,6 +212,7 @@ function withdrawMoneyFromAccount(outgoingMoney, accountID) {
         });
 }
 
+//Prompts to ask for money to update sql database
 function askForMoney() {
     const accountID = localStorage.getItem("ID");
     availableFunds = localStorage.getItem("funds");
@@ -230,6 +232,7 @@ function askForMoney() {
     location.reload()
 }
 
+//calls app to update sql database with new available funds
 function addMoneyToAccount(moneyIncome, accountID) {
     fetch('http://localhost:3000/addFunds', {
         method: 'POST',
@@ -275,7 +278,7 @@ function updateEmail() {
 
     alert("Email changed");
 }
-
+//function to call app to update password
 function passChange() {
     const newPassword = document.getElementById("CurrentPassword").value;
     console.log(newPassword);
@@ -300,7 +303,7 @@ function passChange() {
 
     alert("Password changed");
 }
-
+//Adds stock that are purchased to transaction table
 function addStockToDatabase(symbol, qty, sellPrice) {
     const accountID = localStorage.getItem("ID");
 
@@ -317,7 +320,7 @@ function addStockToDatabase(symbol, qty, sellPrice) {
             console.log(err);
         });
 }
-
+//adds stock to active stocked owned by a user
 function addActiveStock(symbol, qty, sellPrice) {
     const accountID = localStorage.getItem("ID");
 
@@ -346,10 +349,11 @@ function getPriceStock() {
     document.querySelector('#closeBuyButton').style.display = 'inline-block';
 
 }
-
+//searches using api key to update stock prices
 async function setCurrentPrice(symbol) {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
     accountID = localStorage.getItem("ID");
+    console.log("Hello");
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -360,7 +364,6 @@ async function setCurrentPrice(symbol) {
             const price = latestData['1. open'];
 
             let getStockPrice = parseFloat(price);
-            //
             fetch('http://localhost:3000/updateCurrentPrice', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -380,7 +383,7 @@ async function setCurrentPrice(symbol) {
         console.error('Error fetching data:', error);
     }
 }
-
+//Gets the stock prices for stock search buy page
 async function getStockPrice(symbol) {
     const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
     console.log("Hello")
@@ -426,7 +429,7 @@ async function getStockPrice(symbol) {
 }
 
 
-
+//checks to make sure funds are enough to buy the stock and adds data to databases
 function buyStock() {
 
     const purchasedShares = document.getElementById('numberofShares').value;
@@ -446,11 +449,13 @@ function buyStock() {
         document.getElementById("purchaseMessage").innerHTML = `Congratulations! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
         document.getElementById('result').innerHTML = "";
         localStorage.setItem("funds", availableFunds);
+        closeStock();
     } else {
         document.getElementById("purchaseMessage").innerHTML = `You only have enough funds to purchase up to ${buyAmount} shares.`;
     }
 
 }
+//closes the form for buying stock
 function closeStock() {
 
     document.querySelector('#shareMessage').style.display = 'none';
@@ -460,7 +465,7 @@ function closeStock() {
     document.querySelector('#purchaseMessage').style.display = 'none';
 
 }
-
+//update backaccount 
 function updateBankAcc() {
     console.log("hello");
     const accountID = localStorage.getItem("ID");
@@ -584,7 +589,7 @@ function accountOVPage() {
     loadFundsHist()
 }
 
-
+//pull up stocks that are currently owned.
 function loadOwnedStocks() {
     const accountID = localStorage.getItem("ID");
     // Error test: console.log(`test A ${accountID}`);
@@ -611,7 +616,7 @@ function loadOwnedStocks() {
                     `$${stock.Bought_price.toFixed(2)}`,
                     `$${stock.Current_price.toFixed(2)}`,
                     //Price/Share
-                    //Total;
+                    `$${(stock.Current_price * stock.qty).toFixed(2)}`//Total;
 
                 ];
                 //Error test: console.log("TX row values:", fields);
@@ -626,7 +631,7 @@ function loadOwnedStocks() {
             console.error("Error loading stocks:", err);
         });
 }
-
+//Adds the sell button to the end of each row for buying the stock
 function addButtonsToTable(tableId) {
     const table = document.getElementById(tableId);
     if (!table) {
@@ -664,7 +669,7 @@ function addButtonsToTable(tableId) {
                 let newQty = qty - num;
                 if (newQty > 0) {
                     changeQuantity(symbol, newQty, accountID, qty);
-                    alert(`${symbol} shares sold for a total of ${addMoney.toFixed(2)}`);
+                    alert(`${symbol} shares sold for a total of $${addMoney.toFixed(2)}`);
                     updateSoldHistory(symbol, num, currentPrice, addMoney);
                     window.location.reload();
                 } else if (newQty == 0) {
@@ -684,7 +689,7 @@ function addButtonsToTable(tableId) {
         row.appendChild(cell);
     }
 }
-
+//update transaction table with sold data
 function updateSoldHistory(sym, qty, price, total) {
     accountID = localStorage.getItem("ID");
     fetch('http://localhost:3000/updateTxTable', {
@@ -700,7 +705,7 @@ function updateSoldHistory(sym, qty, price, total) {
             console.log(err);
         });
 }
-
+//change quantity of stocks sold
 function changeQuantity(sym, newQty, accountID, qty) {
 
     fetch('http://localhost:3000/sellStocks', {
@@ -717,7 +722,7 @@ function changeQuantity(sym, newQty, accountID, qty) {
         });
 
 }
-
+//delete stock from active list if all shares are sold
 function deleteStocks(sym, qty, accountID) {
     fetch('http://localhost:3000/deleteStocks', {
         method: 'POST',
@@ -732,7 +737,7 @@ function deleteStocks(sym, qty, accountID) {
             console.log(err);
         });
 }
-
+//sell
 function accAdd(bankAccount, accountID) {
 
     fetch('http://localhost:3000/sellStocks', {
