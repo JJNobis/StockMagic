@@ -311,14 +311,23 @@ app.post('/changeEmail', async (req, res) => {
 
 //settings change password//
 app.post('/passChange', async (req, res) => {
-    const { newPassword, accountID } = req.body;
+    const { currentPassword, newPassword, accountID } = req.body;
     console.log(req.body);
     let userID = JSON.parse(accountID);
-    let nPass = JSON.parse(newPassword);
+    
 
     try {
         await sql.connect(config);
-        await sql.query(`UPDATE users SET pwd = '${nPass}' WHERE userID = ${userID}`);
+        const result = await sql.query(`SELECT * from users where userID = ${userID}`);
+        const user = result.recordset[0];
+        console.log(user.pwd)
+        if (currentPassword == user.pwd) {
+        await sql.query(`UPDATE users SET pwd = '${newPassword}' WHERE userID = ${userID}`);
+        } else {
+            alert("Invalid password");
+        }
+
+        
 
     } catch (err) {
         console.log(`DB Error: ${err}`)
