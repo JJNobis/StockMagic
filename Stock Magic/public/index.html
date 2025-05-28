@@ -9,14 +9,12 @@
 </head>
 
 <nav class="topnav">
-    <a class="active" href="index.html">Home</a>
-    <a href="contactUs.html">Contact</a>
     <div class="login-container">
         <div id="loginForm">
 
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
-            <button id="login" onclick="login()" class="logout">Login</button>
+            <button id="login" onclick="login()" class="loginButton">Login</button>
             <br>
             <span id="message" style="color: rgb(243, 20, 20);"></span>
         </div>
@@ -69,7 +67,7 @@
 
             <label for="username">Username</label>
             <input type="text" id="createUsername" name="username" placeholder="Your Username" required>
-            
+
             <label for="Accnum"> Account Number</label>
             <input type="text" id="Accnum" name="Accnum" placeholder="Your Account Number" required>
 
@@ -86,7 +84,7 @@
     <script src="script.js">
     </script>
 
-    <footer style="position: fixed; bottom: 10px; left: 44vw;">
+    <footer style="position: fixed; bottom: 10px;">
         <p style="color: white;">Copyright &copy; 2025</p>
     </footer>
 </body>
