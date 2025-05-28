@@ -33,7 +33,7 @@ app.post('/addFunds', async (req, res) => {
         await sql.connect(config);
         const result = await sql.query(`SELECT * from users where userID = ${userID}`);
         const user = result.recordset[0];
-        const amt= addFunds;
+        const amt = addFunds;
 
         addFunds = addFunds + user.funds;
         console.log(addFunds);
@@ -352,12 +352,13 @@ app.post('/accAdd', async (req, res) => {
     try {
         await sql.connect(config);
         await sql.query(`UPDATE users SET accountNumber = '${newAccNum}' WHERE userID = ${userID}`);
- 
+
 
     } catch (err) {
-        console.log(`DB Error: ${err}`)  
-    }});
-          
+        console.log(`DB Error: ${err}`)
+    }
+});
+
 app.post('/updateTxTable', async (req, res) => {
     const { sym, qty, price, accountID, total } = req.body;
 
@@ -372,9 +373,7 @@ app.post('/updateTxTable', async (req, res) => {
     await sql.close();
 });
 
-app.post('/contactResponse', async (req) => {
-    console.log(req.body)
-});
+
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
