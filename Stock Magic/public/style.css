@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  padding: 1rem 0 1rem 0;
+  padding-bottom: 24px;
 
 
 }
@@ -44,18 +44,21 @@
 .topnav input[type=text] {
   padding-left: .25rem;
   padding-right: .25rem;
+  background-color: #e9e8e8;
   font-size: 17px;
   border: none;
   width: 15vw;
   /* adjust as needed (as long as it doesn't break the topnav) */
 }
 
-.topnav .login-container button {
-  padding-left: 5px;
+.topnav input[type=password] {
+  padding-left: .25rem;
   padding-right: .25rem;
-  background: color-light;
+  background-color: #e9e8e8;
   font-size: 17px;
-  border-radius: .5rem;
+  border: none;
+  width: 15vw;
+  /* adjust as needed (as long as it doesn't break the topnav) */
 }
 
 .index-background {
@@ -82,20 +85,20 @@
 
 
 .createAccount button {
-  background-image: radial-gradient(var(--color-dark), var(--color-extra-light));
+  background-image: radial-gradient(closest-side, #3f87a6, #ebf8e1, #cc7313);
   position: fixed;
   text-align: center;
   font-size: 20px;
   color: black;
   top: 46vh;
-  left: 46vw;
-  height: 10vw;
-  width: 10vw;
+  left: 48vw;
+  height: 6vw;
+  width: 6vw;
   border-radius: 50%;
 }
 
 .createAccount button:hover {
-  background-image: radial-gradient(var(--color-extra-light), var(--color-dark));
+  background-image: radial-gradient(closest-side, #f69d3c, #ebf8e1, #3f87a6);
 }
 
 .form-popup {
@@ -198,11 +201,11 @@
   }
 
   38% {
-    margin-top: -69px;
+    margin-top: -68px;
   }
 
   66% {
-    margin-top: -69px;
+    margin-top: -68px;
   }
 
   71% {
@@ -248,6 +251,13 @@
   max-height: 5em;
   max-width: 5em;
 }
+.NavBar>li{
+  border-radius: 2vh;
+}
+
+.NavBar>li>a{
+  padding-left: 1vw;
+}
 
 /*TX Hist**************************/
 #TXTable {
@@ -288,6 +298,19 @@ h1 {
   margin: 2vh 15vw 0 30vw;
 }
 
+.loginButton {
+  display: flex inline-block;
+  padding: 4px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 96px;
+  background: #007AFF;
+  color: white;
+  font-size: 16px;
+  border-radius: 32px;
+  white-space: nowrap;
+}
+
 /*Log out button*/
 .logout {
   display: flex inline-block;
@@ -317,7 +340,7 @@ h1 {
 }
 
 #numberofShares {
-  width: 64px;
+  width: 96px;
 
 }
 
@@ -542,4 +565,17 @@ h2 {
   margin-top: 10px;
   margin-left: 21vw;
   width: 75vw;
+}
+
+.settingsButt {
+  display: flex inline-block;
+  padding: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  width: auto;
+  background: #007AFF;
+  color: white;
+  font-size: 10px;
+  border-radius: 64px;
+  white-space: nowrap;
 }

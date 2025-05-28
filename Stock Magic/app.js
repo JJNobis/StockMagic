@@ -381,7 +381,9 @@ app.post('/updateTxTable', async (req, res) => {
     await sql.close();
 });
 
-
+app.post('/contactResponse', async (req) => {
+    console.log(req.body)
+});
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');

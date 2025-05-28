@@ -15,6 +15,7 @@ var userID;
 
 // Function for logging in calls app /login to check credentials
 function login() {
+    localStorage.clear();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     fetch('http://localhost:3000/login', {
@@ -45,6 +46,7 @@ function logout() {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('ID');
     location.reload();
+    localStorage.clear();
     window.location.href = "index.html";
 }
 
