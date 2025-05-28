@@ -1,4 +1,4 @@
-const apiKey = 'W14I9M4P1PD5SM52';  //API key to connect to Stock Market
+const apiKey = '5ORFBD05O917SGOR';  //API key to connect to Stock Market
 //Spare API 
 //8G92EAMNYI9SW94C
 //W14I9M4P1PD5SM52
