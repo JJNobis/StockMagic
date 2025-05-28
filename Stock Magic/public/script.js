@@ -270,13 +270,14 @@ function updateEmail() {
 }
 
 function passChange() {
-    const newPassword = document.getElementById("CurrentPassword").value;
-    console.log(newPassword);
-    const accountID = localStorage.getItem("ID");
+const currentPassword = document.getElementById("CurrentPassword").value;
+const newPassword = document.getElementById("newPassword").value;
+console.log(newPassword);
+const accountID = localStorage.getItem("ID");
     fetch('http://localhost:3000/passChange', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ newPassword, accountID })
+        body: JSON.stringify({ currentPassword, newPassword, accountID })
     })
         .then(res => {
             if (!res.ok) throw new Error("Failed to update password");
@@ -293,6 +294,8 @@ function passChange() {
 
     alert("Password changed");
 }
+
+//end settings //
 
 function addStockToDatabase(symbol, qty, sellPrice) {
     const accountID = localStorage.getItem("ID");
@@ -454,7 +457,7 @@ function closeStock() {
 
 }
 
-function updateBankAcc() {
+function changeBank() {
     console.log("hello");
     const accountID = localStorage.getItem("ID");
     console.log(`test A ${accountID}`);

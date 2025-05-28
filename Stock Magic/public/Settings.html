@@ -53,8 +53,9 @@
         <span></span><br /><br />
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="us***@yahoo.com" required>
+        <input type="email" id="email" name="email" placeholder="email@email.com">
         <span></span>
+        <button class="settingsButt" onclick="updateEmail()"> Change Email </button>
       </form>
 
       <h4>Change Password</h4>
@@ -64,28 +65,25 @@
 
         <span></span>
 
-        <label for="newpassword"> New Password</label>
-        <input type="text" id="newPassword" name="New Password" placeholder="**********" required>
-        <button id="changePassword" type="submit" value="Change Password"> Change Password</button>
+        <label for="newPassword"> New Password</label>
+        <input type="text" id="newPassword" name="New Password" placeholder="**********">
+        <button class="settingsButt" onclick="passChange()">Change Password</button>
 
       </form>
       <h4>Change Banking</h4>
-      <form id="bankChange" class="contact-form">
-        <label for="bankname"> Bank Name</label>
-        <input type="text" id="bankname" name="Bank Name" placeholder="Bank Name">
+      <form id="changeBank" class="contact-form">
+        <label for="bankName"> Bank Name</label>
+        <input type="text" id="bankName" name="Bank Name" placeholder="Bank Name">
         <span></span>
 
-        <label for="bankaccount">Bank Account #</label>
-        <input type="number" id="routingNumber" placeholder="Enter Bank Account Number" required>
-        <button onclick="updateBankAcc()"> Submit changes </button>
-
-
+        <label for="accountNumber">Account Number</label>
+        <input type="number" id="accountNumber" placeholder="Account Number" required>
+        
        <span></span>
-        <label for="routingnumber"> Routing #</label>
-        <input type="text" id="routingnumber" name="Routing #" placeholder="273073848">
+        <label for="routingNumber"> Routing Number</label>
+        <input type="text" id="bankAccount" name="Routing #" placeholder="Routing Number">
         <span></span> <br /> <br />
-        <input id="ChangeBankAcct_button" type="submit" value="Change Banking">
-        <input id="Cancel" type="submit" value="Cancel">
+        <button class="settingsButt" onclick="updateBankAcc()"> Submit changes </button>
         
       </form>
      
