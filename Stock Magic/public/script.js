@@ -161,6 +161,8 @@ function getStockValue() {
 
             })
             localStorage.setItem("total", total);
+            document.getElementById("totalMoney").innerHTML = `$${(availableFunds + total).toFixed(2)}`;
+            document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
             // let previousTotal = parseFloat(localStorage.getItem("previousTotal"));
             // document.getElementById("priceChange").innerHTML = `Price change since last viewed: $${(total - previousTotal).toFixed(2)}`;
         })
@@ -229,7 +231,6 @@ function askForMoney() {
     } else {
         alert('Invalid input.')
     }
-    location.reload()
 }
 
 //calls app to update sql database with new available funds
@@ -249,7 +250,7 @@ function addMoneyToAccount(moneyIncome, accountID) {
         .catch(err => {
             console.log(err);
         });
-
+    location.reload();
 }
 //settings page start//
 
@@ -450,7 +451,8 @@ function buyStock() {
         document.getElementById("purchaseMessage").innerHTML = `Congratulations! You've purchased ${purchasedShares} shares of ${symbol.toUpperCase()}`;
         document.getElementById('result').innerHTML = "";
         localStorage.setItem("funds", availableFunds);
-        closeStock();
+
+
     } else {
         document.getElementById("purchaseMessage").innerHTML = `You only have enough funds to purchase up to ${buyAmount} shares.`;
     }
