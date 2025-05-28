@@ -1,5 +1,8 @@
-const apiKey = '8G92EAMNYI9SW94C';  //API key to connect to Stock Market
-
+const apiKey = 'W14I9M4P1PD5SM52';  //API key to connect to Stock Market
+//Spare API 
+//8G92EAMNYI9SW94C
+//W14I9M4P1PD5SM52
+//5ORFBD05O917SGOR
 let finalPrice; //Used to display the price of a stock
 let buyAmount; //Maximum number of shares that can be purchased. 
 var availableFunds; // Funds that are available for buying stocks. This will get updated later to incorporate the array. 
@@ -85,8 +88,6 @@ function greetingMessage() {
     availableFunds = localStorage.getItem("funds");
     userID = localStorage.getItem("ID");
     availableFunds = parseFloat(availableFunds);
-    let previousTotal = parseFloat(localStorage.getItem("previousTotal"));
-    let total = parseFloat(localStorage.getItem("total"));
 
     let check = localStorage.getItem('loggedIn');
     if (check == 1) {
@@ -96,17 +97,15 @@ function greetingMessage() {
     getStockValue();
     document.getElementById("greeting").innerHTML = `Welcome, ${userFirstName} ${userLastName}.`;
     document.getElementById("fundsDisplay").innerHTML = `$${availableFunds.toFixed(2)}`;
-    document.getElementById("totalMoney").innerHTML = `$${(availableFunds + total).toFixed(2)}`;
-    document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
-    document.getElementById("priceChange").innerHTML = `Price change since last login $${(total - previousTotal).toFixed(2)}`;
-
+    document.getElementById("totalMoney").innerHTML = `LOADING...`;
+    document.getElementById("stockMoney").innerHTML = `LOADING...`;
 
 }
 
-function getActiveStocks() {
+async function getActiveStocks() {
     accountID = localStorage.getItem('ID');
     localStorage.setItem("total", 0);
-    let previousTotal = 0;
+    //let previousTotal = 0;
     fetch('http://localhost:3000/getStocks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -118,13 +117,15 @@ function getActiveStocks() {
         })
         .then(user => {
             user.forEach(stock => {
-                previousTotal = previousTotal + (stock.qty * stock.Current_price);
+                //  previousTotal = previousTotal + (stock.qty * stock.Current_price);
                 localStorage.setItem("qty", stock.qty);
+                localStorage.setItem("previousTotal", previousTotal);
                 setCurrentPrice(stock.sym);
 
+
             })
-            localStorage.setItem("previousTotal", previousTotal);
-            localStorage.setItem('loggedIn', 0);
+
+            //localStorage.setItem('loggedIn', 0);
             // let completeValue = parseFloat(availableFunds) + total;
             // document.getElementById("totalMoney").innerHTML = `$${completeValue.toFixed(2)}`;
             //document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
@@ -142,6 +143,8 @@ function getStockValue() {
     accountID = localStorage.getItem('ID');
     localStorage.setItem("total", 0);
     let total = 0;
+    availableFunds = parseFloat(localStorage.getItem("funds"));
+
     fetch('http://localhost:3000/getStocks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -154,9 +157,13 @@ function getStockValue() {
         .then(user => {
             user.forEach(stock => {
                 total = total + (stock.qty * stock.Current_price);
+                document.getElementById("totalMoney").innerHTML = `$${(availableFunds + total).toFixed(2)}`;
+                document.getElementById("stockMoney").innerHTML = `$${total.toFixed(2)}`;
+
             })
             localStorage.setItem("total", total);
-
+            // let previousTotal = parseFloat(localStorage.getItem("previousTotal"));
+            // document.getElementById("priceChange").innerHTML = `Price change since last viewed: $${(total - previousTotal).toFixed(2)}`;
         })
 
         .catch(err => {
