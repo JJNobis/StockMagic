@@ -314,7 +314,7 @@ app.post('/passChange', async (req, res) => {
     const { currentPassword, newPassword, accountID } = req.body;
     console.log(req.body);
     let userID = JSON.parse(accountID);
-    
+
 
     try {
         await sql.connect(config);
@@ -322,12 +322,12 @@ app.post('/passChange', async (req, res) => {
         const user = result.recordset[0];
         console.log(user.pwd)
         if (currentPassword == user.pwd) {
-        await sql.query(`UPDATE users SET pwd = '${newPassword}' WHERE userID = ${userID}`);
+            await sql.query(`UPDATE users SET pwd = '${newPassword}' WHERE userID = ${userID}`);
         } else {
             alert("Invalid password");
         }
 
-        
+
 
     } catch (err) {
         console.log(`DB Error: ${err}`)
@@ -382,9 +382,7 @@ app.post('/updateTxTable', async (req, res) => {
     await sql.close();
 });
 
-app.post('/contactResponse', async (req) => {
-    console.log(req.body)
-});
+
 
 app.listen(3000, () => {
     console.log('Server running at http://localhost:3000');
