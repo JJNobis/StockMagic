@@ -268,10 +268,10 @@ function updateEmail() {
 }
 
 function passChange() {
-    const newPassword = document.getElementById("password").value;
-    console.log(newPassword);
-    const accountID = localStorage.getItem("ID");
-    fetch('http://localhost:3000/passchange', {
+const newPassword = document.getElementById("CurrentPassword").value;
+console.log(newPassword);
+const accountID = localStorage.getItem("ID");
+    fetch('http://localhost:3000/passChange', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword, accountID })
@@ -282,7 +282,7 @@ function passChange() {
         })
         .then(data => {
             // handle success, e.g. shows a message
-            console.log("Password updated successfully", data);
+            console.log("Password updated successfully");
         })
 
         .catch(err => {
@@ -631,7 +631,7 @@ function addButtonsToTable(tableId) {
 
         const button = document.createElement('button');
         button.textContent = 'Sell';
-        button.classList.add('my-button');
+        button.classList.add('sellbuttons');
         button.addEventListener('click', function () {
             const symbol = row.cells[0].textContent;
             let qty = parseFloat(row.cells[1].textContent);
@@ -722,4 +722,21 @@ function deleteStocks(sym, qty, accountID) {
         .catch(err => {
             console.log(err);
         });
+}
+
+function accAdd(bankAccount, accountID) {
+
+    fetch('http://localhost:3000/sellStocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bankAccount, accountID, qty })
+    })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to add Money");
+            return res.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
 }

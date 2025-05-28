@@ -280,7 +280,6 @@ app.post('/pullTXHist', async (req, res) => {
     }
 });
 
-
 //settings page change bank//
 app.post('/changeBank', async (req, res) => {
     const { bankAccount, accountID } = req.body;
@@ -291,6 +290,7 @@ app.post('/changeBank', async (req, res) => {
     } catch (err) {
         console.log(`DB Error: ${err}`)
     }
+
 });
 
 //settings page change name and email//
@@ -314,11 +314,11 @@ app.post('/passChange', async (req, res) => {
     const { newPassword, accountID } = req.body;
     console.log(req.body);
     let userID = JSON.parse(accountID);
+    let nPass = JSON.parse(newPassword);
 
     try {
         await sql.connect(config);
-        await sql.query(`UPDATE users SET currentPassword = '${newPassword}' WHERE userID = ${userID}`);
-
+        await sql.query(`UPDATE users SET pwd = '${nPass}' WHERE userID = ${userID}`);
 
     } catch (err) {
         console.log(`DB Error: ${err}`)
@@ -344,6 +344,20 @@ app.post('/pullFundsHist', async (req, res) => {
     }
 });
 
+app.post('/accAdd', async (req, res) => {
+    const { newAccNum, accountID } = req.body;
+    console.log(req.body);
+    let userID = JSON.parse(accountID);
+
+    try {
+        await sql.connect(config);
+        await sql.query(`UPDATE users SET accountNumber = '${newAccNum}' WHERE userID = ${userID}`);
+ 
+
+    } catch (err) {
+        console.log(`DB Error: ${err}`)  
+    }});
+          
 app.post('/updateTxTable', async (req, res) => {
     const { sym, qty, price, accountID, total } = req.body;
 
