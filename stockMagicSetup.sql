@@ -58,6 +58,18 @@ create table stockTXHist(
 	select * from stockTXHist
 	sp_help stockTXHist
 	select * from users where userID = 4
+
+	CREATE TABLE userStocks(
+	StockID int IDENTITY(1,1) primary key not null,
+	UserID int not null,
+	sym VARCHAR(255)not null,
+	qty int not null,
+	Bought_price MONEY not null,
+	Current_price MONEY not null,
+	Profit MONEY,
+	Threshold MONEY)
+
+	select * from fundsTXHist
 /*
 	alter table users
 	alter column username nvarchar(32) not null;
